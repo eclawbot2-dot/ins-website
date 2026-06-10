@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  /* Deep navy primary */
+  --color-navy-50: #f0f5fa;
+  --color-navy-100: #dce8f3;
+  --color-navy-200: #bdd3e8;
+  --color-navy-300: #92b5d6;
+  --color-navy-400: #6190c0;
+  --color-navy-500: #3f72a9;
+  --color-navy-600: #2e5a8e;
+  --color-navy-700: #274973;
+  --color-navy-800: #243f60;
+  --color-navy-900: #1b2f49;
+  --color-navy-950: #0b1830;
+
+  /* Teal secondary */
+  --color-teal-50: #effaf9;
+  --color-teal-100: #d7f2f0;
+  --color-teal-200: #b3e5e2;
+  --color-teal-300: #80d1cf;
+  --color-teal-400: #46b5b4;
+  --color-teal-500: #2b9a9a;
+  --color-teal-600: #217c7e;
+  --color-teal-700: #1e6365;
+  --color-teal-800: #1d5052;
+  --color-teal-900: #1c4345;
+  --color-teal-950: #0a2629;
+
+  /* Warm amber accent */
+  --color-accent-50: #fff9eb;
+  --color-accent-100: #ffefc6;
+  --color-accent-200: #ffdd88;
+  --color-accent-300: #ffc44a;
+  --color-accent-400: #ffab20;
+  --color-accent-500: #f98807;
+  --color-accent-600: #dd6302;
+  --color-accent-700: #b74306;
+  --color-accent-800: #94330c;
+  --color-accent-900: #7a2b0d;
+  --color-accent-950: #461402;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-navy-900 antialiased;
+}
+
+::selection {
+  @apply bg-teal-200 text-navy-950;
+}
+
+/* Soft fade-up used on hero elements */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fade-up 0.6s ease-out 0.12s both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.6s ease-out 0.24s both;
+}
+
+details.faq-item summary::-webkit-details-marker {
+  display: none;
+}
