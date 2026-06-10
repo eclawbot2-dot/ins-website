@@ -4,7 +4,7 @@ Public marketing / lead-generation site for the insurance agency. Built with
 Next.js 16 + React 19 + Tailwind CSS 4 + TypeScript (strict). Static/SSG — no database.
 
 - **Live:** https://ins.jahdev.com
-- **Platform (lead intake):** https://ins-app.jahdev.com (separate internal app)
+- **Platform (lead intake):** https://ins.jahdev.com (separate internal app)
 
 ## Branding
 
@@ -25,7 +25,7 @@ To rename the agency, edit that one file.
 
 Both forms POST to the internal proxy `POST /api/quote`, which forwards JSON
 `{firstName,lastName,email,phone,zip,lineOfBusiness,message,source}` to
-`https://ins-app.jahdev.com/api/public/leads` with header `X-Lead-Key` read from the
+`https://ins.jahdev.com/api/public/leads` with header `X-Lead-Key` read from the
 `LEAD_INTAKE_KEY` env var (defaults to the dev key). If the platform is offline the
 visitor still sees success; the failure is logged server-side.
 

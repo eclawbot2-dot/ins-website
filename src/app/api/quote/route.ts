@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const LEAD_ENDPOINT = "https://ins-app.jahdev.com/api/public/leads";
+const LEAD_ENDPOINT = "https://ins.jahdev.com/api/public/leads";
 const LEAD_KEY = process.env.LEAD_INTAKE_KEY ?? "ins-lead-intake-2026";
 
 type LeadPayload = {
