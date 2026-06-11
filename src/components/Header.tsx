@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Anchor, ChevronDown, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, LogIn, Menu, Phone, X } from "lucide-react";
 import { BRAND } from "@/lib/brand";
+import Wordmark from "@/components/Wordmark";
 import { PERSONAL_LINES, BUSINESS_LINES } from "@/lib/coverage-data";
 
 const NAV = [
@@ -56,16 +57,8 @@ export default function Header() {
       </div>
 
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2.5" aria-label={`${BRAND.name} — home`}>
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-navy-800 to-teal-700 text-white shadow-sm">
-            <Anchor className="h-5 w-5" aria-hidden="true" />
-          </span>
-          <span className="leading-tight">
-            <span className="block text-lg font-bold tracking-tight text-navy-950">{BRAND.shortName}</span>
-            <span className="block text-[11px] font-medium uppercase tracking-widest text-teal-700">
-              Insurance Group
-            </span>
-          </span>
+        <Link href="/" className="flex items-center" aria-label={`${BRAND.name} — home`}>
+          <Wordmark variant="light" className="h-11 w-auto" />
         </Link>
 
         {/* Desktop nav */}
@@ -76,7 +69,7 @@ export default function Header() {
                 <Link
                   href={item.href}
                   className={`flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-navy-50 hover:text-navy-950 ${
-                    pathname.startsWith(item.href) ? "text-teal-700" : "text-navy-700"
+                    pathname.startsWith(item.href) ? "text-gold-700" : "text-navy-700"
                   }`}
                 >
                   {item.label}
@@ -86,7 +79,7 @@ export default function Header() {
                   <div className="w-64 rounded-xl border border-navy-100 bg-white p-2 shadow-xl shadow-navy-950/10">
                     <Link
                       href={item.href}
-                      className="block rounded-lg px-3 py-2 text-sm font-semibold text-navy-950 hover:bg-teal-50 hover:text-teal-800"
+                      className="block rounded-lg px-3 py-2 text-sm font-semibold text-navy-950 hover:bg-gold-50 hover:text-gold-800"
                     >
                       All {item.label} Insurance →
                     </Link>
@@ -108,7 +101,7 @@ export default function Header() {
                 key={item.label}
                 href={item.href}
                 className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-navy-50 hover:text-navy-950 ${
-                  pathname === item.href ? "text-teal-700" : "text-navy-700"
+                  pathname === item.href ? "text-gold-700" : "text-navy-700"
                 }`}
               >
                 {item.label}
@@ -116,8 +109,15 @@ export default function Header() {
             )
           )}
           <Link
+            href="/client-login"
+            className="ml-3 flex items-center gap-1.5 rounded-full border border-navy-200 px-4 py-2 text-sm font-semibold text-navy-800 transition-colors hover:border-navy-300 hover:bg-navy-50"
+          >
+            <LogIn className="h-3.5 w-3.5" aria-hidden="true" />
+            Client Login
+          </Link>
+          <Link
             href="/quote"
-            className="ml-3 rounded-full bg-accent-500 px-5 py-2.5 text-sm font-semibold text-navy-950 shadow-sm transition-all hover:bg-accent-400 hover:shadow-md"
+            className="ml-2 rounded-full bg-accent-500 px-5 py-2.5 text-sm font-semibold text-navy-950 shadow-sm transition-all hover:bg-accent-400 hover:shadow-md"
           >
             Get a Quote
           </Link>
@@ -171,7 +171,7 @@ export default function Header() {
                     <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block py-2 text-sm font-semibold text-teal-700"
+                      className="block py-2 text-sm font-semibold text-gold-700"
                     >
                       All {item.label} Insurance →
                     </Link>
@@ -199,7 +199,15 @@ export default function Header() {
               </Link>
             )
           )}
-          <a href={BRAND.phoneHref} className="mt-3 flex items-center gap-2 py-2.5 text-sm font-semibold text-teal-700">
+          <Link
+            href="/client-login"
+            onClick={() => setMobileOpen(false)}
+            className="mt-4 flex items-center justify-center gap-2 rounded-full border border-navy-200 py-3 text-base font-semibold text-navy-900 hover:bg-navy-50"
+          >
+            <LogIn className="h-4 w-4" aria-hidden="true" />
+            Client Login
+          </Link>
+          <a href={BRAND.phoneHref} className="mt-3 flex items-center gap-2 py-2.5 text-sm font-semibold text-gold-700">
             <Phone className="h-4 w-4" aria-hidden="true" />
             {BRAND.phone}
           </a>

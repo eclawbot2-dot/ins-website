@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Anchor, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { BRAND } from "@/lib/brand";
+import Wordmark from "@/components/Wordmark";
 import { PERSONAL_LINES, BUSINESS_LINES } from "@/lib/coverage-data";
 
 export default function Footer() {
@@ -10,16 +11,13 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand + NAP */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2.5" aria-label={`${BRAND.name} — home`}>
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-teal-600 to-navy-700 text-white">
-                <Anchor className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <span className="text-lg font-bold tracking-tight text-white">{BRAND.name}</span>
+            <Link href="/" className="inline-flex items-center" aria-label={`${BRAND.name} — home`}>
+              <Wordmark variant="dark" className="h-12 w-auto" />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-navy-300">{BRAND.tagline}</p>
             <ul className="mt-6 space-y-3 text-sm">
               <li className="flex items-start gap-2.5">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-teal-400" aria-hidden="true" />
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
                 <span>
                   {BRAND.address.street}
                   <br />
@@ -28,13 +26,13 @@ export default function Footer() {
               </li>
               <li>
                 <a href={BRAND.phoneHref} className="flex items-center gap-2.5 hover:text-white">
-                  <Phone className="h-4 w-4 text-teal-400" aria-hidden="true" />
+                  <Phone className="h-4 w-4 text-gold-400" aria-hidden="true" />
                   {BRAND.phone}
                 </a>
               </li>
               <li>
                 <a href={`mailto:${BRAND.email}`} className="flex items-center gap-2.5 hover:text-white">
-                  <Mail className="h-4 w-4 text-teal-400" aria-hidden="true" />
+                  <Mail className="h-4 w-4 text-gold-400" aria-hidden="true" />
                   {BRAND.email}
                 </a>
               </li>
@@ -73,6 +71,7 @@ export default function Footer() {
           <nav aria-label="Company links">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white">Company</h3>
             <ul className="mt-4 space-y-2.5 text-sm">
+              <li><Link href="/client-login" className="inline-block py-0.5 hover:text-white">Client Login</Link></li>
               <li><Link href="/about" className="inline-block py-0.5 hover:text-white">About Us</Link></li>
               <li><Link href="/claims" className="inline-block py-0.5 hover:text-white">File a Claim</Link></li>
               <li><Link href="/quote" className="inline-block py-0.5 hover:text-white">Get a Quote</Link></li>
@@ -93,7 +92,7 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-navy-800 pt-8 text-xs leading-relaxed text-navy-400">
           <p>
-            © {new Date().getFullYear()} {BRAND.name}. All rights reserved. {BRAND.license}.
+            © {new Date().getFullYear()} {BRAND.legalName}. All rights reserved. {BRAND.license}.
           </p>
           <p className="mt-2 max-w-3xl">
             {BRAND.shortName} is an independent insurance agency. Insurance products are offered through multiple

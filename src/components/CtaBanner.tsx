@@ -10,9 +10,9 @@ export default function CtaBanner({
   subtitle?: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-teal-900">
+    <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-gold-950">
       <div
-        className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-teal-500/10 blur-3xl"
+        className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-gold-500/10 blur-3xl"
         aria-hidden="true"
       />
       <div

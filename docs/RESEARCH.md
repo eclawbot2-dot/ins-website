@@ -72,5 +72,5 @@ Blues convey stability/trust and dominate the category; a warm accent color for 
 creates contrast that drives clicks; generous whitespace and card-based layouts read as
 modern and credible.
 
-**Applied:** deep navy + teal palette with warm amber CTA accent; gradient heroes,
+**Applied:** deep navy + warm gold/brass palette with bright gold CTA accent (Tabor Agency rebrand); gradient heroes,
 card grids, and generous spacing throughout.

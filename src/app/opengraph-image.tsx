@@ -16,43 +16,39 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          backgroundImage: "linear-gradient(135deg, #0b1830 0%, #1b2f49 55%, #1c4345 100%)",
+          backgroundImage: "linear-gradient(135deg, #101d33 0%, #243044 60%, #351e0e 100%)",
           color: "#ffffff",
           fontFamily: "sans-serif",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "20px",
-          }}
-        >
+        {/* Tabor Agency wordmark */}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ fontSize: "56px", fontWeight: 800, letterSpacing: "4px" }}>TABOR</div>
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "76px",
-              height: "76px",
-              borderRadius: "20px",
-              backgroundImage: "linear-gradient(135deg, #243f60, #1e6365)",
-              fontSize: "44px",
+              marginTop: "10px",
+              width: "44px",
+              height: "5px",
+              borderRadius: "3px",
+              backgroundColor: "#d0a448",
+            }}
+          />
+          <div
+            style={{
+              marginTop: "10px",
+              fontSize: "24px",
+              fontWeight: 600,
+              letterSpacing: "14px",
+              color: "#d0a448",
             }}
           >
-            ⚓
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontSize: "40px", fontWeight: 700 }}>{BRAND.shortName}</div>
-            <div style={{ fontSize: "20px", letterSpacing: "6px", color: "#80d1cf" }}>
-              INSURANCE GROUP
-            </div>
+            AGENCY
           </div>
         </div>
         <div
           style={{
-            marginTop: "56px",
-            fontSize: "64px",
+            marginTop: "52px",
+            fontSize: "62px",
             fontWeight: 700,
             lineHeight: 1.15,
             maxWidth: "950px",
@@ -60,7 +56,7 @@ export default function OpengraphImage() {
         >
           The right coverage. The right price. Every renewal.
         </div>
-        <div style={{ display: "flex", marginTop: "32px", fontSize: "28px", color: "#bdd3e8" }}>
+        <div style={{ display: "flex", marginTop: "32px", fontSize: "28px", color: "#cfd9e6" }}>
           {`Independent agency · ${BRAND.carriers.length}+ top-rated carriers compared`}
         </div>
       </div>

@@ -51,14 +51,14 @@ const STEPS = [
 export default function ClaimsPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-teal-900">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-teal-500/10 blur-3xl" aria-hidden="true" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-gold-950">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-gold-500/10 blur-3xl" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">File a Claim</h1>
           <p className="mt-4 max-w-2xl text-lg text-navy-200">
             A claim is the moment your insurance has to work. Here&apos;s exactly what to do — and remember, you can
             always call us first at{" "}
-            <a href={BRAND.phoneHref} className="font-semibold text-teal-300 underline">
+            <a href={BRAND.phoneHref} className="font-semibold text-gold-300 underline">
               {BRAND.phone}
             </a>{" "}
             and we&apos;ll handle the carrier with you.
@@ -73,15 +73,15 @@ export default function ClaimsPage() {
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {STEPS.map((s) => (
             <div key={s.title} className="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold-50 text-gold-700">
                 <s.icon className="h-5 w-5" aria-hidden="true" />
               </span>
               <h3 className="mt-4 font-bold text-navy-950">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-700">{s.text}</p>
             </div>
           ))}
-          <div className="rounded-2xl bg-gradient-to-br from-navy-950 to-teal-900 p-6 text-white">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-teal-300">
+          <div className="rounded-2xl bg-gradient-to-br from-navy-950 to-gold-950 p-6 text-white">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-gold-300">
               <Phone className="h-5 w-5" aria-hidden="true" />
             </span>
             <h3 className="mt-4 font-bold">Not sure whether to file?</h3>
@@ -116,10 +116,10 @@ export default function ClaimsPage() {
               </thead>
               <tbody className="divide-y divide-navy-100">
                 {CARRIER_CLAIMS.map((row) => (
-                  <tr key={row.carrier} className="hover:bg-teal-50/40">
+                  <tr key={row.carrier} className="hover:bg-gold-50/40">
                     <th scope="row" className="px-6 py-4 font-semibold text-navy-950">{row.carrier}</th>
                     <td className="px-6 py-4">
-                      <a href={`tel:${row.phone.replace(/[^0-9]/g, "")}`} className="font-medium text-teal-700 hover:text-teal-600">
+                      <a href={`tel:${row.phone.replace(/[^0-9]/g, "")}`} className="font-medium text-gold-700 hover:text-gold-600">
                         {row.phone}
                       </a>
                     </td>

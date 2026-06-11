@@ -54,12 +54,12 @@ export default function ContactForm() {
 
   if (sent) {
     return (
-      <div className="rounded-3xl border border-teal-200 bg-teal-50 p-10 text-center">
-        <CheckCircle2 className="mx-auto h-12 w-12 text-teal-600" aria-hidden="true" />
+      <div className="rounded-3xl border border-gold-200 bg-gold-50 p-10 text-center">
+        <CheckCircle2 className="mx-auto h-12 w-12 text-gold-600" aria-hidden="true" />
         <h3 className="mt-4 text-xl font-bold text-navy-950">Message sent — thank you!</h3>
         <p className="mx-auto mt-2 max-w-sm text-navy-700">
           We&apos;ll get back to you within one business day. For anything urgent, call{" "}
-          <a href={BRAND.phoneHref} className="font-semibold text-teal-700 underline">
+          <a href={BRAND.phoneHref} className="font-semibold text-gold-700 underline">
             {BRAND.phone}
           </a>
           .
@@ -92,7 +92,7 @@ export default function ContactForm() {
             autoComplete="given-name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+            className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
           />
         </div>
         <div>
@@ -105,7 +105,7 @@ export default function ContactForm() {
             autoComplete="family-name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+            className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
           />
         </div>
         <div>
@@ -118,7 +118,7 @@ export default function ContactForm() {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+            className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
           />
         </div>
         <div>
@@ -131,7 +131,7 @@ export default function ContactForm() {
             autoComplete="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+            className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
           />
         </div>
         <div className="sm:col-span-2">
@@ -145,7 +145,7 @@ export default function ContactForm() {
             maxLength={10}
             value={zip}
             onChange={(e) => setZip(e.target.value)}
-            className="mt-1.5 w-full max-w-xs rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+            className="mt-1.5 w-full max-w-xs rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
           />
         </div>
         <div className="sm:col-span-2">
@@ -158,7 +158,7 @@ export default function ContactForm() {
             rows={5}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+            className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
           />
         </div>
       </div>

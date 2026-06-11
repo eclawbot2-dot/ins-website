@@ -69,13 +69,13 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
 
   if (step === 4) {
     return (
-      <div className="rounded-3xl border border-teal-200 bg-teal-50 p-10 text-center">
-        <CheckCircle2 className="mx-auto h-14 w-14 text-teal-600" aria-hidden="true" />
+      <div className="rounded-3xl border border-gold-200 bg-gold-50 p-10 text-center">
+        <CheckCircle2 className="mx-auto h-14 w-14 text-gold-600" aria-hidden="true" />
         <h2 className="mt-4 text-2xl font-bold text-navy-950">Request received — thank you, {firstName}!</h2>
         <p className="mx-auto mt-3 max-w-md text-navy-700">
           A licensed advisor will review your request and reach out within one business day with quotes from
           multiple carriers. Need something faster? Call us at{" "}
-          <a href={BRAND.phoneHref} className="font-semibold text-teal-700 underline">
+          <a href={BRAND.phoneHref} className="font-semibold text-gold-700 underline">
             {BRAND.phone}
           </a>
           .
@@ -101,7 +101,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
             <li key={label} className="flex flex-1 flex-col gap-1.5">
               <span
                 className={`h-1.5 rounded-full transition-colors ${
-                  state === "done" ? "bg-teal-500" : state === "active" ? "bg-accent-500" : "bg-navy-100"
+                  state === "done" ? "bg-gold-500" : state === "active" ? "bg-accent-500" : "bg-navy-100"
                 }`}
               />
               <span
@@ -125,7 +125,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
             { title: "Business", lines: business },
           ].map((group) => (
             <div key={group.title} className="mt-6">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-teal-700">{group.title}</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-gold-700">{group.title}</h3>
               <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
                 {group.lines.map((line) => {
                   const Icon = getIcon(line.icon);
@@ -141,11 +141,11 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
                       aria-pressed={selected}
                       className={`flex items-center gap-2.5 rounded-xl border p-3 text-left text-sm font-medium transition-all ${
                         selected
-                          ? "border-teal-500 bg-teal-50 text-navy-950"
-                          : "border-navy-100 text-navy-700 hover:border-teal-300 hover:bg-teal-50/50"
+                          ? "border-gold-500 bg-gold-50 text-navy-950"
+                          : "border-navy-100 text-navy-700 hover:border-gold-300 hover:bg-gold-50/50"
                       }`}
                     >
-                      <Icon className="h-5 w-5 shrink-0 text-teal-600" aria-hidden="true" />
+                      <Icon className="h-5 w-5 shrink-0 text-gold-600" aria-hidden="true" />
                       {line.shortName}
                     </button>
                   );
@@ -160,7 +160,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
         <div>
           <h2 className="text-xl font-bold text-navy-950">Tell us a bit about what you need</h2>
           <p className="mt-1 text-sm text-navy-600">
-            Quoting: <span className="font-semibold text-teal-700">{lineOfBusiness || "Insurance"}</span>{" "}
+            Quoting: <span className="font-semibold text-gold-700">{lineOfBusiness || "Insurance"}</span>{" "}
             <button type="button" className="text-xs text-navy-500 underline" onClick={() => setStep(1)}>
               (change)
             </button>
@@ -178,7 +178,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
                 value={zip}
                 onChange={(e) => setZip(e.target.value)}
                 placeholder="e.g. 92101"
-                className="mt-1.5 w-full max-w-xs rounded-xl border border-navy-200 px-4 py-3 text-navy-950 placeholder:text-navy-300 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+                className="mt-1.5 w-full max-w-xs rounded-xl border border-navy-200 px-4 py-3 text-navy-950 placeholder:text-navy-300 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
               />
             </div>
             <div>
@@ -191,7 +191,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Vehicles, drivers, property details, current carrier, renewal date, business operations — whatever's relevant."
-                className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 placeholder:text-navy-300 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+                className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 placeholder:text-navy-300 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
               />
             </div>
           </div>
@@ -247,7 +247,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
                 autoComplete="given-name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+                className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
               />
             </div>
             <div>
@@ -260,7 +260,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
                 autoComplete="family-name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+                className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
               />
             </div>
             <div>
@@ -273,7 +273,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+                className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
               />
             </div>
             <div>
@@ -286,7 +286,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
                 autoComplete="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+                className="mt-1.5 w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
               />
             </div>
           </div>

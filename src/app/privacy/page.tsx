@@ -76,7 +76,7 @@ export default function PrivacyPage() {
             You may request access to, correction of, or deletion of your personal information, subject to records we
             are legally required to keep. Depending on your state of residence, you may have additional privacy
             rights. To exercise any of these, contact us at{" "}
-            <a href={`mailto:${BRAND.email}`} className="font-medium text-teal-700 underline">{BRAND.email}</a> or{" "}
+            <a href={`mailto:${BRAND.email}`} className="font-medium text-gold-700 underline">{BRAND.email}</a> or{" "}
             {BRAND.phone}.
           </p>
         </section>
@@ -101,7 +101,7 @@ export default function PrivacyPage() {
           <p className="mt-3">
             Questions about this policy: {BRAND.name}, {BRAND.address.street}, {BRAND.address.city},{" "}
             {BRAND.address.state} {BRAND.address.zip} · {BRAND.phone} ·{" "}
-            <a href={`mailto:${BRAND.email}`} className="font-medium text-teal-700 underline">{BRAND.email}</a>. {BRAND.license}.
+            <a href={`mailto:${BRAND.email}`} className="font-medium text-gold-700 underline">{BRAND.email}</a>. {BRAND.license}.
           </p>
         </section>
       </div>

@@ -4,7 +4,18 @@ import { PERSONAL_LINES, BUSINESS_LINES } from "@/lib/coverage-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const staticPages = ["", "/personal", "/business", "/quote", "/claims", "/about", "/contact", "/privacy", "/terms"];
+  const staticPages = [
+    "",
+    "/personal",
+    "/business",
+    "/quote",
+    "/claims",
+    "/client-login",
+    "/about",
+    "/contact",
+    "/privacy",
+    "/terms",
+  ];
 
   return [
     ...staticPages.map((path) => ({

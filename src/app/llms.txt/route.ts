@@ -37,6 +37,7 @@ ${business}
 - [Personal Insurance](${SITE_URL}/personal): all personal lines
 - [Business Insurance](${SITE_URL}/business): all commercial lines
 - [File a Claim](${SITE_URL}/claims): what to do after a loss + carrier claim numbers
+- [Client Login](${SITE_URL}/client-login): existing clients — portal for policies, invoices, claims, and certificates
 - [About](${SITE_URL}/about): the independent agency model and our values
 - [Contact](${SITE_URL}/contact): phone, email, office address, hours
 `;

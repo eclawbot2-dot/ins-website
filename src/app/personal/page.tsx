@@ -26,13 +26,13 @@ export default function PersonalHubPage() {
           { name: "Personal Insurance", path: "/personal" },
         ])}
       />
-      <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-teal-900">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-teal-500/10 blur-3xl" aria-hidden="true" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-gold-950">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-gold-500/10 blur-3xl" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-navy-300">
             <Link href="/" className="hover:text-white">Home</Link>
             <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
-            <span className="text-teal-300">Personal Insurance</span>
+            <span className="text-gold-300">Personal Insurance</span>
           </nav>
           <h1 className="mt-8 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             Personal Insurance
@@ -67,7 +67,7 @@ export default function PersonalHubPage() {
             everything with one company versus splitting policies across carriers. Whichever combination protects you
             best for the least money is the one we recommend.
           </p>
-          <Link href="/quote" className="mt-5 inline-flex items-center gap-2 font-semibold text-teal-700 hover:text-teal-600">
+          <Link href="/quote" className="mt-5 inline-flex items-center gap-2 font-semibold text-gold-700 hover:text-gold-600">
             Price my bundle
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>

@@ -96,7 +96,7 @@ export default function TermsPage() {
           <p className="mt-3">
             {BRAND.name}, {BRAND.address.street}, {BRAND.address.city}, {BRAND.address.state} {BRAND.address.zip} ·{" "}
             {BRAND.phone} ·{" "}
-            <a href={`mailto:${BRAND.email}`} className="font-medium text-teal-700 underline">{BRAND.email}</a>. {BRAND.license}.
+            <a href={`mailto:${BRAND.email}`} className="font-medium text-gold-700 underline">{BRAND.email}</a>. {BRAND.license}.
           </p>
         </section>
       </div>

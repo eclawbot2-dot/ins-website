@@ -26,18 +26,18 @@ export default function CoverageDetail({ line }: { line: CoverageLine }) {
         ])}
       />
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-teal-900">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-teal-500/10 blur-3xl" aria-hidden="true" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-gold-950">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-gold-500/10 blur-3xl" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-navy-300">
             <Link href="/" className="hover:text-white">Home</Link>
             <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
             <Link href={`/${line.category}`} className="hover:text-white">{hubLabel}</Link>
             <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
-            <span className="text-teal-300">{line.shortName}</span>
+            <span className="text-gold-300">{line.shortName}</span>
           </nav>
           <div className="mt-8 flex items-start gap-5">
-            <span className="hidden h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-teal-300 ring-1 ring-white/15 sm:flex">
+            <span className="hidden h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-gold-300 ring-1 ring-white/15 sm:flex">
               <Icon className="h-8 w-8" aria-hidden="true" />
             </span>
             <div>
@@ -74,15 +74,15 @@ export default function CoverageDetail({ line }: { line: CoverageLine }) {
 
             {/* Covers / doesn't cover */}
             <section aria-labelledby="covers" className="grid gap-6 md:grid-cols-2">
-              <div className="rounded-2xl border border-teal-100 bg-teal-50/50 p-6">
+              <div className="rounded-2xl border border-gold-100 bg-gold-50/50 p-6">
                 <h2 id="covers" className="flex items-center gap-2 text-lg font-bold text-navy-950">
-                  <CheckCircle2 className="h-5 w-5 text-teal-600" aria-hidden="true" />
+                  <CheckCircle2 className="h-5 w-5 text-gold-600" aria-hidden="true" />
                   What it covers
                 </h2>
                 <ul className="mt-4 space-y-3">
                   {line.whatItCovers.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-[15px] text-navy-800">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-teal-600" aria-hidden="true" />
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" aria-hidden="true" />
                       {item}
                     </li>
                   ))}
@@ -113,7 +113,7 @@ export default function CoverageDetail({ line }: { line: CoverageLine }) {
                 {line.components.map((c, i) => (
                   <div key={c.name} className="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm">
                     <h3 className="flex items-center gap-3 text-base font-bold text-navy-950">
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-teal-600 text-xs font-bold text-white">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold-600 text-xs font-bold text-white">
                         {i + 1}
                       </span>
                       {c.name}
@@ -125,7 +125,7 @@ export default function CoverageDetail({ line }: { line: CoverageLine }) {
             </section>
 
             {/* When you need it */}
-            <section aria-labelledby="when" className="rounded-3xl bg-gradient-to-br from-navy-950 to-teal-900 p-8 text-white sm:p-10">
+            <section aria-labelledby="when" className="rounded-3xl bg-gradient-to-br from-navy-950 to-gold-950 p-8 text-white sm:p-10">
               <h2 id="when" className="text-2xl font-bold">
                 When you need {line.shortName.toLowerCase()} coverage
               </h2>
@@ -183,9 +183,9 @@ export default function CoverageDetail({ line }: { line: CoverageLine }) {
                     <li key={s.slug}>
                       <Link
                         href={`/${s.category}/${s.slug}`}
-                        className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm font-medium text-navy-700 hover:bg-teal-50 hover:text-teal-800"
+                        className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm font-medium text-navy-700 hover:bg-gold-50 hover:text-gold-800"
                       >
-                        <SIcon className="h-4 w-4 text-teal-600" aria-hidden="true" />
+                        <SIcon className="h-4 w-4 text-gold-600" aria-hidden="true" />
                         {s.name}
                       </Link>
                     </li>

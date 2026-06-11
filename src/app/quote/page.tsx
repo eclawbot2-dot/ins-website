@@ -42,7 +42,7 @@ export default async function QuotePage({
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <p className="text-sm font-semibold uppercase tracking-widest text-teal-700">Free &amp; no obligation</p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-gold-700">Free &amp; no obligation</p>
             <h1 className="mt-3 text-3xl font-bold tracking-tight text-navy-950 sm:text-4xl">
               Let&apos;s find your best rate
             </h1>
@@ -53,7 +53,7 @@ export default async function QuotePage({
             <ul className="mt-9 space-y-6">
               {ASSURANCES.map((a) => (
                 <li key={a.title} className="flex gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gold-50 text-gold-700">
                     <a.icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <div>
@@ -65,7 +65,7 @@ export default async function QuotePage({
             </ul>
             <p className="mt-9 rounded-2xl border border-navy-100 bg-white p-5 text-sm leading-relaxed text-navy-600">
               Prefer to talk it through? Call{" "}
-              <a href={BRAND.phoneHref} className="font-semibold text-teal-700">
+              <a href={BRAND.phoneHref} className="font-semibold text-gold-700">
                 {BRAND.phone}
               </a>{" "}
               — {BRAND.hours[0].days}, {BRAND.hours[0].hours}.

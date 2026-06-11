@@ -36,10 +36,10 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-teal-900">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-teal-500/10 blur-3xl" aria-hidden="true" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-gold-950">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-gold-500/10 blur-3xl" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-          <p className="text-sm font-semibold uppercase tracking-widest text-teal-300">About {BRAND.shortName}</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-gold-300">About {BRAND.shortName}</p>
           <h1 className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             Insurance the way it should work: someone on your side of the table.
           </h1>
@@ -64,9 +64,9 @@ export default function AboutPage() {
                 getting the best deal available — not just the one easiest to renew.
               </p>
               <p>
-                The name says what we do. A harborline is where vessels tie off — secure, oriented, ready for whatever
-                the water does next. That&apos;s the job: protect what our clients have built, keep them oriented as
-                their lives and businesses change, and be the steady line they can count on when something goes wrong.
+                The name reflects how we work. Tabor is a name with weight — steady, plain-spoken, built to last.
+                That&apos;s the job: protect what our clients have built, keep them oriented as their lives and
+                businesses change, and be the steady hand they can count on when something goes wrong.
               </p>
             </div>
           </div>
@@ -99,13 +99,13 @@ export default function AboutPage() {
       <section className="bg-navy-50/60 py-16" aria-labelledby="values">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <Users className="h-6 w-6 text-teal-700" aria-hidden="true" />
+            <Users className="h-6 w-6 text-gold-700" aria-hidden="true" />
             <h2 id="values" className="text-2xl font-bold text-navy-950">What we stand for</h2>
           </div>
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
             {VALUES.map((v) => (
               <div key={v.title} className="rounded-2xl border border-navy-100 bg-white p-7 shadow-sm">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-50 text-gold-700">
                   <v.icon className="h-6 w-6" aria-hidden="true" />
                 </span>
                 <h3 className="mt-4 text-lg font-bold text-navy-950">{v.title}</h3>
@@ -117,7 +117,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="rounded-3xl bg-gradient-to-br from-navy-950 to-teal-900 p-10 text-center text-white sm:p-14">
+        <div className="rounded-3xl bg-gradient-to-br from-navy-950 to-gold-950 p-10 text-center text-white sm:p-14">
           <h2 className="text-2xl font-bold sm:text-3xl">Carriers we represent</h2>
           <p className="mx-auto mt-3 max-w-2xl text-navy-200">
             Appointments with highly rated national and regional carriers — and the lineup keeps growing.

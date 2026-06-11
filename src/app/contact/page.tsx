@@ -26,27 +26,27 @@ export default function ContactPage() {
           <div className="space-y-6 lg:col-span-2">
             <div className="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm">
               <h2 className="flex items-center gap-2.5 font-bold text-navy-950">
-                <Phone className="h-5 w-5 text-teal-700" aria-hidden="true" />
+                <Phone className="h-5 w-5 text-gold-700" aria-hidden="true" />
                 Phone
               </h2>
-              <a href={BRAND.phoneHref} className="mt-2 block text-lg font-semibold text-teal-700 hover:text-teal-600">
+              <a href={BRAND.phoneHref} className="mt-2 block text-lg font-semibold text-gold-700 hover:text-gold-600">
                 {BRAND.phone}
               </a>
               <p className="mt-1 text-sm text-navy-600">Fastest for anything time-sensitive.</p>
             </div>
             <div className="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm">
               <h2 className="flex items-center gap-2.5 font-bold text-navy-950">
-                <Mail className="h-5 w-5 text-teal-700" aria-hidden="true" />
+                <Mail className="h-5 w-5 text-gold-700" aria-hidden="true" />
                 Email
               </h2>
-              <a href={`mailto:${BRAND.email}`} className="mt-2 block text-lg font-semibold text-teal-700 hover:text-teal-600">
+              <a href={`mailto:${BRAND.email}`} className="mt-2 block text-lg font-semibold text-gold-700 hover:text-gold-600">
                 {BRAND.email}
               </a>
               <p className="mt-1 text-sm text-navy-600">Great for documents, COI requests, and policy questions.</p>
             </div>
             <div className="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm">
               <h2 className="flex items-center gap-2.5 font-bold text-navy-950">
-                <MapPin className="h-5 w-5 text-teal-700" aria-hidden="true" />
+                <MapPin className="h-5 w-5 text-gold-700" aria-hidden="true" />
                 Office
               </h2>
               <p className="mt-2 text-navy-800">
@@ -57,7 +57,7 @@ export default function ContactPage() {
             </div>
             <div className="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm">
               <h2 className="flex items-center gap-2.5 font-bold text-navy-950">
-                <Clock3 className="h-5 w-5 text-teal-700" aria-hidden="true" />
+                <Clock3 className="h-5 w-5 text-gold-700" aria-hidden="true" />
                 Hours
               </h2>
               <ul className="mt-2 space-y-1.5 text-sm text-navy-800">
