@@ -23,6 +23,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot — humans never fill this
 
   const personal = ALL_LINES.filter((l) => l.category === "personal");
   const business = ALL_LINES.filter((l) => l.category === "business");
@@ -50,6 +51,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
           zip,
           lineOfBusiness,
           message,
+          website,
           source: "website",
         }),
       });
@@ -219,6 +221,17 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
             void submit();
           }}
         >
+          <div aria-hidden="true" className="absolute h-0 w-0 overflow-hidden">
+            <label htmlFor="q-website">Leave this field empty</label>
+            <input
+              id="q-website"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+          </div>
           <h2 className="text-xl font-bold text-navy-950">Where should we send your quotes?</h2>
           <p className="mt-1 text-sm text-navy-600">
             A licensed advisor will follow up — no robocalls, no spam, and we never sell your information.

@@ -19,10 +19,11 @@ export async function generateMetadata({
   return {
     title: `${line.name} — Compare Quotes from ${BRAND.carriers.length}+ Carriers`,
     description: line.summary,
+    alternates: { canonical: `/business/${line.slug}` },
     openGraph: {
       title: `${line.name} | ${BRAND.name}`,
       description: line.summary,
-      url: `${BRAND.url}/business/${line.slug}`,
+      url: `/business/${line.slug}`,
     },
   };
 }

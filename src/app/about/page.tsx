@@ -6,6 +6,7 @@ import CtaBanner from "@/components/CtaBanner";
 
 export const metadata: Metadata = {
   title: "About Us — An Independent Agency That Works for You",
+  alternates: { canonical: "/about" },
   description: `${BRAND.name} is an independent insurance agency representing ${BRAND.carriers.length}+ top-rated carriers. Learn about our story, our values, and why the independent agency model puts clients first.`,
 };
 

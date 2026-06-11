@@ -14,6 +14,7 @@ export default function ContactForm() {
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot — humans never fill this
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -35,6 +36,7 @@ export default function ContactForm() {
           zip,
           lineOfBusiness: "",
           message,
+          website,
           source: "contact",
         }),
       });
@@ -68,6 +70,17 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={submit} className="rounded-3xl border border-navy-100 bg-white p-6 shadow-xl shadow-navy-950/5 sm:p-8">
+      <div aria-hidden="true" className="absolute h-0 w-0 overflow-hidden">
+        <label htmlFor="c-website">Leave this field empty</label>
+        <input
+          id="c-website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+        />
+      </div>
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="c-firstName" className="block text-sm font-medium text-navy-900">

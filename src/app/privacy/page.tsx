@@ -3,6 +3,7 @@ import { BRAND } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
+  alternates: { canonical: "/privacy" },
   description: `How ${BRAND.name} collects, uses, and protects your personal information.`,
   robots: { index: true, follow: true },
 };

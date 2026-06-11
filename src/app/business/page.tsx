@@ -5,9 +5,11 @@ import { BUSINESS_LINES } from "@/lib/coverage-data";
 import { BRAND } from "@/lib/brand";
 import CoverageCard from "@/components/CoverageCard";
 import CtaBanner from "@/components/CtaBanner";
+import { JsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Business Insurance — GL, BOP, Workers' Comp, Cyber & More",
+  alternates: { canonical: "/business" },
   description: `Commercial insurance from ${BRAND.name}: general liability, BOP, workers' compensation, commercial auto, cyber, E&O, and commercial property — quoted across multiple carriers with same-day certificates of insurance.`,
   openGraph: {
     title: `Business Insurance | ${BRAND.name}`,
@@ -18,6 +20,12 @@ export const metadata: Metadata = {
 export default function BusinessHubPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Business Insurance", path: "/business" },
+        ])}
+      />
       <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-teal-900">
         <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-teal-500/10 blur-3xl" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">

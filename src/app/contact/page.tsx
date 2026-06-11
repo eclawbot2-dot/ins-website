@@ -5,6 +5,7 @@ import { BRAND } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Contact Us — Talk to a Licensed Advisor",
+  alternates: { canonical: "/contact" },
   description: `Contact ${BRAND.name}: call ${BRAND.phone}, email ${BRAND.email}, or send a message. Office in ${BRAND.address.city}, ${BRAND.address.state}. We respond within one business day.`,
 };
 

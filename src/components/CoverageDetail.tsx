@@ -5,6 +5,7 @@ import { PERSONAL_LINES, BUSINESS_LINES } from "@/lib/coverage-data";
 import { getIcon } from "@/lib/icons";
 import FaqList from "@/components/FaqList";
 import CtaBanner from "@/components/CtaBanner";
+import { JsonLd, breadcrumbJsonLd, faqJsonLd, serviceJsonLd } from "@/lib/seo";
 
 export default function CoverageDetail({ line }: { line: CoverageLine }) {
   const Icon = getIcon(line.icon);
@@ -15,6 +16,15 @@ export default function CoverageDetail({ line }: { line: CoverageLine }) {
 
   return (
     <>
+      <JsonLd data={serviceJsonLd(line)} />
+      <JsonLd data={faqJsonLd(line.faqs)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: hubLabel, path: `/${line.category}` },
+          { name: line.name, path: `/${line.category}/${line.slug}` },
+        ])}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-teal-900">
         <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-teal-500/10 blur-3xl" aria-hidden="true" />

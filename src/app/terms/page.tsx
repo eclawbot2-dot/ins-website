@@ -3,6 +3,7 @@ import { BRAND } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
+  alternates: { canonical: "/terms" },
   description: `Terms governing use of the ${BRAND.name} website.`,
   robots: { index: true, follow: true },
 };

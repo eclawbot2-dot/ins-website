@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Anchor, ChevronDown, Menu, Phone, X } from "lucide-react";
@@ -27,6 +27,20 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>(null);
   const pathname = usePathname();
+
+  // Close the mobile menu on Escape and on route change.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-navy-100 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
@@ -113,15 +127,16 @@ export default function Header() {
         <div className="flex items-center gap-2 lg:hidden">
           <Link
             href="/quote"
-            className="rounded-full bg-accent-500 px-4 py-2 text-sm font-semibold text-navy-950 shadow-sm"
+            className="rounded-full bg-accent-500 px-4 py-2.5 text-sm font-semibold text-navy-950 shadow-sm transition-colors hover:bg-accent-400"
           >
             Get a Quote
           </Link>
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            className="rounded-lg p-2 text-navy-800 hover:bg-navy-50"
+            className="rounded-lg p-2.5 text-navy-800 hover:bg-navy-50"
             aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -131,7 +146,11 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <nav className="border-t border-navy-100 bg-white px-4 pb-6 pt-2 lg:hidden" aria-label="Mobile navigation">
+        <nav
+          id="mobile-menu"
+          className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-navy-100 bg-white px-4 pb-6 pt-2 lg:hidden"
+          aria-label="Mobile navigation"
+        >
           {NAV.map((item) =>
             item.children.length > 0 ? (
               <div key={item.label} className="border-b border-navy-50">
@@ -161,7 +180,7 @@ export default function Header() {
                         key={child.href}
                         href={child.href}
                         onClick={() => setMobileOpen(false)}
-                        className="block py-2 text-sm text-navy-700"
+                        className="block py-2.5 text-sm text-navy-700"
                       >
                         {child.label}
                       </Link>
@@ -180,7 +199,7 @@ export default function Header() {
               </Link>
             )
           )}
-          <a href={BRAND.phoneHref} className="mt-4 flex items-center gap-2 text-sm font-semibold text-teal-700">
+          <a href={BRAND.phoneHref} className="mt-3 flex items-center gap-2 py-2.5 text-sm font-semibold text-teal-700">
             <Phone className="h-4 w-4" aria-hidden="true" />
             {BRAND.phone}
           </a>

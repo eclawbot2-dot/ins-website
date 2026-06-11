@@ -26,6 +26,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
+  // Honeypot: real visitors never see or fill the "website" field. Bots that
+  // fill every input get a silent success and the lead is never forwarded.
+  if (str(body.website, 200)) {
+    return NextResponse.json({ ok: true });
+  }
+
   const payload: LeadPayload = {
     firstName: str(body.firstName, 100),
     lastName: str(body.lastName, 100),

@@ -47,7 +47,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               {PERSONAL_LINES.map((l) => (
                 <li key={l.slug}>
-                  <Link href={`/personal/${l.slug}`} className="hover:text-white">
+                  <Link href={`/personal/${l.slug}`} className="inline-block py-0.5 hover:text-white">
                     {l.name}
                   </Link>
                 </li>
@@ -61,7 +61,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               {BUSINESS_LINES.map((l) => (
                 <li key={l.slug}>
-                  <Link href={`/business/${l.slug}`} className="hover:text-white">
+                  <Link href={`/business/${l.slug}`} className="inline-block py-0.5 hover:text-white">
                     {l.shortName}
                   </Link>
                 </li>
@@ -73,12 +73,12 @@ export default function Footer() {
           <nav aria-label="Company links">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white">Company</h3>
             <ul className="mt-4 space-y-2.5 text-sm">
-              <li><Link href="/about" className="hover:text-white">About Us</Link></li>
-              <li><Link href="/claims" className="hover:text-white">File a Claim</Link></li>
-              <li><Link href="/quote" className="hover:text-white">Get a Quote</Link></li>
-              <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-              <li><Link href="/privacy" className="hover:text-white">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-white">Terms of Use</Link></li>
+              <li><Link href="/about" className="inline-block py-0.5 hover:text-white">About Us</Link></li>
+              <li><Link href="/claims" className="inline-block py-0.5 hover:text-white">File a Claim</Link></li>
+              <li><Link href="/quote" className="inline-block py-0.5 hover:text-white">Get a Quote</Link></li>
+              <li><Link href="/contact" className="inline-block py-0.5 hover:text-white">Contact</Link></li>
+              <li><Link href="/privacy" className="inline-block py-0.5 hover:text-white">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="inline-block py-0.5 hover:text-white">Terms of Use</Link></li>
             </ul>
             <h3 className="mt-8 text-sm font-semibold uppercase tracking-wider text-white">Hours</h3>
             <ul className="mt-4 space-y-1.5 text-sm">

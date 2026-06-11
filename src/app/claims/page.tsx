@@ -5,6 +5,7 @@ import CtaBanner from "@/components/CtaBanner";
 
 export const metadata: Metadata = {
   title: "File a Claim — Carrier Claim Numbers & What to Do First",
+  alternates: { canonical: "/claims" },
   description: `How to file an insurance claim with ${BRAND.name}: step-by-step guidance, 24/7 carrier claim phone numbers for Progressive, Travelers, Hartford, Liberty Mutual, Chubb, Nationwide, Safeco, and Hanover.`,
 };
 

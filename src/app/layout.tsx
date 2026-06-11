@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { BRAND } from "@/lib/brand";
+import { SITE_URL } from "@/lib/site";
+import { JsonLd, agencyJsonLd } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -12,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(BRAND.url),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `${BRAND.name} | Independent Insurance Agency`,
     template: `%s | ${BRAND.name}`,
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: BRAND.name,
-    url: BRAND.url,
+    url: SITE_URL,
     title: `${BRAND.name} | Independent Insurance Agency`,
     description: `Independent insurance agency comparing ${BRAND.carriers.length}+ top-rated carriers for personal and business coverage.`,
   },
@@ -39,6 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans">
+        <JsonLd data={agencyJsonLd()} />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-navy-950 focus:px-4 focus:py-2 focus:text-white"

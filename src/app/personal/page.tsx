@@ -5,9 +5,11 @@ import { PERSONAL_LINES } from "@/lib/coverage-data";
 import { BRAND } from "@/lib/brand";
 import CoverageCard from "@/components/CoverageCard";
 import CtaBanner from "@/components/CtaBanner";
+import { JsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Personal Insurance — Auto, Home, Renters, Umbrella, Life & Health",
+  alternates: { canonical: "/personal" },
   description: `Personal insurance from ${BRAND.name}: auto, homeowners, renters, umbrella, life, and health coverage compared across ${BRAND.carriers.length}+ top-rated carriers. Get a free quote today.`,
   openGraph: {
     title: `Personal Insurance | ${BRAND.name}`,
@@ -18,6 +20,12 @@ export const metadata: Metadata = {
 export default function PersonalHubPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Personal Insurance", path: "/personal" },
+        ])}
+      />
       <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-teal-900">
         <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-teal-500/10 blur-3xl" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">

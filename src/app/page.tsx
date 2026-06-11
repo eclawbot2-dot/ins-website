@@ -19,8 +19,9 @@ import CoverageCard from "@/components/CoverageCard";
 import CtaBanner from "@/components/CtaBanner";
 
 export const metadata: Metadata = {
-  title: `${BRAND.name} | Independent Insurance Agency — Auto, Home, Life & Business`,
+  title: { absolute: `${BRAND.name} | Independent Insurance Agency — Auto, Home, Life & Business` },
   description: `Get the right coverage at the right price. ${BRAND.name} compares quotes from ${BRAND.carriers.length}+ top-rated carriers including Progressive, Travelers, and Nationwide — for auto, home, life, health, and business insurance.`,
+  alternates: { canonical: "/" },
 };
 
 const TRUST_POINTS = [
