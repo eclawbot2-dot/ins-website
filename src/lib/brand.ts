@@ -35,6 +35,24 @@ export const BRAND = {
     "Safeco",
     "Hanover",
   ],
+  /**
+   * Cities / regions served — used for local-SEO content and LocalBusiness
+   * areaServed JSON-LD. Replace with the agency's real footprint.
+   */
+  serviceAreas: [
+    "San Diego",
+    "La Jolla",
+    "Chula Vista",
+    "Carlsbad",
+    "Escondido",
+    "El Cajon",
+    "Oceanside",
+    "Encinitas",
+    "Coronado",
+    "Poway",
+  ],
+  /** Geo coordinates for LocalBusiness JSON-LD (office location). */
+  geo: { latitude: 32.8328, longitude: -117.2713 },
 } as const;
 
 /**

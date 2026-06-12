@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { StickyQuoteBar } from "@/components/LeadForm";
+import AnalyticsBridge from "@/components/AnalyticsBridge";
 import { BRAND } from "@/lib/brand";
 import { SITE_URL } from "@/lib/site";
 import { JsonLd, agencyJsonLd } from "@/lib/seo";
@@ -51,6 +53,8 @@ export default function RootLayout({
         <Header />
         <main id="main-content">{children}</main>
         <Footer />
+        <StickyQuoteBar />
+        <AnalyticsBridge />
       </body>
     </html>
   );

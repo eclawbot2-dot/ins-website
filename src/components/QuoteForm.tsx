@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { ALL_LINES } from "@/lib/coverage-data";
 import { getIcon } from "@/lib/icons";
 import { BRAND } from "@/lib/brand";
+import { trackLead } from "@/lib/analytics";
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -53,12 +54,14 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
           message,
           website,
           source: "website",
+          campaign: "main-quote-form",
         }),
       });
       if (!res.ok) {
         const data = (await res.json().catch(() => null)) as { error?: string } | null;
         throw new Error(data?.error ?? "Something went wrong.");
       }
+      trackLead({ source: "website", lineOfBusiness, campaign: "main-quote-form" });
       setStep(4);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again or call us.");

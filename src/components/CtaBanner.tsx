@@ -25,6 +25,8 @@ export default function CtaBanner({
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
             href="/quote"
+            data-cta="Start My Quote"
+            data-cta-location="cta-banner"
             className="inline-flex items-center gap-2 rounded-full bg-accent-500 px-8 py-3.5 text-base font-semibold text-navy-950 shadow-lg shadow-accent-500/25 transition-all hover:bg-accent-400 hover:shadow-xl"
           >
             Start My Quote

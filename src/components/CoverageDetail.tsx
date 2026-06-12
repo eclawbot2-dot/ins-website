@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, ChevronRight, XCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, Repeat, SearchCheck, XCircle } from "lucide-react";
 import type { CoverageLine } from "@/lib/coverage-data";
 import { PERSONAL_LINES, BUSINESS_LINES } from "@/lib/coverage-data";
 import { getIcon } from "@/lib/icons";
@@ -166,11 +166,29 @@ export default function CoverageDetail({ line }: { line: CoverageLine }) {
               </p>
               <Link
                 href={`/quote?line=${encodeURIComponent(line.name)}`}
+                data-cta={`Start My ${line.shortName} Quote`}
+                data-cta-location="coverage-sidebar"
                 className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-500 px-5 py-3 text-sm font-semibold text-navy-950 transition-colors hover:bg-accent-400"
               >
                 Start My Quote
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
+              <div className="mt-4 flex flex-col gap-2 border-t border-accent-200/70 pt-4 text-sm">
+                <Link
+                  href="/coverage-checkup"
+                  className="inline-flex items-center gap-1.5 font-semibold text-gold-700 hover:text-gold-600"
+                >
+                  <SearchCheck className="h-4 w-4" aria-hidden="true" />
+                  Free coverage checkup
+                </Link>
+                <Link
+                  href="/switch-and-save"
+                  className="inline-flex items-center gap-1.5 font-semibold text-gold-700 hover:text-gold-600"
+                >
+                  <Repeat className="h-4 w-4" aria-hidden="true" />
+                  Already insured? Switch &amp; save
+                </Link>
+              </div>
             </div>
             <nav className="rounded-2xl border border-navy-100 bg-white p-6" aria-label={`Other ${hubLabel.toLowerCase()} coverage`}>
               <h2 className="text-sm font-semibold uppercase tracking-wider text-navy-500">

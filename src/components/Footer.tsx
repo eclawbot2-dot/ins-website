@@ -3,10 +3,11 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import Wordmark from "@/components/Wordmark";
 import { PERSONAL_LINES, BUSINESS_LINES } from "@/lib/coverage-data";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-950 text-navy-200">
+    <footer className="bg-navy-950 pb-20 text-navy-200 lg:pb-0">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand + NAP */}
@@ -37,6 +38,16 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
+
+            <div className="mt-7 max-w-sm">
+              <h3 className="text-sm font-semibold text-white">Coverage tips in your inbox</h3>
+              <p className="mt-1.5 text-xs text-navy-400">
+                Occasional money-saving tips and renewal reminders. No spam, unsubscribe anytime.
+              </p>
+              <div className="mt-3">
+                <NewsletterSignup variant="footer" />
+              </div>
+            </div>
           </div>
 
           {/* Personal */}
@@ -71,6 +82,10 @@ export default function Footer() {
           <nav aria-label="Company links">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white">Company</h3>
             <ul className="mt-4 space-y-2.5 text-sm">
+              <li><Link href="/coverage-checkup" className="inline-block py-0.5 hover:text-white">Free Coverage Checkup</Link></li>
+              <li><Link href="/switch-and-save" className="inline-block py-0.5 hover:text-white">Switch &amp; Save</Link></li>
+              <li><Link href="/certificate" className="inline-block py-0.5 hover:text-white">Request a Certificate</Link></li>
+              <li><Link href="/resources" className="inline-block py-0.5 hover:text-white">Resources &amp; Guides</Link></li>
               <li><Link href="/client-login" className="inline-block py-0.5 hover:text-white">Client Login</Link></li>
               <li><Link href="/about" className="inline-block py-0.5 hover:text-white">About Us</Link></li>
               <li><Link href="/claims" className="inline-block py-0.5 hover:text-white">File a Claim</Link></li>

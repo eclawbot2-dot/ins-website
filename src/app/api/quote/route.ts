@@ -12,6 +12,7 @@ type LeadPayload = {
   lineOfBusiness: string;
   message: string;
   source: string;
+  campaign: string;
 };
 
 function str(v: unknown, max = 2000): string {
@@ -41,6 +42,7 @@ export async function POST(request: Request) {
     lineOfBusiness: str(body.lineOfBusiness, 100),
     message: str(body.message),
     source: str(body.source, 50) || "website",
+    campaign: str(body.campaign, 80),
   };
 
   if (!payload.firstName || !payload.lastName || (!payload.email && !payload.phone)) {

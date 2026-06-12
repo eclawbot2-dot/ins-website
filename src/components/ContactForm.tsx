@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { BRAND } from "@/lib/brand";
+import { trackLead } from "@/lib/analytics";
 
 export default function ContactForm() {
   const [firstName, setFirstName] = useState("");
@@ -38,12 +39,14 @@ export default function ContactForm() {
           message,
           website,
           source: "contact",
+          campaign: "contact-page",
         }),
       });
       if (!res.ok) {
         const data = (await res.json().catch(() => null)) as { error?: string } | null;
         throw new Error(data?.error ?? "Something went wrong.");
       }
+      trackLead({ source: "contact", campaign: "contact-page" });
       setSent(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again or call us.");

@@ -1,6 +1,7 @@
 import { BRAND } from "@/lib/brand";
 import { SITE_URL, absoluteUrl } from "@/lib/site";
 import type { CoverageLine } from "@/lib/coverage-data";
+import type { Article } from "@/lib/blog-data";
 
 /** Renders a JSON-LD <script> tag. Server-component safe. */
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
@@ -35,7 +36,19 @@ export function agencyJsonLd(): Record<string, unknown> {
       postalCode: BRAND.address.zip,
       addressCountry: "US",
     },
-    areaServed: { "@type": "State", name: "California" },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: BRAND.geo.latitude,
+      longitude: BRAND.geo.longitude,
+    },
+    hasMap: `https://www.google.com/maps?q=${encodeURIComponent(
+      `${BRAND.address.street}, ${BRAND.address.city}, ${BRAND.address.state} ${BRAND.address.zip}`
+    )}`,
+    priceRange: "Free quotes · No-fee advisory",
+    areaServed: [
+      { "@type": "State", name: "California" },
+      ...BRAND.serviceAreas.map((c) => ({ "@type": "City", name: c })),
+    ],
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -91,6 +104,31 @@ export function faqJsonLd(faqs: { question: string; answer: string }[]): Record<
       name: f.question,
       acceptedAnswer: { "@type": "Answer", text: f.answer },
     })),
+  };
+}
+
+export function articleJsonLd(article: Article): Record<string, unknown> {
+  const path = `/resources/${article.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${absoluteUrl(path)}#article`,
+    headline: article.title,
+    description: article.description,
+    url: absoluteUrl(path),
+    datePublished: article.datePublished,
+    dateModified: article.dateModified,
+    articleSection: article.category,
+    inLanguage: "en-US",
+    mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(path) },
+    author: { "@type": "Organization", name: BRAND.name, url: SITE_URL },
+    publisher: {
+      "@type": "Organization",
+      name: BRAND.name,
+      url: SITE_URL,
+      logo: { "@type": "ImageObject", url: absoluteUrl("/opengraph-image") },
+    },
+    about: article.related.map((r) => ({ "@type": "Thing", name: r.label })),
   };
 }
 

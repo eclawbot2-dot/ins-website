@@ -1,6 +1,7 @@
 import { BRAND } from "@/lib/brand";
 import { SITE_URL } from "@/lib/site";
 import { PERSONAL_LINES, BUSINESS_LINES } from "@/lib/coverage-data";
+import { ARTICLES } from "@/lib/blog-data";
 
 export const dynamic = "force-static";
 
@@ -10,6 +11,9 @@ export function GET(): Response {
   ).join("\n");
   const business = BUSINESS_LINES.map(
     (l) => `- [${l.name}](${SITE_URL}/business/${l.slug}): ${l.summary}`
+  ).join("\n");
+  const resources = ARTICLES.map(
+    (a) => `- [${a.title}](${SITE_URL}/resources/${a.slug}): ${a.description}`
   ).join("\n");
 
   const body = `# ${BRAND.name}
@@ -21,7 +25,11 @@ Key facts:
 - Carriers quoted: ${BRAND.carriers.join(", ")}
 - Service area: California (personal and commercial lines)
 - How to get a quote: ${SITE_URL}/quote (3-step form, response within one business day) or call ${BRAND.phone}
+- Free coverage checkup: ${SITE_URL}/coverage-checkup (send your current policy; we find gaps and savings — no obligation)
+- Switch & save: ${SITE_URL}/switch-and-save (we re-shop your insurance across carriers and handle the switch)
+- Certificate of insurance: ${SITE_URL}/certificate (same-day COIs with additional-insured wording)
 - Claims help: ${SITE_URL}/claims (step-by-step guidance plus 24/7 carrier claim phone numbers)
+- Service area: ${BRAND.serviceAreas.join(", ")} and the rest of California
 - Office: ${BRAND.address.street}, ${BRAND.address.city}, ${BRAND.address.state} ${BRAND.address.zip}
 - Hours: ${BRAND.hours.map((h) => `${h.days} ${h.hours}`).join("; ")}
 - ${BRAND.license}
@@ -32,8 +40,15 @@ ${personal}
 ## Business Insurance
 ${business}
 
+## Resources & Guides
+${resources}
+
 ## Key Pages
 - [Get a Free Quote](${SITE_URL}/quote): 3-step quote request — coverage type, details, contact info
+- [Free Coverage Checkup](${SITE_URL}/coverage-checkup): policy review for gaps and savings
+- [Switch & Save](${SITE_URL}/switch-and-save): re-shop your current policy across carriers
+- [Request a Certificate](${SITE_URL}/certificate): same-day certificate of insurance (COI)
+- [Resources](${SITE_URL}/resources): plain-English insurance guides
 - [Personal Insurance](${SITE_URL}/personal): all personal lines
 - [Business Insurance](${SITE_URL}/business): all commercial lines
 - [File a Claim](${SITE_URL}/claims): what to do after a loss + carrier claim numbers

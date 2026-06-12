@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Compass, Handshake, Lightbulb, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, Compass, Handshake, Lightbulb, MapPin, ShieldCheck, Users } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import CtaBanner from "@/components/CtaBanner";
 
@@ -134,6 +134,34 @@ export default function AboutPage() {
             Put them to work for you
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
+        </div>
+      </section>
+
+      {/* Service areas — local SEO */}
+      <section className="bg-navy-50/60 py-16" aria-labelledby="service-areas">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3">
+            <MapPin className="h-6 w-6 text-gold-700" aria-hidden="true" />
+            <h2 id="service-areas" className="text-2xl font-bold text-navy-950">
+              Areas we serve
+            </h2>
+          </div>
+          <p className="mt-3 max-w-3xl text-navy-700">
+            Headquartered in {BRAND.address.city}, {BRAND.address.state}, {BRAND.shortName} writes
+            personal and commercial insurance across California — including {BRAND.address.city} and
+            the surrounding communities below. Don&apos;t see your city? We likely cover it too —
+            just ask.
+          </p>
+          <ul className="mt-6 flex flex-wrap gap-2.5">
+            {BRAND.serviceAreas.map((city) => (
+              <li
+                key={city}
+                className="rounded-full border border-navy-200 bg-white px-4 py-2 text-sm font-medium text-navy-700"
+              >
+                {city}, {BRAND.address.state}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

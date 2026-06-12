@@ -6,7 +6,6 @@ import {
   Building2,
   Handshake,
   Phone,
-  Quote,
   Scale,
   SearchCheck,
   ShieldCheck,
@@ -17,6 +16,8 @@ import { BRAND } from "@/lib/brand";
 import { PERSONAL_LINES, BUSINESS_LINES } from "@/lib/coverage-data";
 import CoverageCard from "@/components/CoverageCard";
 import CtaBanner from "@/components/CtaBanner";
+import Testimonials from "@/components/Testimonials";
+import TrustBadges from "@/components/TrustBadges";
 
 export const metadata: Metadata = {
   title: { absolute: `${BRAND.name} | Independent Insurance Agency — Auto, Home, Life & Business` },
@@ -29,27 +30,6 @@ const TRUST_POINTS = [
   { icon: BadgeCheck, title: "Licensed advisors", text: "Real people who explain coverage in plain English." },
   { icon: Handshake, title: "We work for you", text: "Independent means our loyalty is to clients, not a carrier." },
   { icon: ShieldCheck, title: "Claims advocacy", text: "When you have a claim, we're in your corner — start to finish." },
-];
-
-const TESTIMONIALS = [
-  {
-    quote:
-      "They re-shopped my auto and home at renewal and cut my total premium by almost $900 a year — same coverage, better carrier. I didn't fill out a single application myself.",
-    name: "Melissa R.",
-    detail: "Auto + Home bundle",
-  },
-  {
-    quote:
-      "As a new contractor I needed GL, workers' comp, and a certificate for a job starting Monday. They had me covered and the COI in the GC's inbox the same afternoon.",
-    name: "Dan K.",
-    detail: "Small business owner",
-  },
-  {
-    quote:
-      "After our kitchen fire, our advisor handled the carrier so we didn't have to. Hotel covered, claim paid, zero runaround. That's why you use an agency instead of an 800 number.",
-    name: "Priya & James T.",
-    detail: "Homeowners claim",
-  },
 ];
 
 export default function HomePage() {
@@ -84,17 +64,26 @@ export default function HomePage() {
             <div className="animate-fade-up-delay-2 mt-9 flex flex-col gap-4 sm:flex-row">
               <Link
                 href="/quote"
+                data-cta="Get My Free Quote"
+                data-cta-location="home-hero"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-500 px-8 py-4 text-base font-semibold text-navy-950 shadow-lg shadow-accent-500/30 transition-all hover:bg-accent-400 hover:shadow-xl"
               >
                 Get My Free Quote
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </Link>
-              <a
-                href={BRAND.phoneHref}
+              <Link
+                href="/coverage-checkup"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-white/10"
               >
+                <SearchCheck className="h-5 w-5" aria-hidden="true" />
+                Free Coverage Checkup
+              </Link>
+              <a
+                href={BRAND.phoneHref}
+                className="inline-flex items-center justify-center gap-2 rounded-full px-3 py-4 text-base font-semibold text-gold-200 transition-colors hover:text-white"
+              >
                 <Phone className="h-5 w-5" aria-hidden="true" />
-                Talk to an Advisor
+                {BRAND.phone}
               </a>
             </div>
             <p className="animate-fade-up-delay-2 mt-5 flex items-center gap-1.5 text-sm text-navy-300">
@@ -251,38 +240,49 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Testimonials ─────────────────────────────────────── */}
-      <section className="bg-navy-50/60 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-navy-950 sm:text-4xl">
-              Clients who stopped overpaying
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-lg text-navy-600">
-              The best measure of an agency is what happens after you buy the policy.
-            </p>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {TESTIMONIALS.map((t) => (
-              <figure key={t.name} className="flex flex-col rounded-2xl border border-navy-100 bg-white p-7 shadow-sm">
-                <Quote className="h-7 w-7 text-gold-300" aria-hidden="true" />
-                <blockquote className="mt-4 flex-1 text-[15px] leading-relaxed text-navy-800">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-6 border-t border-navy-100 pt-4">
-                  <div className="flex items-center gap-1" aria-label="5 out of 5 stars">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-accent-400 text-accent-400" aria-hidden="true" />
-                    ))}
-                  </div>
-                  <p className="mt-2 font-semibold text-navy-950">{t.name}</p>
-                  <p className="text-sm text-navy-500">{t.detail}</p>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+      {/* ── Lead-gen promo band ──────────────────────────────── */}
+      <section className="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
+        <div className="grid gap-5 md:grid-cols-2">
+          <Link
+            href="/coverage-checkup"
+            className="group flex items-center justify-between gap-4 rounded-3xl border border-navy-100 bg-gradient-to-br from-navy-50/80 to-white p-7 transition-shadow hover:shadow-lg hover:shadow-navy-950/5"
+          >
+            <div>
+              <h3 className="text-xl font-bold text-navy-950">Free coverage checkup</h3>
+              <p className="mt-1.5 text-sm text-navy-600">
+                Send us your current policy — we&apos;ll find the gaps and the savings. No obligation.
+              </p>
+            </div>
+            <ArrowRight
+              className="h-6 w-6 shrink-0 text-gold-600 transition-transform group-hover:translate-x-1"
+              aria-hidden="true"
+            />
+          </Link>
+          <Link
+            href="/switch-and-save"
+            className="group flex items-center justify-between gap-4 rounded-3xl border border-navy-100 bg-gradient-to-br from-gold-50 to-white p-7 transition-shadow hover:shadow-lg hover:shadow-navy-950/5"
+          >
+            <div>
+              <h3 className="text-xl font-bold text-navy-950">Switch &amp; save</h3>
+              <p className="mt-1.5 text-sm text-navy-600">
+                Think you&apos;re overpaying? We re-shop the market and handle the entire switch.
+              </p>
+            </div>
+            <ArrowRight
+              className="h-6 w-6 shrink-0 text-gold-600 transition-transform group-hover:translate-x-1"
+              aria-hidden="true"
+            />
+          </Link>
         </div>
       </section>
+
+      {/* ── Trust badges ─────────────────────────────────────── */}
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <TrustBadges />
+      </section>
+
+      {/* ── Testimonials ─────────────────────────────────────── */}
+      <Testimonials />
 
       <CtaBanner />
     </>

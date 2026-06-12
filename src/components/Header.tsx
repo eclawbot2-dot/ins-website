@@ -19,6 +19,16 @@ const NAV = [
     href: "/business",
     children: BUSINESS_LINES.map((l) => ({ label: l.name, href: `/business/${l.slug}` })),
   },
+  {
+    label: "Save",
+    href: "/coverage-checkup",
+    children: [
+      { label: "Free Coverage Checkup", href: "/coverage-checkup" },
+      { label: "Switch & Save", href: "/switch-and-save" },
+      { label: "Request a Certificate", href: "/certificate" },
+    ],
+  },
+  { label: "Resources", href: "/resources", children: [] },
   { label: "Claims", href: "/claims", children: [] },
   { label: "About", href: "/about", children: [] },
   { label: "Contact", href: "/contact", children: [] },
