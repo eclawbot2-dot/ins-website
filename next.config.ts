@@ -20,6 +20,16 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      // Health insurance was discontinued — send old links to the personal hub.
+      {
+        source: "/personal/health",
+        destination: "/personal",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

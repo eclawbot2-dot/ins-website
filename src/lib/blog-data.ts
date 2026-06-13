@@ -42,7 +42,6 @@ const COVERAGE = {
   renters: { label: "Renters Insurance", href: "/personal/renters" },
   umbrella: { label: "Umbrella Insurance", href: "/personal/umbrella" },
   life: { label: "Life Insurance", href: "/personal/life" },
-  health: { label: "Health Insurance", href: "/personal/health" },
   gl: { label: "General Liability", href: "/business/general-liability" },
   bop: { label: "Business Owners Policy", href: "/business/bop" },
   wc: { label: "Workers' Comp", href: "/business/workers-comp" },

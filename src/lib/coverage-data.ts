@@ -312,7 +312,7 @@ export const PERSONAL_LINES: CoverageLine[] = [
       "Claims against household members, including teen drivers",
     ],
     whatItDoesNotCover: [
-      "Your own injuries or property damage (that's what health, auto, and home coverage are for)",
+      "Your own injuries or property damage (that's what your auto and home coverage are for)",
       "Business liability — that requires commercial coverage",
       "Intentional or criminal acts",
       "Contracts you've agreed to or professional services you provide",
@@ -449,100 +449,6 @@ export const PERSONAL_LINES: CoverageLine[] = [
         question: "I have a health condition. Can I still get coverage?",
         answer:
           "Almost certainly — the question is price, and that's where independent shopping matters most. Carriers treat conditions like diabetes, anxiety, or a past cancer diagnosis very differently. We pre-screen your profile with underwriters across carriers before you ever formally apply.",
-      },
-    ],
-  },
-  {
-    slug: "health",
-    category: "personal",
-    name: "Health Insurance",
-    shortName: "Health",
-    icon: "stethoscope",
-    tagline: "Navigate the marketplace, Medicare, and private plans with an advisor on your side.",
-    summary:
-      "Individual and family health coverage — ACA marketplace plans, short-term options, and Medicare guidance — explained in plain English by a licensed advisor.",
-    intro: [
-      "Health insurance is the coverage people find most confusing — networks, deductibles, out-of-pocket maximums, subsidies, enrollment windows. Choosing wrong can mean thousands in unexpected costs or discovering your doctor is out of network when you need them most.",
-      "We help individuals, families, and the self-employed compare plans clearly: ACA marketplace plans (with premium tax credits you may not realize you qualify for), off-exchange options, and supplemental coverage like dental, vision, and accident plans. Our guidance costs you nothing — we're paid by the carriers, and your premium is identical whether you enroll through us or on your own. The difference is having someone to call when a claim goes sideways.",
-    ],
-    whatItCovers: [
-      "Preventive care — annual checkups, screenings, and immunizations at no cost on ACA-compliant plans",
-      "Doctor visits, specialist care, and urgent care",
-      "Emergency services and hospitalization",
-      "Prescription drugs",
-      "Mental health and substance-use treatment",
-      "Maternity, newborn, and pediatric care — including dental and vision for children",
-    ],
-    whatItDoesNotCover: [
-      "Out-of-network care, except true emergencies, on HMO and EPO plans",
-      "Adult dental and vision (available as inexpensive standalone policies)",
-      "Most cosmetic procedures",
-      "Care received before coverage starts — enrollment windows matter",
-    ],
-    components: [
-      {
-        name: "Premium",
-        description:
-          "Your monthly cost to keep the plan. On marketplace plans, premium tax credits can reduce this substantially based on household income — many families qualify and don't know it.",
-      },
-      {
-        name: "Deductible",
-        description:
-          "What you pay for care before the plan starts sharing costs. Plans with low premiums carry high deductibles and vice versa — the right balance depends on how much care you expect to use.",
-      },
-      {
-        name: "Copays & Coinsurance",
-        description:
-          "Your share of each service after (or sometimes before) the deductible — a flat copay per visit or a percentage of the bill.",
-      },
-      {
-        name: "Out-of-Pocket Maximum",
-        description:
-          "The most you can pay for covered, in-network care in a year. This is the number that matters in a bad year — it's your true worst-case exposure.",
-      },
-      {
-        name: "Network (HMO / PPO / EPO)",
-        description:
-          "Which doctors and hospitals the plan covers. HMOs cost less but restrict you to network providers with referrals; PPOs cost more but offer flexibility. We check that your doctors and medications are covered before you enroll.",
-      },
-      {
-        name: "Metal Tiers",
-        description:
-          "Bronze, Silver, Gold, and Platinum reflect cost-sharing, not quality. Silver plans unlock extra cost-sharing reductions for income-qualified households — sometimes making Silver better than Gold for less money.",
-      },
-    ],
-    whenYouNeedIt: [
-      "You're self-employed or your employer doesn't offer coverage",
-      "You're losing employer coverage — job change, layoff, or COBRA decision (loss of coverage opens a special enrollment period)",
-      "You're turning 26 and aging off a parent's plan",
-      "You're approaching 65 and need to navigate Medicare enrollment correctly (late-enrollment penalties are permanent)",
-      "Your income changed — you may now qualify for subsidies that make better coverage affordable",
-    ],
-    faqs: [
-      {
-        question: "When can I enroll in health insurance?",
-        answer:
-          "Open enrollment runs roughly November 1 – January 15 in most states. Outside that window, you need a qualifying life event — losing other coverage, moving, marriage, a new child — which opens a 60-day special enrollment period. If you think you've missed your window, call us; there are often more options than people realize.",
-      },
-      {
-        question: "Does using an agent cost more than enrolling myself?",
-        answer:
-          "No. Premiums are set by regulation and are identical with or without an agent. The carrier pays us. What you gain is plan-selection guidance, a network check against your actual doctors and prescriptions, and an advocate when claims or billing go wrong.",
-      },
-      {
-        question: "What's the real difference between Bronze and Gold plans?",
-        answer:
-          "How costs are split — not the quality of care. Bronze means low premium, high deductible: good if you're healthy and want catastrophic protection. Gold means higher premium, lower out-of-pocket costs: good if you use regular care or take ongoing medications. We'll model your expected usage both ways.",
-      },
-      {
-        question: "I'm self-employed. What are my options?",
-        answer:
-          "Marketplace plans with premium tax credits (your subsidy is based on net self-employment income), and your premiums are generally tax-deductible. Depending on your state and situation, association or group-of-one options may also exist. This is one of the most common situations we handle.",
-      },
-      {
-        question: "Do you help with Medicare?",
-        answer:
-          "Yes — Medicare Supplement (Medigap) and related guidance for those approaching 65. Initial enrollment decisions have permanent consequences (Medigap underwriting rights, Part B/D penalties), so talk to us a few months before your 65th birthday.",
       },
     ],
   },

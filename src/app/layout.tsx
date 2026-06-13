@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     default: `${BRAND.name} | Independent Insurance Agency`,
     template: `%s | ${BRAND.name}`,
   },
-  description: `${BRAND.name} is an independent insurance agency. We compare coverage and pricing across ${BRAND.carriers.length}+ top-rated carriers for auto, home, life, health, and business insurance — so you get the right protection at the right price.`,
+  description: `${BRAND.name} is an independent insurance agency. We compare coverage and pricing across ${BRAND.carriers.length}+ top-rated carriers for auto, home, life, and business insurance — so you get the right protection at the right price.`,
   openGraph: {
     type: "website",
     siteName: BRAND.name,

@@ -18,7 +18,7 @@ bright gold CTA accent (`accent-*`) — tokens defined in `src/app/globals.css`.
 ## Structure
 
 - `/` — home (hero, trust signals, coverage grid, captive-vs-independent, testimonials, carriers)
-- `/personal` + `/personal/[slug]` — hub + 6 detail pages (auto, homeowners, renters, umbrella, life, health)
+- `/personal` + `/personal/[slug]` — hub + 5 detail pages (auto, homeowners, renters, umbrella, life)
 - `/business` + `/business/[slug]` — hub + 7 detail pages (GL, BOP, workers' comp, commercial auto, cyber, E&O, commercial property)
 - `/quote` — 3-step quote form (supports `?line=Auto%20Insurance` prefill)
 - `/client-login` — client portal landing (links out to the agency platform portal)

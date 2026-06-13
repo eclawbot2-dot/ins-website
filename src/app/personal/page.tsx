@@ -8,12 +8,12 @@ import CtaBanner from "@/components/CtaBanner";
 import { JsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Personal Insurance — Auto, Home, Renters, Umbrella, Life & Health",
+  title: "Personal Insurance — Auto, Home, Renters, Umbrella & Life",
   alternates: { canonical: "/personal" },
-  description: `Personal insurance from ${BRAND.name}: auto, homeowners, renters, umbrella, life, and health coverage compared across ${BRAND.carriers.length}+ top-rated carriers. Get a free quote today.`,
+  description: `Personal insurance from ${BRAND.name}: auto, homeowners, renters, umbrella, and life coverage compared across ${BRAND.carriers.length}+ top-rated carriers. Get a free quote today.`,
   openGraph: {
     title: `Personal Insurance | ${BRAND.name}`,
-    description: "Auto, home, renters, umbrella, life, and health insurance — quoted across multiple carriers.",
+    description: "Auto, home, renters, umbrella, and life insurance — quoted across multiple carriers.",
   },
 };
 

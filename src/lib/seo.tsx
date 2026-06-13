@@ -69,7 +69,6 @@ export function agencyJsonLd(): Record<string, unknown> {
       "Renters Insurance",
       "Umbrella Insurance",
       "Life Insurance",
-      "Health Insurance",
       "General Liability Insurance",
       "Business Owners Policy",
       "Workers Compensation Insurance",

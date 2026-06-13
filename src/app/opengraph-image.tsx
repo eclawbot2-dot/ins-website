@@ -54,7 +54,7 @@ export default function OpengraphImage() {
             maxWidth: "950px",
           }}
         >
-          The right coverage. The right price. Every renewal.
+          Protect what you&apos;ve built — for the right price.
         </div>
         <div style={{ display: "flex", marginTop: "32px", fontSize: "28px", color: "#cfd9e6" }}>
           {`Independent agency · ${BRAND.carriers.length}+ top-rated carriers compared`}
