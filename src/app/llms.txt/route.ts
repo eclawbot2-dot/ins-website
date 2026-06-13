@@ -18,12 +18,12 @@ export function GET(): Response {
 
   const body = `# ${BRAND.name}
 
-> ${BRAND.name} is an independent insurance agency based in ${BRAND.address.city}, ${BRAND.address.state}. Unlike a captive agent who sells one company's policies, we hold appointments with ${BRAND.carriers.length}+ top-rated carriers (including ${BRAND.carriers.slice(0, 4).join(", ")}) and compare coverage and price across all of them — for personal and business insurance. Quotes are free, no-obligation, and reviewed by a licensed advisor.
+> ${BRAND.name} is an independent insurance agency based in ${BRAND.address.city}, ${BRAND.address.state}. Unlike a captive agent who sells one company's policies, we hold appointments with ${BRAND.carriers.length}+ top-rated carriers (including ${BRAND.carriers.slice(0, 4).join(", ")}) and compare coverage and price across all of them — for business and personal insurance. Quotes are free, no-obligation, and reviewed by a licensed advisor.
 
 Key facts:
 - Independent agency: we represent the client, not a single insurance carrier
 - Carriers quoted: ${BRAND.carriers.join(", ")}
-- Service area: California (personal and commercial lines)
+- Service area: California (commercial and personal lines)
 - How to get a quote: ${SITE_URL}/quote (3-step form, response within one business day) or call ${BRAND.phone}
 - Free coverage checkup: ${SITE_URL}/coverage-checkup (send your current policy; we find gaps and savings — no obligation)
 - Switch & save: ${SITE_URL}/switch-and-save (we re-shop your insurance across carriers and handle the switch)
@@ -34,11 +34,11 @@ Key facts:
 - Hours: ${BRAND.hours.map((h) => `${h.days} ${h.hours}`).join("; ")}
 - ${BRAND.license}
 
-## Personal Insurance
-${personal}
-
 ## Business Insurance
 ${business}
+
+## Personal Insurance
+${personal}
 
 ## Resources & Guides
 ${resources}
@@ -49,8 +49,8 @@ ${resources}
 - [Switch & Save](${SITE_URL}/switch-and-save): re-shop your current policy across carriers
 - [Request a Certificate](${SITE_URL}/certificate): same-day certificate of insurance (COI)
 - [Resources](${SITE_URL}/resources): plain-English insurance guides
-- [Personal Insurance](${SITE_URL}/personal): all personal lines
 - [Business Insurance](${SITE_URL}/business): all commercial lines
+- [Personal Insurance](${SITE_URL}/personal): all personal lines
 - [File a Claim](${SITE_URL}/claims): what to do after a loss + carrier claim numbers
 - [Client Login](${SITE_URL}/client-login): existing clients — portal for policies, invoices, claims, and certificates
 - [About](${SITE_URL}/about): the independent agency model and our values

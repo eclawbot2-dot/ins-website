@@ -124,8 +124,8 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
           <legend className="text-xl font-bold text-navy-950">What would you like a quote for?</legend>
           <p className="mt-1 text-sm text-navy-600">Pick the coverage you need — you can mention others later.</p>
           {[
-            { title: "Personal", lines: personal },
             { title: "Business", lines: business },
+            { title: "Personal", lines: personal },
           ].map((group) => (
             <div key={group.title} className="mt-6">
               <h3 className="text-xs font-semibold uppercase tracking-wider text-gold-700">{group.title}</h3>

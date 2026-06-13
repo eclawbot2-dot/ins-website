@@ -10,14 +10,14 @@ import { PERSONAL_LINES, BUSINESS_LINES } from "@/lib/coverage-data";
 
 const NAV = [
   {
-    label: "Personal",
-    href: "/personal",
-    children: PERSONAL_LINES.map((l) => ({ label: l.name, href: `/personal/${l.slug}` })),
-  },
-  {
     label: "Business",
     href: "/business",
     children: BUSINESS_LINES.map((l) => ({ label: l.name, href: `/business/${l.slug}` })),
+  },
+  {
+    label: "Personal",
+    href: "/personal",
+    children: PERSONAL_LINES.map((l) => ({ label: l.name, href: `/personal/${l.slug}` })),
   },
   {
     label: "Save",

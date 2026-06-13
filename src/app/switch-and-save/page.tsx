@@ -11,7 +11,7 @@ import { TESTIMONIALS } from "@/lib/testimonials";
 export const metadata: Metadata = {
   title: "Switch & Save on Insurance — We Re-Shop the Market for You",
   alternates: { canonical: "/switch-and-save" },
-  description: `Think you're overpaying? ${BRAND.name} re-shops your auto, home, and business insurance across ${BRAND.carriers.length}+ carriers. We handle the paperwork and the switch. Free quote.`,
+  description: `Think you're overpaying? ${BRAND.name} re-shops your business, auto, and home insurance across ${BRAND.carriers.length}+ carriers. We handle the paperwork and the switch. Free quote.`,
   openGraph: {
     title: `Switch & Save | ${BRAND.name}`,
     description: "We re-shop your insurance across multiple carriers and handle the switch for you.",

@@ -148,7 +148,7 @@ export default function AboutPage() {
           </div>
           <p className="mt-3 max-w-3xl text-navy-700">
             Headquartered in {BRAND.address.city}, {BRAND.address.state}, {BRAND.shortName} writes
-            personal and commercial insurance across California — including {BRAND.address.city} and
+            commercial and personal insurance across California — including {BRAND.address.city} and
             the surrounding communities below. Don&apos;t see your city? We likely cover it too —
             just ask.
           </p>

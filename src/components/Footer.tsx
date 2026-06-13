@@ -50,20 +50,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Personal */}
-          <nav aria-label="Personal insurance links">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-white">Personal</h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              {PERSONAL_LINES.map((l) => (
-                <li key={l.slug}>
-                  <Link href={`/personal/${l.slug}`} className="inline-block py-0.5 hover:text-white">
-                    {l.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
           {/* Business */}
           <nav aria-label="Business insurance links">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white">Business</h3>
@@ -72,6 +58,20 @@ export default function Footer() {
                 <li key={l.slug}>
                   <Link href={`/business/${l.slug}`} className="inline-block py-0.5 hover:text-white">
                     {l.shortName}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Personal */}
+          <nav aria-label="Personal insurance links">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white">Personal</h3>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              {PERSONAL_LINES.map((l) => (
+                <li key={l.slug}>
+                  <Link href={`/personal/${l.slug}`} className="inline-block py-0.5 hover:text-white">
+                    {l.name}
                   </Link>
                 </li>
               ))}

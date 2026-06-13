@@ -8,8 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const highIntent = ["/quote", "/coverage-checkup", "/switch-and-save"];
   const staticPages = [
     "",
-    "/personal",
     "/business",
+    "/personal",
     "/quote",
     "/coverage-checkup",
     "/switch-and-save",
@@ -30,14 +30,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: path === "" ? 1 : highIntent.includes(path) ? 0.9 : 0.7,
     })),
-    ...PERSONAL_LINES.map((l) => ({
-      url: `${SITE_URL}/personal/${l.slug}`,
+    ...BUSINESS_LINES.map((l) => ({
+      url: `${SITE_URL}/business/${l.slug}`,
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
-    ...BUSINESS_LINES.map((l) => ({
-      url: `${SITE_URL}/business/${l.slug}`,
+    ...PERSONAL_LINES.map((l) => ({
+      url: `${SITE_URL}/personal/${l.slug}`,
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,

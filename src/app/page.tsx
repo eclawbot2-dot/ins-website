@@ -14,13 +14,34 @@ import CtaBanner from "@/components/CtaBanner";
 import Testimonials from "@/components/Testimonials";
 
 export const metadata: Metadata = {
-  title: { absolute: `${BRAND.name} | Independent Insurance Agency — Auto, Home, Life & Business` },
-  description: `Get the right coverage at the right price. ${BRAND.name} compares quotes from ${BRAND.carriers.length}+ top-rated carriers including Progressive, Travelers, and Nationwide — for auto, home, life, and business insurance.`,
+  title: { absolute: `${BRAND.name} | Independent Insurance Agency — Business, Auto, Home & Life` },
+  description: `Get the right coverage at the right price. ${BRAND.name} compares quotes from ${BRAND.carriers.length}+ top-rated carriers including Progressive, Travelers, and Nationwide — for business, auto, home, and life insurance.`,
   alternates: { canonical: "/" },
 };
 
-/** Image-rich coverage cards (personal + commercial, no health). */
+/** Image-rich coverage cards — business/commercial first, then personal (no health). */
 const COVERAGE_CARDS = [
+  {
+    href: "/business",
+    img: "/img/coverage-business.jpg",
+    alt: "A small-business owner helping a customer at a shop counter",
+    title: "Business",
+    blurb: "General liability, BOP, workers' comp, cyber, commercial auto, and property.",
+  },
+  {
+    href: "/business/general-liability",
+    img: "/img/feature-independent.jpg",
+    alt: "An advisor reviewing a commercial policy with a business owner at a table",
+    title: "General Liability",
+    blurb: "The foundation of business protection — and the coverage your contracts demand.",
+  },
+  {
+    href: "/business/workers-comp",
+    img: "/img/feature-local.jpg",
+    alt: "A work crew on a job site wearing safety gear",
+    title: "Workers' Comp",
+    blurb: "Required in nearly every state — your shield against employee-injury claims.",
+  },
   {
     href: "/personal/auto",
     img: "/img/coverage-auto.jpg",
@@ -36,32 +57,11 @@ const COVERAGE_CARDS = [
     blurb: "Your largest asset, insured to its real rebuild cost — not a guess.",
   },
   {
-    href: "/personal/renters",
-    img: "/img/coverage-renters.jpg",
-    alt: "A bright, modern living room with large windows and a water view",
-    title: "Renters & Condo",
-    blurb: "Affordable cover for your belongings and liability — often a few dollars a month.",
-  },
-  {
     href: "/personal/life",
     img: "/img/coverage-life.jpg",
     alt: "A father smiling and holding his two young children outdoors",
     title: "Life",
     blurb: "Term and permanent life from multiple carriers, sized to your family's future.",
-  },
-  {
-    href: "/business",
-    img: "/img/coverage-business.jpg",
-    alt: "A small-business owner helping a customer at a shop counter",
-    title: "Business",
-    blurb: "General liability, BOP, workers' comp, cyber, commercial auto, and property.",
-  },
-  {
-    href: "/personal/umbrella",
-    img: "/img/feature-protect.jpg",
-    alt: "A parent holding their child at a sunlit beach",
-    title: "Umbrella",
-    blurb: "An extra million in liability protection — for about a dollar a day.",
   },
 ];
 
@@ -121,10 +121,10 @@ export default function HomePage() {
               Independent agency — we shop {BRAND.carriers.length}+ carriers for you
             </p>
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] tracking-tight text-navy-950 sm:text-5xl lg:text-6xl">
-              Protect what you&apos;ve built — for the right price.
+              Protect your business — and everything you&apos;ve built.
             </h1>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-navy-700">
-              One advisor. Many carriers. We compare auto, home, life, and business insurance across{" "}
+              One advisor. Many carriers. We compare business, auto, home, and life insurance across{" "}
               {BRAND.carriers.length}+ top-rated companies — then keep shopping at every renewal so you
               never overpay for the coverage you need.
             </p>
@@ -181,7 +181,7 @@ export default function HomePage() {
             Coverage built around your life — not a one-size policy.
           </h2>
           <p className="mt-3 text-lg text-navy-600">
-            Personal or commercial, simple or complex, we hand-pick the right protection from{" "}
+            Commercial or personal, simple or complex, we hand-pick the right protection from{" "}
             {BRAND.carriers.length}+ carriers and shop it again every renewal.
           </p>
         </div>

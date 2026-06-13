@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Insurance Resources & Guides | ${BRAND.name}`,
     description:
-      "Genuinely useful, no-jargon guides to personal and business insurance — written by an independent agency.",
+      "Genuinely useful, no-jargon guides to business and personal insurance — written by an independent agency.",
   },
 };
 
@@ -28,7 +28,7 @@ function blogListJsonLd() {
     "@type": "Blog",
     "@id": `${absoluteUrl("/resources")}#blog`,
     name: `${BRAND.name} Insurance Resources`,
-    description: "Plain-English guides to personal and business insurance.",
+    description: "Plain-English guides to business and personal insurance.",
     url: absoluteUrl("/resources"),
     publisher: { "@id": `${BRAND.url}/#agency` },
     blogPost: ARTICLES.map((a) => ({
