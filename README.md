@@ -3,9 +3,9 @@
 Public marketing / lead-generation site for the insurance agency. Built with
 Next.js 16 + React 19 + Tailwind CSS 4 + TypeScript (strict). Static/SSG — no database.
 
-- **Live (interim):** https://ins-website-sandy.vercel.app
-- **Canonical domain:** https://taboragency.com (attached to the Vercel project; goes live when GoDaddy NS switches to Cloudflare — canonicals/JSON-LD/sitemap already point at it)
-- **Platform (lead intake + client portal):** https://ins.jahdev.com (separate internal app)
+- **Live (production):** https://taboragency.com (+ `www`; GoDaddy → Cloudflare NS switch completed 2026-06-11 — canonicals/JSON-LD/sitemap all point here)
+- **Secondary alias:** https://ins-website-sandy.vercel.app (same deployment)
+- **Platform (lead intake + client portal):** https://ins.jahdev.com — the separate self-hosted `ins-platform` app (`ins-next` Windows service on :3220 behind a Cloudflare tunnel). NOT this repo.
 
 ## Branding
 
@@ -37,38 +37,43 @@ visitor still sees success; the failure is logged server-side.
 ## Client portal links
 
 `NEXT_PUBLIC_PORTAL_URL` (default `https://ins.jahdev.com`) is the portal base;
-the site appends `/portal/login` and `/portal/request-access`. Flip the Vercel
-env to `https://portal.taboragency.com` once that DNS is live — no code change
-needed. See `.env.example`.
+the site appends `/portal/login` and `/portal/request-access`. The Vercel env
+is already set to `https://portal.taboragency.com` (live). See `.env.example`.
 
 ## Develop
 
 ```bash
 npm install
 npm run dev        # http://localhost:3215
-npx tsc --noEmit   # typecheck
+npm run typecheck  # tsc --noEmit
+npm run lint       # eslint (flat config, eslint-config-next)
 npm run build      # production build (must be green before push)
+node scripts/check-site.mjs  # post-build static audit (canonical host, links, assets, 404)
 ```
 
-## Deploy (manual — GitHub→Vercel auto-deploy is broken on this account)
+## Deploy
 
-From the repo root:
+This repo's GitHub Actions **auto-deploy works** (unlike most of the fleet):
+`.github/workflows/deploy.yml` deploys to Vercel production on every push to
+`main`, gated by the `check` job (typecheck + build + `check-site`). A manual
+fallback is still available:
 
 ```bash
 npx vercel deploy --prod --token <VERCEL_TOKEN> --yes
 ```
 
-- Vercel project: `ins-website` (account `ericbbowman2-1420`)
+- Vercel project: `ins-website` (account `ericbbowman2-1420`, project `prj_EtUulkfUYaDCQcSzeHeTzb3Y9W3R`)
 - Env vars on the project: `LEAD_INTAKE_KEY` (production), `NEXT_PUBLIC_PORTAL_URL` (all environments)
-- Custom domains `taboragency.com` + `www` are attached; they resolve once the
-  GoDaddy → Cloudflare NS switch completes. Do not detach.
+- Custom domains `taboragency.com` + `www.taboragency.com` are attached and live. Do not detach.
 
-After deploying, verify:
+After deploying, verify against the production hostname:
 
 ```bash
-curl -s "https://ins-website-sandy.vercel.app/?cb=$(date +%s)" | grep -o "Tabor Agency" | head -1
+curl -s "https://taboragency.com/?cb=$(date +%s)" | grep -o "Tabor Agency" | head -1
 ```
 
 ## CI
 
-`.github/workflows/ci.yml` runs `npx tsc --noEmit` and `npm run build` on every push/PR to `main`.
+`.github/workflows/ci.yml` runs `npx tsc --noEmit`, `npm run lint`, `npm run build`,
+and `node scripts/check-site.mjs` on every push/PR to `main`.
+`.github/workflows/deploy.yml` runs the same checks and then deploys to Vercel production.

@@ -57,8 +57,9 @@ export const BRAND = {
 
 /**
  * Client portal (agency platform) base URL.
- * Set NEXT_PUBLIC_PORTAL_URL on the host (Vercel) to repoint without a code
- * change — e.g. flip to https://portal.taboragency.com once DNS is live.
+ * Set NEXT_PUBLIC_PORTAL_URL on the host to repoint without a code change.
+ * Production (Vercel) is already set to https://portal.taboragency.com (live);
+ * the ins.jahdev.com default below is the local-dev fallback only.
  */
 const PORTAL_BASE: string = (
   process.env.NEXT_PUBLIC_PORTAL_URL ?? "https://ins.jahdev.com"

@@ -4,6 +4,9 @@ import type { CoverageLine } from "@/lib/coverage-data";
 import { getIcon } from "@/lib/icons";
 
 export default function CoverageCard({ line }: { line: CoverageLine }) {
+  // getIcon returns a STABLE module-level lucide component reference from a
+  // lookup map — no component is created during render, so the
+  // react-hooks/static-components heuristic is a false positive here.
   const Icon = getIcon(line.icon);
   return (
     <Link
@@ -11,6 +14,7 @@ export default function CoverageCard({ line }: { line: CoverageLine }) {
       className="group relative flex flex-col rounded-2xl border border-navy-100 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-gold-200 hover:shadow-lg hover:shadow-navy-950/5"
     >
       <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-navy-50 to-gold-50 text-gold-700 transition-colors group-hover:from-gold-600 group-hover:to-navy-700 group-hover:text-white">
+        {/* eslint-disable-next-line react-hooks/static-components -- Icon is a stable module-level component from ICON_MAP, not created during render */}
         <Icon className="h-6 w-6" aria-hidden="true" />
       </span>
       <h3 className="mt-4 text-lg font-bold text-navy-950">{line.name}</h3>

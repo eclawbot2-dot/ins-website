@@ -38,6 +38,7 @@ export default function CoverageDetail({ line }: { line: CoverageLine }) {
           </nav>
           <div className="mt-8 flex items-start gap-5">
             <span className="hidden h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-gold-300 ring-1 ring-white/15 sm:flex">
+              {/* eslint-disable-next-line react-hooks/static-components -- Icon is a stable module-level component from ICON_MAP, not created during render */}
               <Icon className="h-8 w-8" aria-hidden="true" />
             </span>
             <div>

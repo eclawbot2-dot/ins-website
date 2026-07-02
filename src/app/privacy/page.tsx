@@ -32,7 +32,7 @@ export default function PrivacyPage() {
           <p className="mt-3">When you request a quote or contact us, we collect information you provide, such as:</p>
           <ul className="mt-3 list-disc space-y-1.5 pl-6">
             <li>Contact details: name, email address, phone number, and ZIP code</li>
-            <li>Information about what you'd like to insure (vehicles, property, business operations)</li>
+            <li>Information about what you&apos;d like to insure (vehicles, property, business operations)</li>
             <li>Any additional details you choose to include in messages to us</li>
           </ul>
           <p className="mt-3">
@@ -53,7 +53,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-navy-950">4. What we don't do</h2>
+          <h2 className="text-xl font-bold text-navy-950">4. What we don&apos;t do</h2>
           <p className="mt-3">
             We do not sell your personal information. We do not share your information with third parties for their
             own marketing purposes. Information is shared only with insurance carriers and service providers as
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-navy-950">7. Children's privacy</h2>
+          <h2 className="text-xl font-bold text-navy-950">7. Children&apos;s privacy</h2>
           <p className="mt-3">
             This website is not directed at children under 13, and we do not knowingly collect information from them.
           </p>

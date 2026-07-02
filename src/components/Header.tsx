@@ -49,9 +49,16 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, [mobileOpen]);
 
-  useEffect(() => {
+  // Close the mobile menu when the route changes (covers browser back/forward
+  // navigation; in-menu links also close via onClick). Adjusting state during
+  // render is the React-recommended way to reset state on a prop/path change —
+  // it avoids the extra post-commit render an effect would cause.
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setMobileOpen(false);
-  }, [pathname]);
+    setOpenSection(null);
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-navy-100 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
