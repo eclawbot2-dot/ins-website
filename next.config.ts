@@ -18,6 +18,18 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: SECURITY_HEADERS,
       },
+      // Class #74 (fleet-qa): the production domain (taboragency.com) is bound
+      // and live, but Vercel also serves the identical build on the project's
+      // *.vercel.app alias (ins-website-sandy.vercel.app). Canonicals already
+      // point every page at taboragency.com, but belt-and-braces: noindex the
+      // vercel.app hosts at the header level so the duplicate can never be
+      // crawled/indexed, while the real domain stays fully indexable. Same
+      // build, host-conditional — no separate deploy.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "(?<host>.*\\.vercel\\.app)" }],
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
   async redirects() {
