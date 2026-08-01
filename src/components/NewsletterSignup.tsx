@@ -45,11 +45,16 @@ export default function NewsletterSignup({
           campaign: "newsletter",
         }),
       });
-      if (!res.ok) throw new Error("Something went wrong.");
+      if (!res.ok) {
+        // Surface the proxy's own message — on a delivery failure it explains
+        // that nothing was sent, which "Something went wrong" does not.
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(data?.error ?? "Something went wrong.");
+      }
       trackLead({ source: "newsletter", campaign: "newsletter" });
       setSent(true);
-    } catch {
-      setError("Something went wrong. Please try again.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }

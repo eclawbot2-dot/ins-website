@@ -97,6 +97,69 @@ if (existsSync(join(ROOT, "src/app/apple-icon.png"))) {
     fail(`apple-icon.png is ${png.readUInt32BE(16)}x${png.readUInt32BE(20)}, expected 180x180`);
 }
 
+// 1a. Lead-proxy honesty + credential tripwires (src/app/api/quote/route.ts).
+// This is a PUBLIC repo whose forms are the agency's only lead channel, so two
+// things must stay true forever:
+//   (a) the X-Lead-Key is read from the environment with NO literal fallback —
+//       a hardcoded default here is a published credential (#4-family), and it
+//       looks harmless because the env var IS set in production, so the
+//       fallback never fires while the constant sits in public git history;
+//   (b) a failed forward must NOT return `ok: true` — the visitor would be
+//       told an advisor is calling back about a lead that does not exist (#43).
+{
+  const routeRel = "src/app/api/quote/route.ts";
+  const routePath = join(ROOT, routeRel);
+  if (!existsSync(routePath)) fail(`missing ${routeRel} — the lead proxy every form posts to`);
+  else {
+    const src = readFileSync(routePath, "utf8");
+
+    // (a) Pin the exact key read. An allow-shape assertion (rather than a
+    //     deny-list of fallback spellings) is the only robust form: `?? "x"`,
+    //     `|| DEV_KEY`, `process.env["LEAD_INTAKE_KEY"] ?? …` and
+    //     `const { LEAD_INTAKE_KEY = "…" } = process.env` all evade a deny-list,
+    //     and any of them republishes a working credential. This trips loudly on
+    //     ANY rewrite of the line, which is the intent — re-read the route and
+    //     update this assertion deliberately.
+    if (!/^const LEAD_KEY = process\.env\.LEAD_INTAKE_KEY;\s*$/m.test(src))
+      fail(
+        `${routeRel}: the X-Lead-Key read is no longer the exact bare env read ` +
+          `\`const LEAD_KEY = process.env.LEAD_INTAKE_KEY;\` — any fallback value here is a published credential`
+      );
+
+    // (b) Exactly two success responses may exist: the honeypot short-circuit
+    //     and the delivered lead. Counting `ok: true` (rather than the 502s)
+    //     is what actually regresses — the old bug was an extra `ok: true` on
+    //     the failure path, and this survives refactors that funnel the failure
+    //     exits through one helper.
+    const okTrue = (src.match(/ok:\s*true/g) ?? []).length;
+    if (okTrue !== 2)
+      fail(
+        `${routeRel}: found ${okTrue} \`ok: true\` responses, expected exactly 2 ` +
+          `(honeypot short-circuit + delivered lead) — a third means a failure path reports success`
+      );
+    if (!/status:\s*502/.test(src))
+      fail(`${routeRel}: no 502 response — an undelivered lead must be reported to the visitor, not swallowed`);
+  }
+}
+
+// 1a-ii. Repo-wide: the lead key may only ever come from the environment.
+// A literal X-Lead-Key anywhere under src/ is a published credential.
+{
+  const srcDir = join(ROOT, "src");
+  const walk = function* (dir) {
+    for (const name of readdirSync(dir)) {
+      const p = join(dir, name);
+      if (statSync(p).isDirectory()) yield* walk(p);
+      else if (/\.(ts|tsx|mjs|js)$/.test(name)) yield p;
+    }
+  };
+  for (const f of walk(srcDir)) {
+    const src = readFileSync(f, "utf8");
+    if (/["']X-Lead-Key["']\s*:\s*["'`]/i.test(src))
+      fail(`${f.slice(ROOT.length)}: hardcoded X-Lead-Key literal — the key must come from process.env only`);
+  }
+}
+
 // 1b. Every route we expect prerendered has a .html — independent of the
 // sitemap, so a route dropping out of BOTH is still caught (e.g. /thank-you,
 // which is deliberately not a sitemap entry).
