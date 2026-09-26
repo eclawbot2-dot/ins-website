@@ -5,7 +5,7 @@ Next.js 16 + React 19 + Tailwind CSS 4 + TypeScript (strict). Static/SSG — no 
 
 - **Live (production):** https://taboragency.com (+ `www`; GoDaddy → Cloudflare NS switch completed 2026-06-11 — canonicals/JSON-LD/sitemap all point here)
 - **Secondary alias:** https://ins-website-sandy.vercel.app (same deployment)
-- **Platform (lead intake + client portal):** https://ins.jahdev.com — the separate self-hosted `ins-platform` app (`ins-next` Windows service on :3220 behind a Cloudflare tunnel). NOT this repo.
+- **Platform (lead intake + client portal):** https://ins.taboragency.com — the separate `ins-platform` app, one host for both (portal at `/portal`, login `/portal/login`). NOT this repo. Since the ins-platform Phase 3 cutover it replaces `ins.jahdev.com` (a temporary 301 to the new host) and `portal.taboragency.com` (deleted).
 
 ## Branding
 
@@ -31,8 +31,22 @@ bright gold CTA accent (`accent-*`) — tokens defined in `src/app/globals.css`.
 All four lead surfaces (`QuoteForm`, `ContactForm`, `LeadForm`, `NewsletterSignup`)
 POST to the internal proxy `POST /api/quote`, which forwards JSON
 `{firstName,lastName,email,phone,zip,lineOfBusiness,message,source,campaign}` to
-`https://ins.jahdev.com/api/public/leads` with header `X-Lead-Key` read from the
+`${INS_PLATFORM_URL}/api/public/leads` with header `X-Lead-Key` read from the
 `LEAD_INTAKE_KEY` env var.
+
+`INS_PLATFORM_URL` is **server-only** (never `NEXT_PUBLIC_`, never shipped to the
+browser) and read from the server's runtime environment (not inlined at build,
+but on Vercel an env change still only applies to a new deployment); unset or
+blank, it defaults to `https://ins.taboragency.com` (`PLATFORM_DEFAULT_URL` in
+`src/lib/brand.ts`; a trailing slash is stripped). Only the base URL is
+configurable — the `/api/public/leads` path is the platform's contract.
+
+**The proxy never follows a redirect** (`redirect: "manual"`). fetch re-issues a
+followed 301/302 POST as a GET with no body, so following one would lose the lead
+while possibly still getting a 2xx back. A 3xx from the platform can only mean
+`INS_PLATFORM_URL` names a moved or retired host (e.g. `ins.jahdev.com` after the
+cutover), so the route logs `[lead-proxy] Upstream redirected the lead POST` with
+the `Location` and returns the same honest **502** as any failed forward.
 
 **The proxy never reports success for a lead it did not deliver.** If the key is
 missing, the platform rejects the lead, or the forward times out (10s), the route
@@ -43,14 +57,24 @@ callback that will never come, and the only record would be a `console.error` in
 serverless function nobody reads. The failure message carries `BRAND.phone` and
 `BRAND.email` so the visitor is not left without a channel.
 
-`scripts/check-site.mjs` pins this with three static assertions over `route.ts`:
+`scripts/check-site.mjs` pins this with static assertions over `route.ts`:
 the key read must be the exact bare `process.env.LEAD_INTAKE_KEY` line (any
 fallback spelling fails), there must be **exactly two** `ok: true` responses (the
 honeypot short-circuit and a delivered lead — a third means a failure path is
-reporting success again), and at least one `502` must remain. A repo-wide sweep
-additionally fails on a literal `X-Lead-Key` header value anywhere under `src/`.
-These are text assertions, not behavioural tests: they trip on a revert and on any
-rewrite of the pinned line, so re-read the route and update them deliberately.
+reporting success again), at least one `502` must remain, the endpoint must derive
+from `platformBaseUrl(process.env.INS_PLATFORM_URL)` with no absolute-URL literal in
+the route, the fetch must carry a `redirect: "manual"` code line, and
+`PLATFORM_DEFAULT_URL` in `brand.ts` must be `https://ins.taboragency.com`. A
+repo-wide sweep additionally fails on a literal `X-Lead-Key` header value anywhere
+under `src/`. These are text assertions: they trip on a revert and on any rewrite of
+the pinned lines, so re-read the route and update them deliberately.
+
+`scripts/check-lead-proxy.mjs` is the behavioural test (run after `npm run build`):
+it starts the built app with `next start`, points `INS_PLATFORM_URL` at a local stub
+platform, and asserts the forwarded request is unchanged (POST, `Content-Type`,
+`X-Lead-Key`, exact body bytes, `/api/public/leads` path), that 301/302/307/308 are
+not followed and come back as 502, that an upstream 500 is a 502, and that the
+honeypot never contacts the platform. Nothing leaves the machine.
 
 **There is no hardcoded key fallback.** This repo is public; a literal default here
 is a published credential, and because `LEAD_INTAKE_KEY` *is* set in production the
@@ -63,9 +87,17 @@ Verified live 2026-07-31 against `https://taboragency.com/api/quote`.
 
 ## Client portal links
 
-`NEXT_PUBLIC_PORTAL_URL` (default `https://ins.jahdev.com`) is the portal base;
-the site appends `/portal/login` and `/portal/request-access`. The Vercel env
-is already set to `https://portal.taboragency.com` (live). See `.env.example`.
+`NEXT_PUBLIC_PORTAL_URL` (default `https://ins.taboragency.com`; blank counts as
+unset) is the portal base; the site appends `/portal/login` and
+`/portal/request-access` (used on `/client-login` and `/coverage-checkup`). It is
+inlined at **build** time, so changing it on Vercel needs a redeploy. The portal no
+longer has its own host: `portal.taboragency.com` was deleted at the ins-platform
+Phase 3 cutover, and `check-site` fails any build whose pages still reference it,
+`ins.jahdev.com` or `insdemo.jahdev.com` — including the real production artifact:
+`deploy.yml` runs `check-site` on the `vercel build --prod` output (built with the
+project's production env) before `vercel deploy`, so a stale Vercel
+`NEXT_PUBLIC_PORTAL_URL` blocks the deploy instead of shipping dead links. See
+`.env.example`.
 
 ## Develop
 
@@ -75,7 +107,8 @@ npm run dev        # http://localhost:3215
 npm run typecheck  # tsc --noEmit
 npm run lint       # eslint (flat config, eslint-config-next)
 npm run build      # production build (must be green before push)
-node scripts/check-site.mjs  # post-build static audit (canonical host, links, assets, 404)
+node scripts/check-site.mjs        # post-build static audit (canonical host, links, assets, 404, lead-proxy tripwires)
+node scripts/check-lead-proxy.mjs  # post-build behavioural test of /api/quote against a local stub platform
 ```
 
 ## Deploy
@@ -94,7 +127,9 @@ gh api repos/eclawbot2-dot/ins-website/actions/workflows --jq '.workflows[] | "\
 (Both workflows `active`, repo public, as of 2026-07-31.)
 
 `.github/workflows/deploy.yml` deploys to Vercel production on every push to
-`main`, gated by the `check` job (typecheck + build + `check-site`). A manual
+`main`, gated by the `check` job (typecheck + lint + build + `check-site` +
+`check-lead-proxy`) and by `check-site` again on the `vercel build --prod` output.
+**Merging to `main` therefore deploys.** A manual
 fallback is still available:
 
 ```bash
@@ -103,7 +138,12 @@ npx vercel deploy --prod --token <VERCEL_TOKEN> --yes
 
 - Vercel project: `ins-website` (account `ericbbowman2-1420`, project `prj_EtUulkfUYaDCQcSzeHeTzb3Y9W3R`)
 - Env vars on the project: `LEAD_INTAKE_KEY` (production only, encrypted),
-  `NEXT_PUBLIC_PORTAL_URL` (all environments). Because there is no hardcoded
+  `NEXT_PUBLIC_PORTAL_URL` (all environments), and optionally `INS_PLATFORM_URL`
+  (server-only; unset = `https://ins.taboragency.com`). **At the ins-platform
+  Phase 3 cutover** `NEXT_PUBLIC_PORTAL_URL` must be changed from
+  `https://portal.taboragency.com` (the deleted host) to
+  `https://ins.taboragency.com` — or deleted, which gives the same default —
+  in every environment, before the deploy. Because there is no hardcoded
   fallback, **preview deployments intentionally 502 on form submit** — a preview
   must not be able to inject leads into the live agency CRM. Set the key on
   preview only if you deliberately want previews writing real leads.
@@ -128,7 +168,7 @@ curl -s "https://taboragency.com/?cb=$(date +%s)" | grep -o "Tabor Agency" | hea
 ## CI
 
 `.github/workflows/ci.yml` runs `npx tsc --noEmit`, `npm run lint`, `npm run build`,
-and `node scripts/check-site.mjs` on every push/PR to `main`.
+`node scripts/check-site.mjs` and `node scripts/check-lead-proxy.mjs` on every push/PR to `main`.
 `.github/workflows/deploy.yml` runs the same checks and then deploys to Vercel production.
 
 ## OWNER FLAGS

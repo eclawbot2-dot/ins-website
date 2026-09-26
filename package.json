@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start -p 3215",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check:site": "node scripts/check-site.mjs",
+    "check:lead-proxy": "node scripts/check-lead-proxy.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
