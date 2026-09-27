@@ -66,14 +66,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
+  // The caps match what ins-platform stores (its staff-form limits): an email
+  // up to 254, a message up to 10,000. They used to be 200 and 2,000, so a
+  // long message lost everything past 2,000 characters with no sign, and a
+  // 201+ character address arrived cut and no longer an address. A phone or
+  // ZIP longer than the platform keeps is not refused there: it stores the
+  // number it finds and keeps the rest in the lead's message (ins-platform
+  // src/lib/intake-contact.ts), so these two only bound the payload.
   const payload: LeadPayload = {
     firstName: str(body.firstName, 100),
     lastName: str(body.lastName, 100),
-    email: str(body.email, 200),
+    email: str(body.email, 254),
     phone: str(body.phone, 50),
     zip: str(body.zip, 20),
     lineOfBusiness: str(body.lineOfBusiness, 100),
-    message: str(body.message),
+    message: str(body.message, 10_000),
     source: str(body.source, 50) || "website",
     campaign: str(body.campaign, 80),
   };
