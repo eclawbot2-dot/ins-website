@@ -10,6 +10,8 @@
 //  - branded 404, not Next's default (#22)
 //  - icon set present and apple-icon is a real 180x180 PNG (#25)
 //  - only the published agency mailto/phone may appear (#4)
+//  - lead proxy: env-only key, honest failures, config-driven platform origin,
+//    redirects never followed; no page references a retired platform host
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -27,12 +29,15 @@ const ALLOWED_HOSTS = new Set([
   "www.w3.org", // SVG/xmlns namespaces
   "schema.org", // JSON-LD @context
   "www.google.com", // Google Maps link in LocalBusiness JSON-LD (hasMap)
-  "ins.jahdev.com", // agency platform (portal fallback + lead intake docs)
-  "portal.taboragency.com", // client portal (prod NEXT_PUBLIC_PORTAL_URL)
+  "ins.taboragency.com", // agency platform: client portal (/portal) + lead intake, one host
 ]);
 
 const FORBIDDEN = [
   /localhost:\d/i,
+  // Retired agency-platform hosts (ins-platform Phase 3 cutover): portal.taboragency.com
+  // is deleted; ins.jahdev.com and insdemo.jahdev.com are temporary 301s. A page that
+  // still references one carries a dead or soon-dead client-portal link.
+  /ins\.jahdev\.com|insdemo\.jahdev\.com|portal\.taboragency\.com/i,
   /instagram\.com|twitter\.com|facebook\.com|linkedin\.com/i, // no verified socials exist — any would be fabricated (#4)
   /\{[A-Z_]{3,}\}/, // leftover template tokens (#49)
 ];
@@ -139,7 +144,31 @@ if (existsSync(join(ROOT, "src/app/apple-icon.png"))) {
       );
     if (!/status:\s*502/.test(src))
       fail(`${routeRel}: no 502 response — an undelivered lead must be reported to the visitor, not swallowed`);
+
+    // (c) The upstream ORIGIN is config (INS_PLATFORM_URL, default in brand.ts),
+    //     never a hardcoded host: a literal here is how the endpoint was left
+    //     pointing at a host that became a redirect. And the POST must not follow
+    //     redirects — fetch re-issues a followed 301/302 POST as a bodiless GET,
+    //     i.e. a lost lead that can still come back 2xx.
+    //     scripts/check-lead-proxy.mjs exercises both behaviourally.
+    if (!/platformBaseUrl\(process\.env\.INS_PLATFORM_URL\)/.test(src))
+      fail(`${routeRel}: the lead endpoint no longer derives from platformBaseUrl(process.env.INS_PLATFORM_URL)`);
+    if (/["'`]https?:\/\//.test(src))
+      fail(`${routeRel}: hardcoded absolute URL literal — the platform origin must come from INS_PLATFORM_URL / PLATFORM_DEFAULT_URL`);
+    // Anchored to a whole code line so the explanatory comment in route.ts
+    // (which quotes the option) can't satisfy it on its own.
+    if (!/^\s*redirect:\s*["']manual["'],?\s*$/m.test(src))
+      fail(`${routeRel}: the upstream fetch must set redirect: "manual" — a followed redirect drops the POST body`);
   }
+}
+
+// 1a-i. The platform default is the production single host (portal + lead
+// intake). Pinned so a stray edit can't silently repoint every client-login
+// link and every lead at the wrong origin.
+{
+  const def = brandTs.match(/PLATFORM_DEFAULT_URL = "([^"]+)"/)?.[1];
+  if (def !== "https://ins.taboragency.com")
+    fail(`src/lib/brand.ts: PLATFORM_DEFAULT_URL is ${def ?? "(missing)"}, expected https://ins.taboragency.com`);
 }
 
 // 1a-ii. Repo-wide: the lead key may only ever come from the environment.

@@ -1,7 +1,14 @@
 import { NextResponse } from "next/server";
-import { BRAND } from "@/lib/brand";
+import { BRAND, platformBaseUrl } from "@/lib/brand";
 
-const LEAD_ENDPOINT = "https://ins.jahdev.com/api/public/leads";
+// The agency platform's public lead-intake endpoint. The ORIGIN is config:
+// INS_PLATFORM_URL (server-only — read from the server's runtime environment
+// when this module loads, not inlined at build and never shipped to the
+// browser; on Vercel an env change still only takes effect on a new
+// deployment), defaulting to the production platform host
+// https://ins.taboragency.com (PLATFORM_DEFAULT_URL in src/lib/brand.ts). The
+// path is part of the platform's contract and stays fixed here.
+const LEAD_ENDPOINT = `${platformBaseUrl(process.env.INS_PLATFORM_URL)}/api/public/leads`;
 
 // No hardcoded fallback. This repo is PUBLIC, so any literal default here is a
 // published credential the platform would still honour. If LEAD_INTAKE_KEY is
@@ -95,6 +102,15 @@ export async function POST(request: Request) {
   // the visitor sees the failure and may resubmit, producing a duplicate. A
   // duplicate lead is strictly better than a lost one; add an idempotency key
   // on the ins-platform side if duplicates ever become noise.
+  //
+  // Redirects are NOT followed. On a 301/302 fetch re-issues a POST as a GET
+  // with no body, so following one would deliver an EMPTY request to wherever
+  // the old host points — and if that GET happened to answer 2xx we would tell
+  // the visitor their enquiry went through when no lead exists. A redirect here
+  // only ever means INS_PLATFORM_URL names a retired/moved host (e.g.
+  // ins.jahdev.com, which 301s to ins.taboragency.com after the Phase 3
+  // cutover), so it is logged loudly with its Location and reported to the
+  // visitor as undelivered, exactly like any other failed forward.
   try {
     const res = await fetch(LEAD_ENDPOINT, {
       method: "POST",
@@ -103,8 +119,22 @@ export async function POST(request: Request) {
         "X-Lead-Key": LEAD_KEY,
       },
       body: JSON.stringify(payload),
+      redirect: "manual",
       signal: AbortSignal.timeout(10_000),
     });
+
+    // `redirect: "manual"` on the server (undici) hands back the real 3xx with
+    // its Location header; an `opaqueredirect` (status 0) is the spec form some
+    // runtimes return instead. Either way: not delivered.
+    if (res.type === "opaqueredirect" || (res.status >= 300 && res.status < 400)) {
+      console.error(
+        `[lead-proxy] Upstream redirected the lead POST (${res.status} -> ${res.headers.get("location") ?? "?"}) — ` +
+          `not following; INS_PLATFORM_URL (${LEAD_ENDPOINT}) points at a moved or retired host`
+      );
+      // Release the unread 3xx body so the pooled connection is freed now.
+      await res.body?.cancel().catch(() => {});
+      return NextResponse.json({ ok: false, error: UNDELIVERED }, { status: 502 });
+    }
 
     if (!res.ok) {
       console.error(`[lead-proxy] Upstream rejected lead: ${res.status} ${await res.text().catch(() => "")}`);

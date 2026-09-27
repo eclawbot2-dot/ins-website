@@ -20,6 +20,7 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: node scripts/check-site.mjs
+      - run: node scripts/check-lead-proxy.mjs
   deploy:
     needs: check
     runs-on: ubuntu-latest
@@ -34,4 +35,10 @@ jobs:
       - run: npm i -g vercel@latest
       - run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      # Audit the artifact that actually ships. The `check` job builds without the
+      # Vercel env, so only this step sees NEXT_PUBLIC_* values as inlined for
+      # production — e.g. a stale NEXT_PUBLIC_PORTAL_URL on a retired host fails
+      # here instead of deploying dead client-login links. (`vercel build` runs
+      # `next build` in place, so .next/server/app is present.)
+      - run: node scripts/check-site.mjs
       - run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
