@@ -188,6 +188,26 @@ try {
     if (r.status !== 502 || r.json?.ok !== false) fail(`upstream 500: expected 502 {ok:false}, got ${r.status} ${JSON.stringify(r.json)}`);
   }
 
+  // 3b. Nothing a visitor typed is silently cut short of what the platform
+  // stores: a 9,000-character message, a 253-character address and a
+  // 45-character phone are forwarded whole (the caps were 2,000 / 200 / —).
+  mode = "ok";
+  hits = [];
+  {
+    const long = {
+      ...INPUT,
+      message: "m".repeat(9_000),
+      email: `${"a".repeat(237)}@example.invalid`,
+      phone: "843-555-0147 (cell, texts best after 5pm ok)",
+    };
+    const r = await postQuote(long);
+    if (r.status !== 200 || r.json?.ok !== true) fail(`long fields: expected 200 {ok:true}, got ${r.status}`);
+    const sent = hits[0] ? JSON.parse(hits[0].body) : {};
+    if (sent.message?.length !== 9_000) fail(`long fields: message forwarded at ${sent.message?.length} characters, expected 9000`);
+    if (sent.email !== long.email) fail(`long fields: email forwarded as ${sent.email?.length} characters, expected ${long.email.length}`);
+    if (sent.phone !== long.phone) fail("long fields: the 45-character phone was not forwarded whole");
+  }
+
   // 4. Honeypot: silent success, platform never contacted.
   mode = "ok";
   hits = [];
@@ -207,5 +227,5 @@ if (failures) {
   console.error(`\ncheck-lead-proxy: ${failures} failure(s)`);
   process.exit(1);
 }
-console.log("check-lead-proxy: OK — contract unchanged, origin from INS_PLATFORM_URL, 301/302/307/308 not followed (502), upstream error 502, honeypot silent");
+console.log("check-lead-proxy: OK — contract unchanged, origin from INS_PLATFORM_URL, 301/302/307/308 not followed (502), upstream error 502, long fields forwarded whole, honeypot silent");
 process.exit(0);
