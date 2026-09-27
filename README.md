@@ -135,8 +135,8 @@ and `node scripts/check-site.mjs` on every push/PR to `main`.
 
 These are live on a **real** insurance company's website and need the owner's real
 values — audits keep rediscovering them, so they are recorded here. The first three
-are placeholder constants in the single file `src/lib/brand.ts`; the fourth is an
-operational fix whose other half lives outside this repo.
+are placeholder constants in the single file `src/lib/brand.ts`; the fourth records
+an operational fix, done 2026-09-27, whose other half lives outside this repo.
 
 - **Phone `(555) 014-7300` is a placeholder.** 555-01xx is the reserved fictional
   range; it is rendered as a `tel:` link in the header and footer of every page and
@@ -148,10 +148,16 @@ operational fix whose other half lives outside this repo.
 - **`hello@taboragency.com` is unconfirmed** — it is the only mailbox the site
   publishes (and the only one `check-site` allows), but nobody has verified it
   receives mail.
-- **Rotate `LEAD_INTAKE_KEY`.** The value that used to be hardcoded in
-  `src/app/api/quote/route.ts` is in this public repo's git history and the
-  platform still accepts it, so anyone can inject leads into the live agency CRM.
-  Fixing it needs both sides: issue a new key on `ins-platform`
-  (`/api/public/leads`), retire the old one, then update the `LEAD_INTAKE_KEY`
-  env var on this Vercel project and redeploy. Not done here — `ins-platform` is
-  a separate repo.
+- **`LEAD_INTAKE_KEY` was rotated on 2026-09-27.** The value that used to be
+  hardcoded in `src/app/api/quote/route.ts`, and was copied into `.env.example`
+  until the same day, is still in this public repo's git history. History is
+  deliberately not rewritten: the platform refuses that value (`401`), and the
+  rotation is what makes a leaked value useless. A new key was set as
+  `LEAD_INTAKE_KEY` on `ins-platform` (checked by `/api/public/leads`) and on this
+  Vercel project (Production, now type *sensitive*: Vercel will not show it again,
+  so a lost key is replaced by rotating, not recovered), the site was redeployed,
+  and the previous production key was retired (the platform now refuses it with
+  `401`). The key lives only in those two env settings, never in this repo. If a
+  key is ever committed here again, rotate it the same way: add the new key on
+  ins-platform (Settings → Lead intake keys lets both keys work during the switch),
+  switch this project's env and redeploy, then retire the old key.
