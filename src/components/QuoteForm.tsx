@@ -7,6 +7,7 @@ import { ALL_LINES } from "@/lib/coverage-data";
 import { getIcon } from "@/lib/icons";
 import { BRAND } from "@/lib/brand";
 import { trackLead } from "@/lib/analytics";
+import { createLeadSubmission } from "@/lib/lead-submission";
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -23,6 +24,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [submission] = useState(createLeadSubmission);
   const [error, setError] = useState("");
   const [website, setWebsite] = useState(""); // honeypot — humans never fill this
 
@@ -30,6 +32,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
   const business = ALL_LINES.filter((l) => l.category === "business");
 
   async function submit() {
+    if (submission.pending) return;
     setError("");
     if (!firstName.trim() || !lastName.trim()) {
       setError("Please enter your first and last name.");
@@ -41,27 +44,18 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
     }
     setSubmitting(true);
     try {
-      const res = await fetch("/api/quote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          phone,
-          zip,
-          lineOfBusiness,
-          message,
-          website,
-          source: "website",
-          campaign: "main-quote-form",
-        }),
+      const result = await submission.submit("quote", {
+        firstName,
+        lastName,
+        email,
+        phone,
+        zip,
+        lineOfBusiness,
+        message,
+        website,
       });
-      if (!res.ok) {
-        const data = (await res.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(data?.error ?? "Something went wrong.");
-      }
-      trackLead({ source: "website", lineOfBusiness, campaign: "main-quote-form" });
+      if (!result.accepted) return;
+      if (result.delivered) trackLead({ source: "website", lineOfBusiness, campaign: "main-quote-form" });
       setStep(4);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again or call us.");
@@ -177,7 +171,6 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
                 id="zip"
                 inputMode="numeric"
                 autoComplete="postal-code"
-                maxLength={10}
                 value={zip}
                 onChange={(e) => setZip(e.target.value)}
                 placeholder="e.g. 92101"

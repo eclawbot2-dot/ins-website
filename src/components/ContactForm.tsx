@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import { trackLead } from "@/lib/analytics";
+import { createLeadSubmission } from "@/lib/lead-submission";
 
 export default function ContactForm() {
   const [firstName, setFirstName] = useState("");
@@ -13,12 +14,14 @@ export default function ContactForm() {
   const [zip, setZip] = useState("");
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [submission] = useState(createLeadSubmission);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
   const [website, setWebsite] = useState(""); // honeypot — humans never fill this
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (submission.pending) return;
     setError("");
     if (!email.trim() && !phone.trim()) {
       setError("Please provide an email or phone number so we can get back to you.");
@@ -26,27 +29,18 @@ export default function ContactForm() {
     }
     setSubmitting(true);
     try {
-      const res = await fetch("/api/quote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          phone,
-          zip,
-          lineOfBusiness: "",
-          message,
-          website,
-          source: "contact",
-          campaign: "contact-page",
-        }),
+      const result = await submission.submit("contact", {
+        firstName,
+        lastName,
+        email,
+        phone,
+        zip,
+        lineOfBusiness: "",
+        message,
+        website,
       });
-      if (!res.ok) {
-        const data = (await res.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(data?.error ?? "Something went wrong.");
-      }
-      trackLead({ source: "contact", campaign: "contact-page" });
+      if (!result.accepted) return;
+      if (result.delivered) trackLead({ source: "contact", campaign: "contact-page" });
       setSent(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again or call us.");
@@ -145,7 +139,6 @@ export default function ContactForm() {
             id="c-zip"
             inputMode="numeric"
             autoComplete="postal-code"
-            maxLength={10}
             value={zip}
             onChange={(e) => setZip(e.target.value)}
             className="mt-1.5 w-full max-w-xs rounded-xl border border-navy-200 px-4 py-3 text-navy-950 focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"

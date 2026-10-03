@@ -5,13 +5,14 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, Loader2, Phone, X } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import { trackLead } from "@/lib/analytics";
+import { createLeadSubmission } from "@/lib/lead-submission";
 
 /**
  * Reusable lead-capture form used across the marketing site.
  *
- * Every instance posts to /api/quote (the X-Lead-Key proxy) with a `source`,
- * `lineOfBusiness`, and `campaign` so the platform can attribute the lead to
- * the exact surface that produced it. Includes a honeypot, graceful success,
+ * Every instance obtains a server-issued context for its supported surface
+ * before posting to /api/quote. The server supplies source and campaign and
+ * constrains coverage choices. Includes a honeypot, graceful success,
  * and a dataLayer `generate_lead` event on success.
  *
  * Variants:
@@ -73,6 +74,7 @@ export default function LeadForm({
   const [zip, setZip] = useState("");
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [submission] = useState(createLeadSubmission);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
@@ -81,6 +83,7 @@ export default function LeadForm({
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (submission.pending) return;
     setError("");
     if (!firstName.trim() || !lastName.trim()) {
       setError("Please enter your first and last name.");
@@ -92,27 +95,18 @@ export default function LeadForm({
     }
     setSubmitting(true);
     try {
-      const res = await fetch("/api/quote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          phone,
-          zip,
-          lineOfBusiness,
-          message,
-          website,
-          source,
-          campaign,
-        }),
+      const result = await submission.submit(source === "resources-article" ? `article:${campaign}` : source, {
+        firstName,
+        lastName,
+        email,
+        phone,
+        zip,
+        lineOfBusiness,
+        message,
+        website,
       });
-      if (!res.ok) {
-        const data = (await res.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(data?.error ?? "Something went wrong.");
-      }
-      trackLead({ source, lineOfBusiness, campaign });
+      if (!result.accepted) return;
+      if (result.delivered) trackLead({ source, lineOfBusiness, campaign });
       setSent(true);
     } catch (err) {
       setError(
@@ -230,7 +224,6 @@ export default function LeadForm({
               id={fieldId("zip")}
               inputMode="numeric"
               autoComplete="postal-code"
-              maxLength={10}
               value={zip}
               onChange={(e) => setZip(e.target.value)}
               placeholder="e.g. 92101"

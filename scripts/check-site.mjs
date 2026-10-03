@@ -142,8 +142,10 @@ if (existsSync(join(ROOT, "src/app/apple-icon.png"))) {
         `${routeRel}: found ${okTrue} \`ok: true\` responses, expected exactly 2 ` +
           `(honeypot short-circuit + delivered lead) — a third means a failure path reports success`
       );
-    if (!/status:\s*502/.test(src))
-      fail(`${routeRel}: no 502 response — an undelivered lead must be reported to the visitor, not swallowed`);
+    // Failure responses now use a helper; actual status/body behavior is tested
+    // by check-lead-proxy. Keep the static false-success and credential guards.
+    if (!/return failure\(UNCONFIRMED, 502\)/.test(src))
+      fail(`${routeRel}: missing unconfirmed-delivery failure response`);
 
     // (c) The upstream ORIGIN is config (INS_PLATFORM_URL, default in brand.ts),
     //     never a hardcoded host: a literal here is how the endpoint was left
