@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Clock, ChevronRight, FileCheck2, Mail } from "lucide-react";
-import { BRAND } from "@/lib/brand";
+import { BRAND, PORTAL_CERTIFICATES_URL, PORTAL_LOGIN_URL, PORTAL_REQUEST_ACCESS_URL } from "@/lib/brand";
 import { JsonLd, breadcrumbJsonLd } from "@/lib/seo";
-import LeadForm from "@/components/LeadForm";
 
 export const metadata: Metadata = {
   title: "Request a Certificate of Insurance (COI) — Same-Day",
@@ -98,19 +97,31 @@ export default function CertificatePage() {
               </div>
             </div>
 
-            <div>
-              <LeadForm
-                source="certificate-request"
-                campaign="certificate"
-                lineOfBusiness="General Liability Insurance"
-                heading="Certificate request"
-                subheading="Give us the details below and we'll get your COI issued. If you're not a client yet, we'll get you quoted first."
-                cta="Request My Certificate"
-                successHeading="Got it — thanks, {name}!"
-                successBody="We'll prepare your certificate and follow up shortly. For anything urgent, call us and we'll handle it on the spot."
-                messageLabel="Certificate details"
-                messagePlaceholder="Who needs the certificate (the holder's name & address), any required additional-insured wording, required limits, and the project or contract it's for."
-              />
+            <div className="rounded-3xl border border-navy-100 bg-white p-8 shadow-xl shadow-navy-950/5 sm:p-10">
+              <FileCheck2 className="h-10 w-10 text-gold-700" aria-hidden="true" />
+              <h2 className="mt-4 text-xl font-bold text-navy-950">Certificate service for existing clients</h2>
+              <p className="mt-3 text-navy-600">
+                Request a certificate for your existing policy in the client portal. Have the
+                certificate holder&apos;s name, address, and any contract requirements ready.
+                You&apos;ll need to sign in to submit your request.
+              </p>
+              <a
+                href={PORTAL_CERTIFICATES_URL}
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent-500 px-7 py-3.5 font-semibold text-navy-950 transition-colors hover:bg-accent-400"
+              >
+                Request a Certificate <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </a>
+              <p className="mt-5 text-sm text-navy-600">
+                Need help getting in? <a href={PORTAL_LOGIN_URL} className="font-semibold text-gold-700 underline">Sign in</a>
+                {" "}or <a href={PORTAL_REQUEST_ACCESS_URL} className="font-semibold text-gold-700 underline">request portal access</a>.
+              </p>
+              <div className="mt-8 border-t border-navy-100 pt-6">
+                <h3 className="font-semibold text-navy-950">Looking for new coverage?</h3>
+                <p className="mt-2 text-sm text-navy-600">Start a separate quote request for a new policy.</p>
+                <Link href="/quote" className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-gold-700 hover:text-gold-600">
+                  Get a New Coverage Quote <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

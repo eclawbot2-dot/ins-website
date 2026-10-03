@@ -264,6 +264,45 @@ if (existsSync(join(OUT, "_not-found.html"))) {
   if (!p404.includes("Page not found")) fail("_not-found.html is missing the branded copy");
 }
 
+// 6. Public checkups and existing-client certificate service must remain usable
+// without JavaScript. Inspect actual main-content anchors, not RSC scripts or
+// shared footer links (the footer legitimately contains a newsletter form).
+for (const [route, requiredLinks] of [
+  ["coverage-checkup", [
+    ["Start My Free Checkup", "https://ins.taboragency.com/coverage-checkup"],
+    ["Continue to Policy Upload", "https://ins.taboragency.com/coverage-checkup"],
+    ["Start My Checkup", "https://ins.taboragency.com/coverage-checkup"],
+  ]],
+  ["certificate", [
+    ["Request a Certificate", "https://ins.taboragency.com/portal/certificates"],
+    ["Sign in", "https://ins.taboragency.com/portal/login"],
+    ["request portal access", "https://ins.taboragency.com/portal/request-access"],
+    ["Get a New Coverage Quote", "/quote"],
+  ]],
+]) {
+  const file = join(OUT, `${route}.html`);
+  if (!existsSync(file)) continue; // Missing artifacts are already reported above.
+  const rendered = readFileSync(file, "utf8").replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+  const main = rendered.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1];
+  if (!main) {
+    fail(`${route}: missing rendered main content for service routing`);
+    continue;
+  }
+  const links = [...main.matchAll(/<a\b[^>]*\bhref="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi)]
+    .map((match) => ({
+      href: match[1],
+      label: match[2].replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim(),
+    }));
+  for (const [label, href] of requiredLinks) {
+    if (!links.some((link) => link.label === label && link.href === href))
+      fail(`${route}: rendered "${label}" link must point to ${href}`);
+  }
+  if (/<form\b/i.test(main))
+    fail(`${route}: service routing must not render a local lead-submission form`);
+  if (route === "coverage-checkup" && /coming soon/i.test(main))
+    fail("coverage-checkup: public upload funnel must not be advertised as coming soon");
+}
+
 if (failures) {
   console.error(`\ncheck-site: ${failures} failure(s) across ${pages} pages`);
   process.exit(1);
