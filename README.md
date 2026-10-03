@@ -28,62 +28,79 @@ bright gold CTA accent (`accent-*`) — tokens defined in `src/app/globals.css`.
 
 ## Lead intake
 
-All four lead surfaces (`QuoteForm`, `ContactForm`, `LeadForm`, `NewsletterSignup`)
-POST to the internal proxy `POST /api/quote`, which forwards JSON
-`{firstName,lastName,email,phone,zip,lineOfBusiness,message,source,campaign}` to
-`${INS_PLATFORM_URL}/api/public/leads` with header `X-Lead-Key` read from the
-`LEAD_INTAKE_KEY` env var.
+The four form components (`QuoteForm`, `ContactForm`, `LeadForm`, and
+`NewsletterSignup`) share `src/lib/lead-submission.ts`. Each mounted form assigns
+a UUID to each original payload before requesting a context and posting to
+`/api/quote`. Unchanged retries reuse that identity, including A -> B -> A edits
+while previous attempts remain unresolved. Concurrent attempts are blocked.
+There is no browser-storage persistence: reload, navigation, or modal unmount
+ends the identity scope. A maximum of 100 unresolved payloads is retained; the
+helper refuses new variants rather than evicting a retry identity.
 
-`INS_PLATFORM_URL` is **server-only** (never `NEXT_PUBLIC_`, never shipped to the
-browser) and read from the server's runtime environment (not inlined at build,
-but on Vercel an env change still only applies to a new deployment); unset or
-blank, it defaults to `https://ins.taboragency.com` (`PLATFORM_DEFAULT_URL` in
-`src/lib/brand.ts`; a trailing slash is stripped). Only the base URL is
-configurable — the `/api/public/leads` path is the platform's contract.
+Before submission the helper requests `/api/quote/context` with a supported
+surface and UUID. The server signs a one-hour context bound to that identity,
+using a domain-separated HMAC and the server-only intake key. Every retry gets a
+fresh context, without changing its submission identity. The server derives
+source/campaign and allowed coverage from its registry and checked-in article
+metadata. Arbitrary source, campaign, referral and enum fields are rejected.
+These public contexts constrain form semantics; they do **not** authenticate a
+person, prove the page they visited, prevent bots, or implement rate limiting.
 
-**The proxy never follows a redirect** (`redirect: "manual"`). fetch re-issues a
-followed 301/302 POST as a GET with no body, so following one would lose the lead
-while possibly still getting a 2xx back. A 3xx from the platform can only mean
-`INS_PLATFORM_URL` names a moved or retired host (e.g. `ins.jahdev.com` after the
-cutover), so the route logs `[lead-proxy] Upstream redirected the lead POST` with
-the `Location` and returns the same honest **502** as any failed forward.
+The proxy accepts a bounded JSON object (at most 1,300,000 UTF-8 bytes) with
+string fields. It rejects oversized values before forwarding and leaves the
+form input visible. It forwards accepted originals without trimming or slicing:
+names up to 100 UTF-16 code units, email/phone/ZIP up to 2,000, message up to
+200,000, coverage up to 100, honeypot up to 2,000, and signed context up to 2,048.
+Name and at least one contact method must contain non-whitespace text.
 
-**The proxy never reports success for a lead it did not deliver.** If the key is
-missing, the platform rejects the lead, or the forward times out (10s), the route
-returns **502** with an honest message telling the visitor nothing was sent — every
-form keeps their typed input on screen and shows it, so they can retry or call.
-Reporting success on a dropped lead would leave an insurance shopper waiting for a
-callback that will never come, and the only record would be a `console.error` in a
-serverless function nobody reads. The failure message carries `BRAND.phone` and
-`BRAND.email` so the visitor is not left without a channel.
+**Forwarding originals is not a claim of durable original storage.** The
+verified platform implementation normalizes names/contact fields and shortens
+stored messages to 10,000 characters with an explicit shortened-message marker.
+As-typed contact notes are capped at 300 characters. The website's preservation
+guarantee covers forwarding, not lossless downstream storage.
 
-`scripts/check-site.mjs` pins this with static assertions over `route.ts`:
-the key read must be the exact bare `process.env.LEAD_INTAKE_KEY` line (any
-fallback spelling fails), there must be **exactly two** `ok: true` responses (the
-honeypot short-circuit and a delivered lead — a third means a failure path is
-reporting success again), at least one `502` must remain, the endpoint must derive
-from `platformBaseUrl(process.env.INS_PLATFORM_URL)` with no absolute-URL literal in
-the route, the fetch must carry a `redirect: "manual"` code line, and
-`PLATFORM_DEFAULT_URL` in `brand.ts` must be `https://ins.taboragency.com`. A
-repo-wide sweep additionally fails on a literal `X-Lead-Key` header value anywhere
-under `src/`. These are text assertions: they trip on a revert and on any rewrite of
-the pinned lines, so re-read the route and update them deliberately.
+The upstream JSON remains
+`{firstName,lastName,email,phone,zip,lineOfBusiness,message,source,campaign}`.
+Headers are `X-Lead-Key`, `Idempotency-Key`, and `X-Lead-Visitor-IP`. The endpoint
+is `${INS_PLATFORM_URL}/api/public/leads`; blank/unset uses
+`https://ins.taboragency.com`. `INS_PLATFORM_URL` and `LEAD_INTAKE_KEY` are
+server-only, read at runtime, with no hardcoded credential fallback. Vercel env
+changes still require a deployment. Redirects are never followed.
 
-`scripts/check-lead-proxy.mjs` is the behavioural test (run after `npm run build`):
-it starts the built app with `next start`, points `INS_PLATFORM_URL` at a local stub
-platform, and asserts the forwarded request is unchanged (POST, `Content-Type`,
-`X-Lead-Key`, exact body bytes, `/api/public/leads` path), that 301/302/307/308 are
-not followed and come back as 502, that an upstream 500 is a 502, and that the
-honeypot never contacts the platform. Nothing leaves the machine.
+On Vercel (`VERCEL=1`), only a single valid `x-vercel-forwarded-for` address is
+forwarded. Other forwarding headers and browser-supplied visitor addresses are
+never trusted. Missing/malformed addresses and unsupported hosting fail closed.
+The trust assumption follows
+[Vercel's request-header contract](https://vercel.com/docs/headers/request-headers).
+Actual Trusted Proxy/firewall configuration must be verified before release;
+this implementation alone does not establish distributed abuse protection. The
+platform's currently inspected limiter is process-local, a separate unresolved
+dependency for distributed enforcement.
 
-**There is no hardcoded key fallback.** This repo is public; a literal default here
-is a published credential, and because `LEAD_INTAKE_KEY` *is* set in production the
-fallback would never fire — so nothing would ever look broken while the constant sat
-in public git history.
+A synthetic local runner can set `LEAD_PROXY_TEST_MODE=loopback` only when the
+upstream is HTTP on `127.0.0.1`, the incoming URL has a loopback hostname, the intake key
+is the literal synthetic `check-lead-proxy-test-key`, and `VERCEL` is not `1`.
+It supplies documentation address `192.0.2.1`; it does not trust client IP headers.
+Never enable this mode on hosting. Use loopback stubs for behavioral checks;
+no real form submissions are needed for deployment verification.
 
-Safe probe that creates **no** lead: POST with the honeypot field `website` filled.
-The proxy short-circuits to `{"ok":true}` without ever contacting the platform.
-Verified live 2026-07-31 against `https://taboragency.com/api/quote`.
+Success requires upstream 201 with `{ok:true,id,score}` or 200 with those fields
+and `idempotent:true`. An empty, malformed, or unrelated 2xx is unconfirmed.
+Timeouts, transport failures, redirects and upstream errors never promise that
+nothing was sent. Conflicts (409), limiting (429), and validation failures (422)
+retain meaningful statuses with fixed safe messages; raw upstream bodies and
+visitor data are not logged or relayed. Browser success requires an explicit
+`{ok:true,accepted:true}` from the proxy. Analytics fires only after confirmed
+delivery. Newsletter success acknowledges the request, not proven enrollment.
+
+The honeypot remains the sole deliberate silent-success path without upstream
+forwarding. Its response is marked suppressed so the browser emits no lead
+analytics. A filled `website` field can be probed without creating a lead.
+
+`check:site` audits built pages and source invariants. `check:lead-proxy` runs the
+real built proxy against a synthetic loopback platform. Both audit scripts must
+track this contract, including context issuance, explicit acknowledgements,
+original payload bytes, retry identity and safe failure behavior.
 
 ## Client portal links
 

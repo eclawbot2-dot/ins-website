@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CheckCircle2, Loader2, Mail } from "lucide-react";
 import { trackLead } from "@/lib/analytics";
+import { createLeadSubmission } from "@/lib/lead-submission";
 
 /**
  * Email newsletter / coverage-tips signup. Posts to the same lead proxy with
@@ -16,12 +17,14 @@ export default function NewsletterSignup({
 }) {
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [submission] = useState(createLeadSubmission);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (submission.pending) return;
     setError("");
     if (!email.trim()) {
       setError("Please enter your email.");
@@ -29,29 +32,18 @@ export default function NewsletterSignup({
     }
     setSubmitting(true);
     try {
-      const res = await fetch("/api/quote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: "Newsletter",
-          lastName: "Subscriber",
-          email,
-          phone: "",
-          zip: "",
-          lineOfBusiness: "",
-          message: "Newsletter / coverage-tips signup",
-          website,
-          source: "newsletter",
-          campaign: "newsletter",
-        }),
+      const result = await submission.submit("newsletter", {
+        firstName: "Newsletter",
+        lastName: "Subscriber",
+        email,
+        phone: "",
+        zip: "",
+        lineOfBusiness: "",
+        message: "Newsletter / coverage-tips signup",
+        website,
       });
-      if (!res.ok) {
-        // Surface the proxy's own message — on a delivery failure it explains
-        // that nothing was sent, which "Something went wrong" does not.
-        const data = (await res.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(data?.error ?? "Something went wrong.");
-      }
-      trackLead({ source: "newsletter", campaign: "newsletter" });
+      if (!result.accepted) return;
+      if (result.delivered) trackLead({ source: "newsletter", campaign: "newsletter" });
       setSent(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
@@ -69,7 +61,7 @@ export default function NewsletterSignup({
           dark ? "text-gold-300" : "text-gold-700"
         }`}
       >
-        <CheckCircle2 className="h-4 w-4" aria-hidden="true" /> You&apos;re subscribed — watch your inbox.
+        <CheckCircle2 className="h-4 w-4" aria-hidden="true" /> Request received — thank you for your interest in our newsletter.
       </p>
     );
   }
