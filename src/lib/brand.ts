@@ -87,3 +87,5 @@ const PORTAL_BASE: string = platformBaseUrl(process.env.NEXT_PUBLIC_PORTAL_URL);
 
 export const PORTAL_LOGIN_URL = `${PORTAL_BASE}/portal/login`;
 export const PORTAL_REQUEST_ACCESS_URL = `${PORTAL_BASE}/portal/request-access`;
+export const PORTAL_CERTIFICATES_URL = `${PORTAL_BASE}/portal/certificates`;
+export const COVERAGE_CHECKUP_URL = `${PORTAL_BASE}/coverage-checkup`;

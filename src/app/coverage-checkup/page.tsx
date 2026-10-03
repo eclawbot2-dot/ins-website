@@ -11,10 +11,8 @@ import {
   Sparkles,
   Upload,
 } from "lucide-react";
-import { BRAND } from "@/lib/brand";
+import { BRAND, COVERAGE_CHECKUP_URL } from "@/lib/brand";
 import { JsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
-import { PORTAL_LOGIN_URL } from "@/lib/brand";
-import LeadForm from "@/components/LeadForm";
 import { CarrierStrip } from "@/components/TrustBadges";
 
 export const metadata: Metadata = {
@@ -144,7 +142,7 @@ export default function CoverageCheckupPage() {
                 ))}
               </ul>
               <a
-                href="#checkup-form"
+                href={COVERAGE_CHECKUP_URL}
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent-500 px-7 py-3.5 text-base font-semibold text-navy-950 shadow-lg shadow-accent-500/25 transition-all hover:bg-accent-400"
               >
                 Start My Free Checkup
@@ -152,19 +150,19 @@ export default function CoverageCheckupPage() {
               </a>
             </div>
 
-            {/* Form card */}
-            <div id="checkup-form" className="scroll-mt-24">
-              <LeadForm
-                source="coverage-checkup"
-                campaign="coverage-checkup"
-                heading="Request your free coverage checkup"
-                subheading="Tell us what you currently have. You can paste your coverages or just note your current carrier and renewal date — we'll take it from there."
-                cta="Get My Free Checkup"
-                successHeading="Checkup requested — thanks, {name}!"
-                successBody="A licensed advisor will review your coverage and follow up within one business day with gaps, savings, and options."
-                messageLabel="What do you currently have?"
-                messagePlaceholder="Current carrier, policies (auto/home/business), renewal date, and anything you're unsure about. If you have a declarations page, mention it and we'll request it securely."
-              />
+            <div className="rounded-3xl border border-navy-100 bg-white p-8 shadow-xl sm:p-10">
+              <Upload className="h-10 w-10 text-gold-700" aria-hidden="true" />
+              <h2 className="mt-4 text-xl font-bold text-navy-950">Start your coverage checkup</h2>
+              <p className="mt-3 text-navy-600">
+                Continue to our coverage checkup to share your contact details and upload your
+                policy for review. You do not need a client portal account to get started.
+              </p>
+              <a
+                href={COVERAGE_CHECKUP_URL}
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent-500 px-7 py-3.5 font-semibold text-navy-950 transition-colors hover:bg-accent-400"
+              >
+                Continue to Policy Upload <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </a>
             </div>
           </div>
         </div>
@@ -225,31 +223,30 @@ export default function CoverageCheckupPage() {
         </div>
       </section>
 
-      {/* Portal tease */}
+      {/* Public upload funnel */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="rounded-3xl border border-navy-100 bg-navy-950 p-8 text-white sm:p-10">
           <div className="grid items-center gap-6 lg:grid-cols-3">
             <div className="lg:col-span-2">
               <p className="text-sm font-semibold uppercase tracking-widest text-gold-300">
-                Coming soon
+                Ready to get started?
               </p>
               <h2 className="mt-2 text-2xl font-bold sm:text-3xl">
-                Self-serve policy analysis in your client portal
+                Share your policy for a coverage checkup
               </h2>
               <p className="mt-3 max-w-2xl text-navy-200">
-                We&apos;re rolling out a tool that lets you upload your policy and instantly see a
-                gap-and-savings analysis online. Until it lands, our advisors do the analysis for
-                you — same result, no waiting for the software.
+                Upload your current policy through our public coverage checkup. Follow the steps
+                there to submit your documents and contact details for review.
               </p>
             </div>
             <div className="flex lg:justify-end">
-              <Link
-                href={PORTAL_LOGIN_URL}
+              <a
+                href={COVERAGE_CHECKUP_URL}
                 className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
               >
-                Client Portal
+                Start My Checkup
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
