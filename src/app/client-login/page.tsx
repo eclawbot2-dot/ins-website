@@ -123,15 +123,10 @@ export default function ClientLoginPage() {
             <div>
               <h2 className="text-2xl font-bold text-navy-950">Prefer to talk to a person?</h2>
               <p className="mt-4 text-[17px] leading-relaxed text-navy-700">
-                The portal never replaces your advisor. Call{" "}
-                <a href={BRAND.phoneHref} className="font-semibold text-gold-700 underline">
-                  {BRAND.phone}
-                </a>{" "}
-                or email{" "}
-                <a href={`mailto:${BRAND.email}`} className="font-semibold text-gold-700 underline">
-                  {BRAND.email}
-                </a>{" "}
-                and a licensed advisor will handle it for you. Not a client yet?{" "}
+                Need help from the agency? Send a message using our{" "}
+                <Link href="/contact" className="font-semibold text-gold-700 underline">
+                  contact form
+                </Link>. Not a client yet?{" "}
                 <Link href="/quote" className="font-semibold text-gold-700 underline">
                   Get a free quote
                 </Link>
