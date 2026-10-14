@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, LogIn, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, LogIn, Menu, X } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import Wordmark from "@/components/Wordmark";
 import { PERSONAL_LINES, BUSINESS_LINES } from "@/lib/coverage-data";
@@ -66,10 +66,6 @@ export default function Header() {
       <div className="hidden bg-navy-950 text-navy-100 md:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-1.5 text-xs sm:px-6 lg:px-8">
           <p>Independent agency · We shop {BRAND.carriers.length}+ carriers so you don&apos;t have to</p>
-          <a href={BRAND.phoneHref} className="flex items-center gap-1.5 font-medium hover:text-white">
-            <Phone className="h-3 w-3" aria-hidden="true" />
-            {BRAND.phone}
-          </a>
         </div>
       </div>
 
@@ -224,10 +220,6 @@ export default function Header() {
             <LogIn className="h-4 w-4" aria-hidden="true" />
             Client Login
           </Link>
-          <a href={BRAND.phoneHref} className="mt-3 flex items-center gap-2 py-2.5 text-sm font-semibold text-gold-700">
-            <Phone className="h-4 w-4" aria-hidden="true" />
-            {BRAND.phone}
-          </a>
         </nav>
       )}
     </header>

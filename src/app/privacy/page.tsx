@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 
 export const metadata: Metadata = {
@@ -75,9 +76,8 @@ export default function PrivacyPage() {
           <p className="mt-3">
             You may request access to, correction of, or deletion of your personal information, subject to records we
             are legally required to keep. Depending on your state of residence, you may have additional privacy
-            rights. To exercise any of these, contact us at{" "}
-            <a href={`mailto:${BRAND.email}`} className="font-medium text-gold-700 underline">{BRAND.email}</a> or{" "}
-            {BRAND.phone}.
+            rights. To exercise any of these, use our{" "}
+            <Link href="/contact" className="font-medium text-gold-700 underline">contact form</Link>.
           </p>
         </section>
 
@@ -99,9 +99,8 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-xl font-bold text-navy-950">9. Contact</h2>
           <p className="mt-3">
-            Questions about this policy: {BRAND.name}, {BRAND.address.street}, {BRAND.address.city},{" "}
-            {BRAND.address.state} {BRAND.address.zip} · {BRAND.phone} ·{" "}
-            <a href={`mailto:${BRAND.email}`} className="font-medium text-gold-700 underline">{BRAND.email}</a>. {BRAND.license}.
+            Questions about this policy? Send {BRAND.name} a message using our{" "}
+            <Link href="/contact" className="font-medium text-gold-700 underline">contact form</Link>.
           </p>
         </section>
       </div>

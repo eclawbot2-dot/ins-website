@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { ALL_LINES } from "@/lib/coverage-data";
 import { getIcon } from "@/lib/icons";
-import { BRAND } from "@/lib/brand";
 import { trackLead } from "@/lib/analytics";
 import { createLeadSubmission } from "@/lib/lead-submission";
 
@@ -58,7 +57,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
       if (result.delivered) trackLead({ source: "website", lineOfBusiness, campaign: "main-quote-form" });
       setStep(4);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again or call us.");
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -71,11 +70,7 @@ export default function QuoteForm({ initialLine }: { initialLine?: string }) {
         <h2 className="mt-4 text-2xl font-bold text-navy-950">Request received — thank you, {firstName}!</h2>
         <p className="mx-auto mt-3 max-w-md text-navy-700">
           A licensed advisor will review your request and reach out within one business day with quotes from
-          multiple carriers. Need something faster? Call us at{" "}
-          <a href={BRAND.phoneHref} className="font-semibold text-gold-700 underline">
-            {BRAND.phone}
-          </a>
-          .
+          multiple carriers.
         </p>
         <Link
           href="/"

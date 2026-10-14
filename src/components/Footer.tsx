@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import Wordmark from "@/components/Wordmark";
 import { PERSONAL_LINES, BUSINESS_LINES } from "@/lib/coverage-data";
@@ -24,18 +24,6 @@ export default function Footer() {
                   <br />
                   {BRAND.address.city}, {BRAND.address.state} {BRAND.address.zip}
                 </span>
-              </li>
-              <li>
-                <a href={BRAND.phoneHref} className="flex items-center gap-2.5 hover:text-white">
-                  <Phone className="h-4 w-4 text-gold-400" aria-hidden="true" />
-                  {BRAND.phone}
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${BRAND.email}`} className="flex items-center gap-2.5 hover:text-white">
-                  <Mail className="h-4 w-4 text-gold-400" aria-hidden="true" />
-                  {BRAND.email}
-                </a>
               </li>
             </ul>
 
@@ -94,20 +82,12 @@ export default function Footer() {
               <li><Link href="/privacy" className="inline-block py-0.5 hover:text-white">Privacy Policy</Link></li>
               <li><Link href="/terms" className="inline-block py-0.5 hover:text-white">Terms of Use</Link></li>
             </ul>
-            <h3 className="mt-8 text-sm font-semibold uppercase tracking-wider text-white">Hours</h3>
-            <ul className="mt-4 space-y-1.5 text-sm">
-              {BRAND.hours.map((h) => (
-                <li key={h.days}>
-                  <span className="text-navy-300">{h.days}:</span> {h.hours}
-                </li>
-              ))}
-            </ul>
           </nav>
         </div>
 
         <div className="mt-12 border-t border-navy-800 pt-8 text-xs leading-relaxed text-navy-400">
           <p>
-            © {new Date().getFullYear()} {BRAND.legalName}. All rights reserved. {BRAND.license}.
+            © {new Date().getFullYear()} {BRAND.legalName}. All rights reserved.
           </p>
           <p className="mt-2 max-w-3xl">
             {BRAND.shortName} is an independent insurance agency. Insurance products are offered through multiple
