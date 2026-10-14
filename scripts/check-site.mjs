@@ -33,6 +33,8 @@ const ALLOWED_HOSTS = new Set([
 ]);
 
 const FORBIDDEN = [
+  /\(555\) 014-7300|15550147300|hello@taboragency\.com|CA License #0000000/i,
+  /8:00 AM[^<\n]*6:00 PM PT|9:00 AM[^<\n]*1:00 PM PT/i,
   /localhost:\d/i,
   // Retired agency-platform hosts (ins-platform Phase 3 cutover): portal.taboragency.com
   // is deleted; ins.jahdev.com and insdemo.jahdev.com are temporary 301s. A page that
@@ -76,6 +78,14 @@ const fail = (msg) => {
   failures++;
   console.error(`FAIL: ${msg}`);
 };
+
+// Agency contact details remain unpublished until independently verified (#10).
+// Check client components too: confirmation and mobile CTAs need not appear in SSG HTML.
+for (const file of ["Header", "Footer", "LeadForm", "QuoteForm", "ContactForm", "CtaBanner"]) {
+  const source = readFileSync(join(ROOT, "src", "components", `${file}.tsx`), "utf8");
+  if (/BRAND\.(phone|phoneHref|email|license|hours)\b/.test(source))
+    fail(`${file}: publishes unverified agency contact details`);
+}
 
 if (!SITE_URL) {
   console.error("FAIL: could not parse BRAND.url from src/lib/brand.ts");
@@ -258,6 +268,26 @@ for (const file of htmlFiles(OUT)) {
   }
 }
 if (pages < 30) fail(`only ${pages} HTML pages prerendered — expected hubs + 12 coverage lines + 10 articles + core pages`);
+
+const llmsFile = join(OUT, "llms.txt.body");
+if (!existsSync(llmsFile)) fail("missing llms.txt output");
+else {
+  const llms = readFileSync(llmsFile, "utf8");
+  for (const pattern of FORBIDDEN) {
+    if (pattern.test(llms)) fail(`llms.txt: matches forbidden pattern ${pattern}`);
+  }
+}
+const homeHtml = readFileSync(join(OUT, "index.html"), "utf8");
+let agencyFound = false;
+for (const script of homeHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+  const data = JSON.parse(script[1]);
+  if (data["@type"] !== "InsuranceAgency") continue;
+  agencyFound = true;
+  for (const key of ["telephone", "email", "openingHoursSpecification"]) {
+    if (key in data) fail(`agency JSON-LD: unverified ${key} must be omitted`);
+  }
+}
+if (!agencyFound) fail("home: missing InsuranceAgency structured data");
 
 // 5. 404 must be the branded one, not Next's default (#22).
 if (existsSync(join(OUT, "_not-found.html"))) {

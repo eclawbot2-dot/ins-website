@@ -63,13 +63,6 @@ export default async function QuotePage({
                 </li>
               ))}
             </ul>
-            <p className="mt-9 rounded-2xl border border-navy-100 bg-white p-5 text-sm leading-relaxed text-navy-600">
-              Prefer to talk it through? Call{" "}
-              <a href={BRAND.phoneHref} className="font-semibold text-gold-700">
-                {BRAND.phone}
-              </a>{" "}
-              — {BRAND.hours[0].days}, {BRAND.hours[0].hours}.
-            </p>
           </div>
           <div className="lg:col-span-3">
             <QuoteForm initialLine={line} />

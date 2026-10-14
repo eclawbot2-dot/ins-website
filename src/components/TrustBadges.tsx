@@ -1,4 +1,4 @@
-import { Award, BadgeCheck, HeartHandshake, Lock, ShieldCheck, Users } from "lucide-react";
+import { Award, HeartHandshake, Lock, ShieldCheck, Users } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
 const BADGES = [
@@ -6,11 +6,6 @@ const BADGES = [
     icon: ShieldCheck,
     title: "Independent agency",
     text: "We represent you, not one carrier.",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Licensed & appointed",
-    text: BRAND.license,
   },
   {
     icon: Users,

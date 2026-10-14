@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   BadgeCheck,
-  Phone,
   SearchCheck,
   ShieldCheck,
   Star,
@@ -146,13 +145,6 @@ export default function HomePage() {
                 Free coverage checkup
               </Link>
             </div>
-            <a
-              href={BRAND.phoneHref}
-              className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-700 transition-colors hover:text-navy-950"
-            >
-              <Phone className="h-4 w-4 text-gold-700" aria-hidden="true" />
-              Talk to a licensed advisor — {BRAND.phone}
-            </a>
           </div>
         </div>
       </section>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookOpen, CheckCircle2, Phone, ShieldCheck } from "lucide-react";
+import { ArrowRight, BookOpen, CheckCircle2, ShieldCheck } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
 export const metadata: Metadata = {
@@ -37,18 +37,10 @@ export default function ThankYouPage() {
           Thank you — your request is in good hands.
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-lg text-navy-600">
-          A licensed advisor will be in touch within one business day. Want to get a head start?
-          Call us now and we can often get you quotes on the spot.
+          A licensed advisor will review your request. You can explore our coverage guides while you wait.
         </p>
 
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href={BRAND.phoneHref}
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-500 px-7 py-3.5 text-base font-semibold text-navy-950 shadow-lg shadow-accent-500/25 transition-all hover:bg-accent-400"
-          >
-            <Phone className="h-5 w-5" aria-hidden="true" />
-            Call {BRAND.phone}
-          </a>
           <Link
             href="/resources"
             className="inline-flex items-center justify-center gap-2 rounded-full border border-navy-200 px-7 py-3.5 text-base font-semibold text-navy-800 transition-colors hover:bg-navy-50"

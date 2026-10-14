@@ -25,8 +25,6 @@ export function agencyJsonLd(): Record<string, unknown> {
     alternateName: BRAND.shortName,
     description: `${BRAND.name} is an independent insurance agency comparing business and personal coverage across ${BRAND.carriers.length}+ top-rated carriers.`,
     url: SITE_URL,
-    telephone: BRAND.phone,
-    email: BRAND.email,
     slogan: BRAND.tagline,
     foundingDate: String(BRAND.foundedYear),
     address: {
@@ -49,20 +47,6 @@ export function agencyJsonLd(): Record<string, unknown> {
     areaServed: [
       { "@type": "State", name: "California" },
       ...BRAND.serviceAreas.map((c) => ({ "@type": "City", name: c })),
-    ],
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "08:00",
-        closes: "18:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: "09:00",
-        closes: "13:00",
-      },
     ],
     knowsAbout: [
       "General Liability Insurance",

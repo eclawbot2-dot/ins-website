@@ -81,11 +81,8 @@ export default function CertificatePage() {
 
               <div className="mt-8 rounded-2xl border border-navy-100 bg-white p-5">
                 <p className="text-sm text-navy-600">
-                  Already a client and need this urgently? Call{" "}
-                  <a href={BRAND.phoneHref} className="font-semibold text-gold-700 hover:text-gold-600">
-                    {BRAND.phone}
-                  </a>{" "}
-                  and we&apos;ll handle it on the spot.
+                  Existing clients can submit a certificate request in the portal below.
+                  If a deadline is approaching, include it in your request. Issuance is subject to review.
                 </p>
                 <Link
                   href="/business/general-liability"

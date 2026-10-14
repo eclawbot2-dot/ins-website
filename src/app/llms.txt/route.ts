@@ -24,15 +24,13 @@ Key facts:
 - Independent agency: we represent the client, not a single insurance carrier
 - Carriers quoted: ${BRAND.carriers.join(", ")}
 - Service area: California (commercial and personal lines)
-- How to get a quote: ${SITE_URL}/quote (3-step form, response within one business day) or call ${BRAND.phone}
+- How to get a quote: ${SITE_URL}/quote (3-step form, response within one business day)
 - Free coverage checkup: ${SITE_URL}/coverage-checkup (send your current policy; we find gaps and savings — no obligation)
 - Switch & save: ${SITE_URL}/switch-and-save (we re-shop your insurance across carriers and handle the switch)
 - Certificate of insurance: ${SITE_URL}/certificate (same-day COIs with additional-insured wording)
 - Claims help: ${SITE_URL}/claims (step-by-step guidance plus 24/7 carrier claim phone numbers)
 - Service area: ${BRAND.serviceAreas.join(", ")} and the rest of California
 - Office: ${BRAND.address.street}, ${BRAND.address.city}, ${BRAND.address.state} ${BRAND.address.zip}
-- Hours: ${BRAND.hours.map((h) => `${h.days} ${h.hours}`).join("; ")}
-- ${BRAND.license}
 
 ## Business Insurance
 ${business}
@@ -54,7 +52,7 @@ ${resources}
 - [File a Claim](${SITE_URL}/claims): what to do after a loss + carrier claim numbers
 - [Client Login](${SITE_URL}/client-login): existing clients — portal for policies, invoices, claims, and certificates
 - [About](${SITE_URL}/about): the independent agency model and our values
-- [Contact](${SITE_URL}/contact): phone, email, office address, hours
+- [Contact](${SITE_URL}/contact): send a coverage or policy question using the contact form
 `;
 
   return new Response(body, {

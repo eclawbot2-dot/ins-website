@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Loader2, Phone, X } from "lucide-react";
-import { BRAND } from "@/lib/brand";
+import { ArrowRight, CheckCircle2, Loader2, X } from "lucide-react";
 import { trackLead } from "@/lib/analytics";
 import { createLeadSubmission } from "@/lib/lead-submission";
 
@@ -110,7 +109,7 @@ export default function LeadForm({
       setSent(true);
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Something went wrong. Please try again or call us."
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
       );
     } finally {
       setSubmitting(false);
@@ -126,12 +125,7 @@ export default function LeadForm({
         </h3>
         <p className="mx-auto mt-2 max-w-sm text-navy-700">
           {successBody ??
-            "A licensed advisor will review your request and reach out within one business day."}{" "}
-          Need it faster? Call{" "}
-          <a href={BRAND.phoneHref} className="font-semibold text-gold-700 underline">
-            {BRAND.phone}
-          </a>
-          .
+            "A licensed advisor will review your request and reach out within one business day."}
         </p>
       </div>
     );
@@ -349,7 +343,7 @@ export function LeadFormModal({
   );
 }
 
-/** A small sticky "call us" + "get a quote" bar that appears on scroll (mobile). */
+/** A sticky quote link that appears on scroll (mobile). */
 export function StickyQuoteBar() {
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -366,12 +360,6 @@ export function StickyQuoteBar() {
       }`}
     >
       <div className="mx-auto flex max-w-md items-center gap-3">
-        <a
-          href={BRAND.phoneHref}
-          className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-navy-200 px-4 py-3 text-sm font-semibold text-navy-800"
-        >
-          <Phone className="h-4 w-4" aria-hidden="true" /> Call
-        </a>
         <Link
           href="/quote"
           className="flex flex-[1.4] items-center justify-center gap-1.5 rounded-full bg-accent-500 px-4 py-3 text-sm font-semibold text-navy-950"

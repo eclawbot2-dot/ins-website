@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Phone } from "lucide-react";
-import { BRAND } from "@/lib/brand";
+import { ArrowRight } from "lucide-react";
 
 export default function CtaBanner({
   title = "Ready to see what the right coverage costs?",
@@ -32,13 +31,6 @@ export default function CtaBanner({
             Start My Quote
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
-          <a
-            href={BRAND.phoneHref}
-            className="inline-flex items-center gap-2 rounded-full border border-white/25 px-8 py-3.5 text-base font-semibold text-white transition-colors hover:bg-white/10"
-          >
-            <Phone className="h-4 w-4" aria-hidden="true" />
-            {BRAND.phone}
-          </a>
         </div>
       </div>
     </section>

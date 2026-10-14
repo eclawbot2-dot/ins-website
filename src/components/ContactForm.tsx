@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
-import { BRAND } from "@/lib/brand";
 import { trackLead } from "@/lib/analytics";
 import { createLeadSubmission } from "@/lib/lead-submission";
 
@@ -43,7 +42,7 @@ export default function ContactForm() {
       if (result.delivered) trackLead({ source: "contact", campaign: "contact-page" });
       setSent(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again or call us.");
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -55,11 +54,7 @@ export default function ContactForm() {
         <CheckCircle2 className="mx-auto h-12 w-12 text-gold-600" aria-hidden="true" />
         <h3 className="mt-4 text-xl font-bold text-navy-950">Message sent — thank you!</h3>
         <p className="mx-auto mt-2 max-w-sm text-navy-700">
-          We&apos;ll get back to you within one business day. For anything urgent, call{" "}
-          <a href={BRAND.phoneHref} className="font-semibold text-gold-700 underline">
-            {BRAND.phone}
-          </a>
-          .
+          We&apos;ll review your message and respond using the contact details you provided.
         </p>
       </div>
     );

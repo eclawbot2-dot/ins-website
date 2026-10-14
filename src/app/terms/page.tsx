@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 
 export const metadata: Metadata = {
@@ -94,9 +95,8 @@ export default function TermsPage() {
         <section>
           <h2 className="text-xl font-bold text-navy-950">9. Contact</h2>
           <p className="mt-3">
-            {BRAND.name}, {BRAND.address.street}, {BRAND.address.city}, {BRAND.address.state} {BRAND.address.zip} ·{" "}
-            {BRAND.phone} ·{" "}
-            <a href={`mailto:${BRAND.email}`} className="font-medium text-gold-700 underline">{BRAND.email}</a>. {BRAND.license}.
+            Contact {BRAND.name} through our{" "}
+            <Link href="/contact" className="font-medium text-gold-700 underline">contact form</Link>.
           </p>
         </section>
       </div>

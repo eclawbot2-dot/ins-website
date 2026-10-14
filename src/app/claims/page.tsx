@@ -38,8 +38,8 @@ const STEPS = [
   },
   {
     icon: Phone,
-    title: "4. Call us — or the carrier directly",
-    text: `During business hours, call ${BRAND.phone} and we'll report the claim with you and stay on it until it's resolved. Nights and weekends, use your carrier's 24/7 claim line below, then let us know so we can track it.`,
+    title: "4. Contact your carrier",
+    text: "Use the claims contact information on your policy documents or your insurer's official website. For emergencies, contact emergency services first.",
   },
   {
     icon: FileText,
@@ -56,12 +56,8 @@ export default function ClaimsPage() {
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">File a Claim</h1>
           <p className="mt-4 max-w-2xl text-lg text-navy-200">
-            A claim is the moment your insurance has to work. Here&apos;s exactly what to do — and remember, you can
-            always call us first at{" "}
-            <a href={BRAND.phoneHref} className="font-semibold text-gold-300 underline">
-              {BRAND.phone}
-            </a>{" "}
-            and we&apos;ll handle the carrier with you.
+            A claim is the moment your insurance has to work. Use the steps below to prepare,
+            then report the loss using the claims contact information on your policy documents.
           </p>
         </div>
       </section>
@@ -86,12 +82,9 @@ export default function ClaimsPage() {
             </span>
             <h3 className="mt-4 font-bold">Not sure whether to file?</h3>
             <p className="mt-2 text-sm leading-relaxed text-navy-200">
-              For smaller losses near your deductible, filing isn&apos;t always the right move. Call us first —
-              we&apos;ll talk through the numbers with no pressure either way.
+              For smaller losses near your deductible, review your policy terms and discuss
+              your options with your insurer or agent before deciding how to proceed.
             </p>
-            <a href={BRAND.phoneHref} className="mt-4 inline-block font-semibold text-accent-300">
-              {BRAND.phone}
-            </a>
           </div>
         </div>
       </section>

@@ -190,21 +190,20 @@ curl -s "https://taboragency.com/?cb=$(date +%s)" | grep -o "Tabor Agency" | hea
 
 ## OWNER FLAGS
 
-These are live on a **real** insurance company's website and need the owner's real
-values — audits keep rediscovering them, so they are recorded here. The first three
-are placeholder constants in the single file `src/lib/brand.ts`; the fourth records
-an operational fix, done 2026-09-27, whose other half lives outside this repo.
+This is a **real** insurance company's website. Publish agency identity facts only
+when the owner's real values are verified; omit unknown facts instead of using
+fixture values. The credential note records an operational fix from 2026-09-27
+whose other half lives outside this repo.
 
-- **Phone `(555) 014-7300` is a placeholder.** 555-01xx is the reserved fictional
-  range; it is rendered as a `tel:` link in the header and footer of every page and
-  as `telephone` in the LocalBusiness JSON-LD (`src/lib/seo.tsx`), and it is the
-  number `/api/quote` prints to a visitor whose submission failed to deliver.
-- **`CA License #0000000` is a placeholder** license number, displayed in the
-  footer. A visibly fake licence number on a licensed insurance agency is a
-  credibility and possibly a compliance problem.
-- **`hello@taboragency.com` is unconfirmed** — it is the only mailbox the site
-  publishes (and the only one `check-site` allows), but nobody has verified it
-  receives mail.
+- Agency phone, email, license and office hours are **unverified and omitted**
+  from branding, public pages, form confirmations and structured data (#10).
+  Contact and privacy questions use `/contact`; existing-client certificate
+  requests use the established portal route. Neither route promises urgent service.
+  Publish contact details only after real agency evidence verifies them; platform
+  seed fixtures are not that evidence. `check:site` rejects the retired placeholder
+  values and checks client-only confirmation/mobile CTAs as well as built HTML.
+- Office location, service geography and named carrier appointments/counts remain
+  unverified pending #10 stage 2. #10 stays open until both stages are released.
 - **`LEAD_INTAKE_KEY` was rotated on 2026-09-27.** The value that used to be
   hardcoded in `src/app/api/quote/route.ts`, and was copied into `.env.example`
   until the same day, is still in this public repo's git history. History is
