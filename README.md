@@ -9,8 +9,9 @@ Next.js 16 + React 19 + Tailwind CSS 4 + TypeScript (strict). Static/SSG — no 
 
 ## Branding
 
-The agency name and all NAP/contact/license details live in **`src/lib/brand.ts`**.
-To rename the agency, edit that one file. The typographic SVG wordmark lives in
+Verified agency branding lives in **`src/lib/brand.ts`**. Unknown contact, license,
+location, hours, legal/founding and carrier appointment facts are omitted.
+To rename the agency, edit that file. The typographic SVG wordmark lives in
 `src/components/Wordmark.tsx` (light/dark variants — no raster logos).
 Palette: deep navy primary (`navy-*`), warm gold/brass secondary (`gold-*`),
 bright gold CTA accent (`accent-*`) — tokens defined in `src/app/globals.css`.
@@ -202,8 +203,13 @@ whose other half lives outside this repo.
   Publish contact details only after real agency evidence verifies them; platform
   seed fixtures are not that evidence. `check:site` rejects the retired placeholder
   values and checks client-only confirmation/mobile CTAs as well as built HTML.
-- Office location, service geography and named carrier appointments/counts remain
-  unverified pending #10 stage 2. #10 stays open until both stages are released.
+- Office location, service geography, legal name, founding year and named carrier
+  appointments/counts are also unverified and omitted (#10 stage 2). No service
+  territory is inferred from platform fixtures or educational coverage content.
+  The agency and Service JSON-LD omit geographic and founding fields; named carrier
+  strips and local-office sections are removed. Carrier claims reference numbers
+  on `/claims` are separate from agency contact details or appointment claims.
+  #10 stays open until both stages are released and the public pages are verified.
 - **`LEAD_INTAKE_KEY` was rotated on 2026-09-27.** The value that used to be
   hardcoded in `src/app/api/quote/route.ts`, and was copied into `.env.example`
   until the same day, is still in this public repo's git history. History is

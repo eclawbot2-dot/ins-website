@@ -4,14 +4,13 @@ import { ArrowRight, ChevronRight, Repeat, ShieldCheck, TrendingDown } from "luc
 import { BRAND } from "@/lib/brand";
 import { JsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import LeadForm from "@/components/LeadForm";
-import { CarrierStrip } from "@/components/TrustBadges";
 import Testimonials from "@/components/Testimonials";
 import { TESTIMONIALS } from "@/lib/testimonials";
 
 export const metadata: Metadata = {
   title: "Switch & Save on Insurance — We Re-Shop the Market for You",
   alternates: { canonical: "/switch-and-save" },
-  description: `Think you're overpaying? ${BRAND.name} re-shops your business, auto, and home insurance across ${BRAND.carriers.length}+ carriers. We handle the paperwork and the switch. Free quote.`,
+  description: `Think you're overpaying? ${BRAND.name} re-shops your business, auto, and home insurance across available coverage options. We handle the paperwork and the switch. Free quote.`,
   openGraph: {
     title: `Switch & Save | ${BRAND.name}`,
     description: "We re-shop your insurance across multiple carriers and handle the switch for you.",
@@ -71,7 +70,7 @@ export default function SwitchAndSavePage() {
               </h1>
               <p className="mt-5 max-w-xl text-lg text-navy-200">
                 Send us your current premium and a licensed advisor will compare it against{" "}
-                {BRAND.carriers.length}+ carriers. If we can&apos;t beat it, we&apos;ll tell you
+                available coverage options. If we can&apos;t beat it, we&apos;ll tell you
                 straight. If we can, we handle the entire switch — paperwork and all.
               </p>
               <a
@@ -96,12 +95,6 @@ export default function SwitchAndSavePage() {
               />
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="border-b border-navy-100 bg-navy-50/60">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <CarrierStrip label="We re-shop your policy across" />
         </div>
       </section>
 

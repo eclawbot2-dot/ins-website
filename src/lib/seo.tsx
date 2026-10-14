@@ -23,31 +23,9 @@ export function agencyJsonLd(): Record<string, unknown> {
     "@id": `${SITE_URL}/#agency`,
     name: BRAND.name,
     alternateName: BRAND.shortName,
-    description: `${BRAND.name} is an independent insurance agency comparing business and personal coverage across ${BRAND.carriers.length}+ top-rated carriers.`,
+    description: `${BRAND.name} is an independent insurance agency for business and personal coverage.`,
     url: SITE_URL,
     slogan: BRAND.tagline,
-    foundingDate: String(BRAND.foundedYear),
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: BRAND.address.street,
-      addressLocality: BRAND.address.city,
-      addressRegion: BRAND.address.state,
-      postalCode: BRAND.address.zip,
-      addressCountry: "US",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: BRAND.geo.latitude,
-      longitude: BRAND.geo.longitude,
-    },
-    hasMap: `https://www.google.com/maps?q=${encodeURIComponent(
-      `${BRAND.address.street}, ${BRAND.address.city}, ${BRAND.address.state} ${BRAND.address.zip}`
-    )}`,
-    priceRange: "Free quotes · No-fee advisory",
-    areaServed: [
-      { "@type": "State", name: "California" },
-      ...BRAND.serviceAreas.map((c) => ({ "@type": "City", name: c })),
-    ],
     knowsAbout: [
       "General Liability Insurance",
       "Business Owners Policy",
@@ -129,10 +107,9 @@ export function serviceJsonLd(line: CoverageLine): Record<string, unknown> {
     url: absoluteUrl(path),
     category: line.category === "personal" ? "Personal Insurance" : "Business Insurance",
     provider: { "@id": `${SITE_URL}/#agency` },
-    areaServed: { "@type": "State", name: "California" },
     offers: {
       "@type": "Offer",
-      description: `Free, no-obligation ${line.shortName.toLowerCase()} insurance quotes compared across ${BRAND.carriers.length}+ carriers.`,
+      description: `Request a free, no-obligation ${line.shortName.toLowerCase()} insurance quote.`,
       price: "0",
       priceCurrency: "USD",
     },

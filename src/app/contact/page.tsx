@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { MapPin } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import { BRAND } from "@/lib/brand";
 
@@ -21,23 +20,8 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-12 lg:grid-cols-5">
-          <div className="space-y-6 lg:col-span-2">
-            <div className="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm">
-              <h2 className="flex items-center gap-2.5 font-bold text-navy-950">
-                <MapPin className="h-5 w-5 text-gold-700" aria-hidden="true" />
-                Office
-              </h2>
-              <p className="mt-2 text-navy-800">
-                {BRAND.address.street}
-                <br />
-                {BRAND.address.city}, {BRAND.address.state} {BRAND.address.zip}
-              </p>
-            </div>
-          </div>
-          <div className="lg:col-span-3">
-            <ContactForm />
-          </div>
+        <div className="mt-12 max-w-2xl">
+          <ContactForm />
         </div>
       </div>
     </div>

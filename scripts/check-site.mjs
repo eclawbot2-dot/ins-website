@@ -33,6 +33,7 @@ const ALLOWED_HOSTS = new Set([
 ]);
 
 const FORBIDDEN = [
+  /1200 Prospect Street|San Diego|La Jolla|Tabor Insurance Agency|32\.8328|-117\.2713/i,
   /\(555\) 014-7300|15550147300|hello@taboragency\.com|CA License #0000000/i,
   /8:00 AM[^<\n]*6:00 PM PT|9:00 AM[^<\n]*1:00 PM PT/i,
   /localhost:\d/i,
@@ -245,6 +246,15 @@ for (const file of htmlFiles(OUT)) {
 
   for (const re of FORBIDDEN) {
     if (re.test(html)) fail(`${rel}: matches forbidden pattern ${re}`);
+  }
+  for (const script of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    const data = JSON.parse(script[1]);
+    if (!["InsuranceAgency", "Service"].includes(data["@type"])) continue;
+    for (const key of ["address", "geo", "hasMap", "areaServed", "foundingDate", "legalName"]) {
+      if (key in data) fail(`${rel}: unverified ${key} in ${data["@type"]} JSON-LD`);
+    }
+    if (/\d+\+.*carriers/i.test(data.description ?? ""))
+      fail(`${rel}: unverified carrier count in structured data`);
   }
   for (const m of html.matchAll(/(?:href|src)="(https?:\/\/[^"]+)"/g)) {
     let host;

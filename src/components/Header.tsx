@@ -65,7 +65,7 @@ export default function Header() {
       {/* Top utility bar */}
       <div className="hidden bg-navy-950 text-navy-100 md:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-1.5 text-xs sm:px-6 lg:px-8">
-          <p>Independent agency · We shop {BRAND.carriers.length}+ carriers so you don&apos;t have to</p>
+          <p>Independent agency · We shop available coverage options so you don&apos;t have to</p>
         </div>
       </div>
 

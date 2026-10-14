@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           <h2 className="text-xl font-bold text-navy-950">1. Who we are</h2>
           <p className="mt-3">
             {BRAND.name} (&quot;{BRAND.shortName},&quot; &quot;we,&quot; &quot;us&quot;) is an independent insurance
-            agency located at {BRAND.address.street}, {BRAND.address.city}, {BRAND.address.state} {BRAND.address.zip}.
+            agency.
             This policy describes how we collect, use, and protect information through this website and in the course
             of providing insurance services.
           </p>

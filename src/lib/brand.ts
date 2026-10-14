@@ -4,47 +4,12 @@
  */
 export const BRAND = {
   name: "Tabor Agency",
-  legalName: "Tabor Insurance Agency",
   shortName: "Tabor",
   tagline: "Independent insurance, built around your best interest.",
   domain: "taboragency.com",
   url: "https://taboragency.com",
-  // Contact channels and license are omitted until verified; never use fixture values.
-  address: {
-    street: "1200 Prospect Street, Suite 240",
-    city: "San Diego",
-    state: "CA",
-    zip: "92101",
-  },
-  foundedYear: 2026,
-  carriers: [
-    "Progressive",
-    "Travelers",
-    "Hartford",
-    "Liberty Mutual",
-    "Chubb",
-    "Nationwide",
-    "Safeco",
-    "Hanover",
-  ],
-  /**
-   * Cities / regions served — used for local-SEO content and LocalBusiness
-   * areaServed JSON-LD. Replace with the agency's real footprint.
-   */
-  serviceAreas: [
-    "San Diego",
-    "La Jolla",
-    "Chula Vista",
-    "Carlsbad",
-    "Escondido",
-    "El Cajon",
-    "Oceanside",
-    "Encinitas",
-    "Coronado",
-    "Poway",
-  ],
-  /** Geo coordinates for LocalBusiness JSON-LD (office location). */
-  geo: { latitude: 32.8328, longitude: -117.2713 },
+  // Contact, licensing, location, hours, legal identity, founding and carrier facts
+  // remain unpublished until verified from real agency evidence, never fixtures.
 } as const;
 
 /**

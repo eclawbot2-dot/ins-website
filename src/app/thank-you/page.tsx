@@ -19,7 +19,7 @@ const NEXT_STEPS = [
   {
     n: "2",
     title: "We shop multiple carriers",
-    text: `We compare coverage and price across ${BRAND.carriers.length}+ top-rated carriers for your situation.`,
+    text: `We compare coverage and price across available coverage options for your situation.`,
   },
   {
     n: "3",

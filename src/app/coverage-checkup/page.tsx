@@ -13,12 +13,11 @@ import {
 } from "lucide-react";
 import { BRAND, COVERAGE_CHECKUP_URL } from "@/lib/brand";
 import { JsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
-import { CarrierStrip } from "@/components/TrustBadges";
 
 export const metadata: Metadata = {
   title: "Free Coverage Checkup — Find Gaps & Savings in Your Policy",
   alternates: { canonical: "/coverage-checkup" },
-  description: `Send us your current policy and ${BRAND.name} will find coverage gaps, overlaps, and savings — free, no obligation. An independent review across ${BRAND.carriers.length}+ carriers.`,
+  description: `Send us your current policy and ${BRAND.name} will find coverage gaps, overlaps, and savings — free, no obligation. Explore available coverage options.`,
   openGraph: {
     title: `Free Coverage Checkup | ${BRAND.name}`,
     description:
@@ -126,8 +125,7 @@ export default function CoverageCheckupPage() {
               </h1>
               <p className="mt-5 max-w-xl text-lg text-navy-200">
                 Send us your current policy and a licensed advisor will review it for coverage gaps,
-                overlaps you&apos;re paying for twice, and savings across {BRAND.carriers.length}+
-                carriers. You get a clear report — and zero pressure to switch.
+                overlaps you&apos;re paying for twice, and available coverage options. You get a clear report — and zero pressure to switch.
               </p>
               <ul className="mt-7 space-y-2.5 text-sm text-navy-200">
                 {[
@@ -165,13 +163,6 @@ export default function CoverageCheckupPage() {
               </a>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Carrier strip */}
-      <section className="border-b border-navy-100 bg-navy-50/60">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <CarrierStrip label="We compare your policy against quotes from" />
         </div>
       </section>
 

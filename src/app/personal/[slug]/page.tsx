@@ -17,7 +17,7 @@ export async function generateMetadata({
   const line = getLine("personal", slug);
   if (!line) return {};
   return {
-    title: `${line.name} — Compare Quotes from ${BRAND.carriers.length}+ Carriers`,
+    title: `${line.name} — Explore Coverage Options`,
     description: line.summary,
     alternates: { canonical: `/personal/${line.slug}` },
     openGraph: {
