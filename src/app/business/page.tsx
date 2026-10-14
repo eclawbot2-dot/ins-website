@@ -40,7 +40,7 @@ export default function BusinessHubPage() {
           <p className="mt-4 max-w-2xl text-lg text-navy-200">
             From your first contract to your fiftieth employee — liability, property, workers&apos; comp, auto, and
             cyber coverage structured around how your business actually operates, quoted across{" "}
-            {BRAND.carriers.length}+ commercial carriers.
+            available coverage options.
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Link

@@ -57,7 +57,7 @@ export default function OpengraphImage() {
           Protect what you&apos;ve built — for the right price.
         </div>
         <div style={{ display: "flex", marginTop: "32px", fontSize: "28px", color: "#cfd9e6" }}>
-          {`Independent agency · ${BRAND.carriers.length}+ top-rated carriers compared`}
+          {`Independent agency · Compare coverage options`}
         </div>
       </div>
     ),

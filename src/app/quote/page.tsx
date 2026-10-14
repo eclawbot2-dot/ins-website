@@ -6,7 +6,7 @@ import { BRAND } from "@/lib/brand";
 export const metadata: Metadata = {
   title: "Get a Free Insurance Quote",
   alternates: { canonical: "/quote" },
-  description: `Request a free, no-obligation insurance quote from ${BRAND.name}. We compare business, auto, home, and life coverage across ${BRAND.carriers.length}+ top-rated carriers.`,
+  description: `Request a free, no-obligation insurance quote from ${BRAND.name}. Explore business, auto, home, and life coverage options.`,
   openGraph: {
     title: `Get a Free Quote | ${BRAND.name}`,
     description: "Two minutes, multiple carriers compared, zero obligation.",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const ASSURANCES = [
   {
     icon: SearchCheck,
-    title: `${BRAND.carriers.length}+ carriers, one request`,
+    title: "Explore coverage options",
     text: "We run your information across our carrier lineup so you see real options side by side.",
   },
   {

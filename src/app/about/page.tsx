@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Compass, Handshake, Lightbulb, MapPin, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, Compass, Handshake, Lightbulb, ShieldCheck, Users } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import CtaBanner from "@/components/CtaBanner";
 
 export const metadata: Metadata = {
   title: "About Us — An Independent Agency That Works for You",
   alternates: { canonical: "/about" },
-  description: `${BRAND.name} is an independent insurance agency representing ${BRAND.carriers.length}+ top-rated carriers. Learn about our story, our values, and why the independent agency model puts clients first.`,
+  description: `${BRAND.name} is an independent insurance agency. Learn about our approach, our values, and why the independent agency model puts clients first.`,
 };
 
 const VALUES = [
@@ -49,24 +49,19 @@ export default function AboutPage() {
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-bold text-navy-950">Our story</h2>
+            <h2 className="text-2xl font-bold text-navy-950">Our approach</h2>
             <div className="mt-5 space-y-4 text-[17px] leading-relaxed text-navy-700">
               <p>
-                {BRAND.name} was founded on a simple frustration: most people buy insurance the way the industry wants
-                them to — one carrier&apos;s agent, one carrier&apos;s products, one carrier&apos;s price — and then
-                quietly overpay for coverage they don&apos;t fully understand.
+                Insurance decisions start with understanding what you need to protect and what
+                your current policy covers.
               </p>
               <p>
-                We built {BRAND.shortName} to flip that arrangement. As an independent agency based in{" "}
-                {BRAND.address.city}, we hold appointments with {BRAND.carriers.length}+ highly rated national and
-                regional carriers. That means every quote we deliver is the product of competition, every
-                recommendation is carrier-agnostic, and every renewal is a fresh chance to make sure you&apos;re still
-                getting the best deal available — not just the one easiest to renew.
+                Start with your coverage needs, then compare the available options. We explain
+                policy terms and trade-offs so you can make an informed decision.
               </p>
               <p>
-                The name reflects how we work. Tabor is a name with weight — steady, plain-spoken, built to last.
-                That&apos;s the job: protect what our clients have built, keep them oriented as their lives and
-                businesses change, and be the steady hand they can count on when something goes wrong.
+                Our aim is plain-English advice that helps you understand coverage as your life
+                and business change.
               </p>
             </div>
           </div>
@@ -80,16 +75,12 @@ export default function AboutPage() {
                 it.
               </p>
               <p>
-                An <strong>independent agency</strong> holds appointments with many carriers. We submit your
-                information once, gather quotes from across our lineup, and present real options with honest
-                trade-offs. You get the buying power of a marketplace with the accountability of a local advisor who
-                answers the phone.
+                An <strong>independent agency</strong> can help compare insurance options.
+                The insurers and products available depend on location, eligibility and underwriting.
               </p>
               <p>
-                And because our appointment is portable, so is your business: if your carrier raises rates or handles
-                a claim poorly, we move you — same agency, same advisor, better carrier. The relationship survives the
-                policy. That&apos;s the structural difference, and it&apos;s why we&apos;ll never operate any other
-                way.
+                Review your options when your needs or policy terms change. A different policy
+                may have different coverage, exclusions and eligibility requirements.
               </p>
             </div>
           </div>
@@ -118,50 +109,17 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="rounded-3xl bg-gradient-to-br from-navy-950 to-gold-950 p-10 text-center text-white sm:p-14">
-          <h2 className="text-2xl font-bold sm:text-3xl">Carriers we represent</h2>
+          <h2 className="text-2xl font-bold sm:text-3xl">Explore coverage options</h2>
           <p className="mx-auto mt-3 max-w-2xl text-navy-200">
-            Appointments with highly rated national and regional carriers — and the lineup keeps growing.
+            Tell us what you need to protect. Availability depends on your location and underwriting.
           </p>
-          <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-            {BRAND.carriers.map((c) => (
-              <li key={c} className="text-lg font-bold tracking-tight text-white/70">{c}</li>
-            ))}
-          </ul>
           <Link
             href="/quote"
             className="mt-10 inline-flex items-center gap-2 rounded-full bg-accent-500 px-8 py-3.5 font-semibold text-navy-950 shadow-lg transition-colors hover:bg-accent-400"
           >
-            Put them to work for you
+            Request a quote
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
-        </div>
-      </section>
-
-      {/* Service areas — local SEO */}
-      <section className="bg-navy-50/60 py-16" aria-labelledby="service-areas">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <MapPin className="h-6 w-6 text-gold-700" aria-hidden="true" />
-            <h2 id="service-areas" className="text-2xl font-bold text-navy-950">
-              Areas we serve
-            </h2>
-          </div>
-          <p className="mt-3 max-w-3xl text-navy-700">
-            Headquartered in {BRAND.address.city}, {BRAND.address.state}, {BRAND.shortName} writes
-            commercial and personal insurance across California — including {BRAND.address.city} and
-            the surrounding communities below. Don&apos;t see your city? We likely cover it too —
-            just ask.
-          </p>
-          <ul className="mt-6 flex flex-wrap gap-2.5">
-            {BRAND.serviceAreas.map((city) => (
-              <li
-                key={city}
-                className="rounded-full border border-navy-200 bg-white px-4 py-2 text-sm font-medium text-navy-700"
-              >
-                {city}, {BRAND.address.state}
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 

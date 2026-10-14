@@ -1,5 +1,4 @@
-import { Award, HeartHandshake, Lock, ShieldCheck, Users } from "lucide-react";
-import { BRAND } from "@/lib/brand";
+import { HeartHandshake, Lock, ShieldCheck, Users } from "lucide-react";
 
 const BADGES = [
   {
@@ -9,8 +8,8 @@ const BADGES = [
   },
   {
     icon: Users,
-    title: `${BRAND.carriers.length}+ carriers`,
-    text: "One conversation, many quotes.",
+    title: "Coverage options",
+    text: "Discuss what you need to protect.",
   },
   {
     icon: HeartHandshake,
@@ -22,16 +21,11 @@ const BADGES = [
     title: "Your data stays private",
     text: "No spam, no robocalls, never sold.",
   },
-  {
-    icon: Award,
-    title: "Local advisors",
-    text: `Based in ${BRAND.address.city}, ${BRAND.address.state}.`,
-  },
 ];
 
 export default function TrustBadges() {
   return (
-    <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+    <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
       {BADGES.map((b) => (
         <li
           key={b.title}
@@ -45,30 +39,5 @@ export default function TrustBadges() {
         </li>
       ))}
     </ul>
-  );
-}
-
-/** Text-based carrier logo strip (no image assets required). */
-export function CarrierStrip({
-  label = "Quoting top-rated carriers including",
-}: {
-  label?: string;
-}) {
-  return (
-    <div>
-      <p className="text-center text-xs font-semibold uppercase tracking-widest text-navy-500">
-        {label}
-      </p>
-      <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-        {BRAND.carriers.map((c) => (
-          <li
-            key={c}
-            className="text-lg font-bold tracking-tight text-navy-400 transition-colors hover:text-navy-700"
-          >
-            {c}
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }

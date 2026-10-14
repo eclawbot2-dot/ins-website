@@ -10,7 +10,7 @@ import { JsonLd, breadcrumbJsonLd } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Personal Insurance — Auto, Home, Renters, Umbrella & Life",
   alternates: { canonical: "/personal" },
-  description: `Personal insurance from ${BRAND.name}: auto, homeowners, renters, umbrella, and life coverage compared across ${BRAND.carriers.length}+ top-rated carriers. Get a free quote today.`,
+  description: `Explore personal insurance with ${BRAND.name}: auto, homeowners, renters, umbrella, and life coverage options. Request a free quote.`,
   openGraph: {
     title: `Personal Insurance | ${BRAND.name}`,
     description: "Auto, home, renters, umbrella, and life insurance — quoted across multiple carriers.",
@@ -39,8 +39,7 @@ export default function PersonalHubPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-navy-200">
             Your car, your home, your family, your future — protected by coverage we hand-pick from{" "}
-            {BRAND.carriers.length}+ carriers, not whatever one company happens to sell. One advisor, one phone
-            number, every personal policy you need.
+            available coverage options. Talk through your needs with an advisor.
           </p>
           <Link
             href="/quote"

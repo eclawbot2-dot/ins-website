@@ -18,19 +18,15 @@ export function GET(): Response {
 
   const body = `# ${BRAND.name}
 
-> ${BRAND.name} is an independent insurance agency based in ${BRAND.address.city}, ${BRAND.address.state}. Unlike a captive agent who sells one company's policies, we hold appointments with ${BRAND.carriers.length}+ top-rated carriers (including ${BRAND.carriers.slice(0, 4).join(", ")}) and compare coverage and price across all of them — for business and personal insurance. Quotes are free, no-obligation, and reviewed by a licensed advisor.
+> ${BRAND.name} is an independent insurance agency. Explore business and personal coverage or send a quote request using this website. Product availability depends on location, eligibility and underwriting.
 
 Key facts:
 - Independent agency: we represent the client, not a single insurance carrier
-- Carriers quoted: ${BRAND.carriers.join(", ")}
-- Service area: California (commercial and personal lines)
 - How to get a quote: ${SITE_URL}/quote (3-step form, response within one business day)
 - Free coverage checkup: ${SITE_URL}/coverage-checkup (send your current policy; we find gaps and savings — no obligation)
 - Switch & save: ${SITE_URL}/switch-and-save (we re-shop your insurance across carriers and handle the switch)
 - Certificate of insurance: ${SITE_URL}/certificate (same-day COIs with additional-insured wording)
 - Claims help: ${SITE_URL}/claims (step-by-step guidance plus 24/7 carrier claim phone numbers)
-- Service area: ${BRAND.serviceAreas.join(", ")} and the rest of California
-- Office: ${BRAND.address.street}, ${BRAND.address.city}, ${BRAND.address.state} ${BRAND.address.zip}
 
 ## Business Insurance
 ${business}

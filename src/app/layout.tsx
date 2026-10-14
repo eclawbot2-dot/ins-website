@@ -21,13 +21,13 @@ export const metadata: Metadata = {
     default: `${BRAND.name} | Independent Insurance Agency`,
     template: `%s | ${BRAND.name}`,
   },
-  description: `${BRAND.name} is an independent insurance agency. We compare coverage and pricing across ${BRAND.carriers.length}+ top-rated carriers for business, auto, home, and life insurance — so you get the right protection at the right price.`,
+  description: `${BRAND.name} is an independent insurance agency. Explore coverage options for business, auto, home, and life insurance.`,
   openGraph: {
     type: "website",
     siteName: BRAND.name,
     url: SITE_URL,
     title: `${BRAND.name} | Independent Insurance Agency`,
-    description: `Independent insurance agency comparing ${BRAND.carriers.length}+ top-rated carriers for business and personal coverage.`,
+    description: `Independent insurance agency for business and personal coverage.`,
   },
   twitter: {
     card: "summary_large_image",

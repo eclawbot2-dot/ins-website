@@ -14,7 +14,7 @@ import Testimonials from "@/components/Testimonials";
 
 export const metadata: Metadata = {
   title: { absolute: `${BRAND.name} | Independent Insurance Agency — Business, Auto, Home & Life` },
-  description: `Get the right coverage at the right price. ${BRAND.name} compares quotes from ${BRAND.carriers.length}+ top-rated carriers including Progressive, Travelers, and Nationwide — for business, auto, home, and life insurance.`,
+  description: `Get the right coverage at the right price. ${BRAND.name} helps you explore coverage options — for business, auto, home, and life insurance.`,
   alternates: { canonical: "/" },
 };
 
@@ -68,7 +68,7 @@ const COVERAGE_CARDS = [
 const FEATURES = [
   {
     eyebrow: "The independent difference",
-    title: "We shop the whole market — you only have one conversation.",
+    title: "We compare coverage options — you only have one conversation.",
     body: "A captive agent can sell you one company's policy. As an independent agency we compare coverage and price across all of our carriers, recommend what actually fits, and re-shop your policies when rates move — so your rate stays honest at every renewal.",
     img: "/img/feature-independent.jpg",
     alt: "An advisor reviewing coverage options with a client at a sunlit table",
@@ -76,9 +76,9 @@ const FEATURES = [
     reverse: false,
   },
   {
-    eyebrow: "Local & personal",
-    title: `Real advisors, based right here in ${BRAND.address.city}.`,
-    body: `We live and work in the communities we protect — ${BRAND.serviceAreas.slice(0, 4).join(", ")}, and across California. When you call, you reach a licensed advisor who knows your policies and is in your corner at claim time. No call-center roulette, no robocalls.`,
+    eyebrow: "Personal advice",
+    title: "Understand the coverage you choose.",
+    body: "Start with your needs and questions. We help explain policy terms, coverage gaps and available options in plain English.",
     img: "/img/feature-local.jpg",
     alt: "An aerial view of a sunny residential neighborhood with tree-lined streets",
     cta: { label: "Meet the agency", href: "/contact" },
@@ -117,14 +117,14 @@ export default function HomePage() {
           <div className="max-w-xl">
             <p className="inline-flex items-center gap-2 rounded-full border border-gold-300/70 bg-white/80 px-4 py-1.5 text-sm font-medium text-gold-800 shadow-sm backdrop-blur">
               <ShieldCheck className="h-4 w-4" aria-hidden="true" />
-              Independent agency — we shop {BRAND.carriers.length}+ carriers for you
+              Independent agency — we shop available coverage options for you
             </p>
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] tracking-tight text-navy-950 sm:text-5xl lg:text-6xl">
               Protect your business — and everything you&apos;ve built.
             </h1>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-navy-700">
               One advisor. Many carriers. We compare business, auto, home, and life insurance across{" "}
-              {BRAND.carriers.length}+ top-rated companies — then keep shopping at every renewal so you
+              available coverage options — then keep shopping at every renewal so you
               never overpay for the coverage you need.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -149,22 +149,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Carrier strip ────────────────────────────────────── */}
-      <section className="border-y border-navy-100 bg-white" aria-label="Carriers we represent">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <p className="text-center text-xs font-semibold uppercase tracking-widest text-navy-500">
-            Quoting top-rated carriers including
-          </p>
-          <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-            {BRAND.carriers.map((c) => (
-              <li key={c} className="text-lg font-bold tracking-tight text-navy-400 transition-colors hover:text-navy-700">
-                {c}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       {/* ── What we protect (image cards) ────────────────────── */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <div className="max-w-2xl">
@@ -174,7 +158,7 @@ export default function HomePage() {
           </h2>
           <p className="mt-3 text-lg text-navy-600">
             Commercial or personal, simple or complex, we hand-pick the right protection from{" "}
-            {BRAND.carriers.length}+ carriers and shop it again every renewal.
+            available coverage options and shop it again every renewal.
           </p>
         </div>
 
@@ -242,7 +226,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: SearchCheck, title: `${BRAND.carriers.length}+ carriers compared`, text: "One conversation, multiple quotes. We do the shopping." },
+              { icon: SearchCheck, title: "Compare coverage options", text: "One conversation, multiple quotes. We do the shopping." },
               { icon: BadgeCheck, title: "Licensed advisors", text: "Real people who explain coverage in plain English." },
               { icon: ShieldCheck, title: "Claims advocacy", text: "When you have a claim, we're in your corner — start to finish." },
               { icon: Star, title: "No spam, ever", text: "A licensed advisor reviews every request personally." },

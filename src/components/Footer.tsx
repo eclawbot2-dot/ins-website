@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { MapPin } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import Wordmark from "@/components/Wordmark";
 import { PERSONAL_LINES, BUSINESS_LINES } from "@/lib/coverage-data";
@@ -10,22 +9,12 @@ export default function Footer() {
     <footer className="bg-navy-950 pb-20 text-navy-200 lg:pb-0">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
-          {/* Brand + NAP */}
+          {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="inline-flex items-center" aria-label={`${BRAND.name} — home`}>
               <Wordmark variant="dark" className="h-12 w-auto" />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-navy-300">{BRAND.tagline}</p>
-            <ul className="mt-6 space-y-3 text-sm">
-              <li className="flex items-start gap-2.5">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
-                <span>
-                  {BRAND.address.street}
-                  <br />
-                  {BRAND.address.city}, {BRAND.address.state} {BRAND.address.zip}
-                </span>
-              </li>
-            </ul>
 
             <div className="mt-7 max-w-sm">
               <h3 className="text-sm font-semibold text-white">Coverage tips in your inbox</h3>
@@ -87,7 +76,7 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-navy-800 pt-8 text-xs leading-relaxed text-navy-400">
           <p>
-            © {new Date().getFullYear()} {BRAND.legalName}. All rights reserved.
+            © {new Date().getFullYear()} {BRAND.name}. All rights reserved.
           </p>
           <p className="mt-2 max-w-3xl">
             {BRAND.shortName} is an independent insurance agency. Insurance products are offered through multiple
