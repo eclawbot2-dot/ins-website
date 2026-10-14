@@ -15,7 +15,7 @@ import { JsonLd, breadcrumbJsonLd } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Client Login — Your Policy Portal",
   alternates: { canonical: "/client-login" },
-  description: `Log in to the ${BRAND.name} client portal to view your policies, pay invoices, file claims, and request certificates of insurance — anytime, from any device.`,
+  description: `Log in to the ${BRAND.name} client portal to view policies and invoice summaries, check payment options, file claims, and request certificates of insurance.`,
 };
 
 const FEATURES = [
@@ -26,8 +26,8 @@ const FEATURES = [
   },
   {
     icon: Receipt,
-    title: "Pay invoices",
-    text: "Review open invoices and pay securely online, with a full history of past payments.",
+    title: "Review invoices",
+    text: "See invoice amounts, balances, due dates, and statuses. Use online payment when available, or follow the agency's how-to-pay instructions.",
   },
   {
     icon: ShieldAlert,
@@ -59,11 +59,11 @@ export default function ClientLoginPage() {
             {BRAND.shortName} Client Portal
           </p>
           <h1 className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            Your policies, payments, and claims — one secure login.
+            Your policies, invoices, and claims — one secure login.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-navy-200">
-            The {BRAND.name} client portal puts your entire insurance program at your fingertips: every policy,
-            every invoice, every claim, every certificate — available 24/7 from any device.
+            Use the {BRAND.name} client portal to review your policies and invoice summaries, check claim status,
+            and request certificates from any device. For payment options, follow the instructions shown on your invoices.
           </p>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
             <a
